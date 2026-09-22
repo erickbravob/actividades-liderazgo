@@ -186,3 +186,42 @@ details[open] summary::after { content: "−"; }
 @media (max-width: 850px) { .survey-item { grid-template-columns: 1fr; } .research-bubbles { grid-template-columns: 1fr; } .survey-items { max-height: 58vh; } .home-hero { grid-template-columns: 1fr; } .home-signal { min-height: 210px; } }
 @media (max-width: 650px) { .site-header { align-items: flex-start; flex-direction: column; } .site-nav { justify-content: flex-start; } .concept-orbit, .grid-2, .summary-grid, .home-grid { grid-template-columns: 1fr; } .section-head, .game-heading, .analysis-tools, .survey-launch, .home-survey { display: block; } .section-head p, .game-heading p { margin-top: 7px; } .analysis-actions { margin-top: 12px; } .launch-button, .home-survey .btn { margin-top: 17px; } .answers { grid-template-columns: 1fr; } .survey-text { align-items: start; } .home-hero { margin-top: 12px; padding: 25px 21px; } .home-hero h1 { font-size: 2.15rem; } .home-signal { padding: 20px; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; } }
+
+/* Escape room: el progreso visualiza el proceso real de cierre. */
+.escape-shell { position: relative; padding: 21px; color: #eaf3f7; background: radial-gradient(circle at 90% 8%, rgba(85,201,189,.18), transparent 28%), linear-gradient(135deg, #10233d, #173d61 68%, #1e5870); border-radius: 26px 14px 26px 14px; box-shadow: 0 18px 38px rgba(16,35,61,.16); overflow: hidden; }
+.escape-top { display: flex; align-items: end; justify-content: space-between; gap: 14px; }
+.escape-kicker { display: block; margin-bottom: 4px; color: var(--teal); font: 700 .66rem "Cascadia Code", Consolas, monospace; letter-spacing: .13em; text-transform: uppercase; }
+.escape-top strong { font-size: .93rem; }
+.escape-lives { padding: 6px 10px; color: var(--navy); background: var(--gold); border-radius: 999px; font-size: .7rem; font-weight: 800; }
+.escape-meter { height: 5px; margin: 14px 0 16px; overflow: hidden; background: rgba(255,255,255,.16); border-radius: 99px; }
+.escape-meter span { display: block; width: 0; height: 100%; background: linear-gradient(90deg, var(--teal), var(--gold)); border-radius: inherit; transition: width .35s ease; }
+.escape-map { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 15px; }
+.escape-station { display: flex; align-items: center; gap: 9px; padding: 9px; color: #a9c0ce; background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; opacity: .65; transition: opacity .2s ease, transform .2s ease, border-color .2s ease; }
+.escape-station.active { color: #fff; border-color: var(--teal); opacity: 1; transform: translateY(-2px); }
+.escape-station span { display: grid; flex: 0 0 29px; place-items: center; width: 29px; height: 29px; color: var(--navy); background: rgba(255,255,255,.78); border-radius: 50%; font: 800 .63rem "Cascadia Code", Consolas, monospace; }
+.escape-station.active span { background: var(--teal); }
+.escape-station b, .escape-station small { display: block; }
+.escape-station b { font-size: .76rem; }
+.escape-station small { margin-top: 2px; color: #abc1cd; font-size: .62rem; }
+.escape-card { position: relative; min-height: 260px; padding: 24px 25px 20px; color: var(--ink); background: var(--white); border-radius: 19px 11px 19px 11px; }
+.escape-card-mark { position: absolute; top: 18px; right: 22px; color: #d6e8e7; font: 800 2.8rem/1 "Cascadia Code", Consolas, monospace; letter-spacing: -.08em; }
+.escape-card .label { position: relative; z-index: 1; }
+.escape-card h3 { position: relative; z-index: 1; max-width: 660px; margin: 8px 0 7px; color: var(--navy); font-size: clamp(1.15rem, 2.4vw, 1.55rem); }
+.escape-card > p { position: relative; z-index: 1; max-width: 680px; margin-bottom: 16px; color: var(--muted); font-size: .84rem; }
+.escape-options { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px; }
+.escape-option { cursor: pointer; display: flex; align-items: center; gap: 8px; padding: 10px 11px; color: var(--ink); text-align: left; background: #f4f8f7; border: 1px solid #d9e5e4; border-radius: 11px; font-size: .77rem; line-height: 1.28; transition: transform .16s ease, border-color .16s ease, background .16s ease; }
+.escape-option span { display: grid; flex: 0 0 22px; place-items: center; width: 22px; height: 22px; color: var(--navy); background: #d9efeb; border-radius: 50%; font-size: .67rem; font-weight: 800; }
+.escape-option:hover, .escape-option:focus-visible { border-color: #55c9bd; background: #e8f7f3; outline: none; transform: translateY(-1px); }
+.escape-option.selected { border-color: #147f82; background: #e4f4f1; }
+.escape-option.correct { color: #155d69; border-color: #42b5a7; background: #d9f3ed; }
+.escape-option.wrong { color: #8b4937; border-color: #e2a18c; background: #fff0eb; }
+.escape-feedback { min-height: 26px; margin-top: 11px; color: #147f82; font-size: .77rem; line-height: 1.35; }
+.escape-actions { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; margin-top: 4px; }
+.escape-actions .btn-secondary { color: var(--navy); background: #edf3f2; border-color: #cfdedd; }
+.escape-result { display: flex; align-items: center; gap: 14px; margin-top: 13px; padding: 15px 17px; color: var(--navy); background: #e5f5f1; border: 1px solid #a9ded4; border-radius: 15px; animation: unlock-in .35s ease both; }
+.escape-result strong { font-size: 1rem; }
+.escape-result p { margin: 3px 0 9px; color: #426174; font-size: .78rem; }
+.result-seal { display: grid; flex: 0 0 42px; place-items: center; width: 42px; height: 42px; color: var(--navy); background: var(--gold); border-radius: 50%; font-size: 1.25rem; font-weight: 900; }
+@keyframes unlock-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 650px) { .escape-map, .escape-options { grid-template-columns: 1fr; } .escape-card { padding: 21px 17px 17px; } .escape-top { align-items: start; flex-direction: column; } }
+@media (prefers-reduced-motion: reduce) { .escape-station, .escape-option, .escape-result, .escape-meter span { transition: none; animation: none; } }
