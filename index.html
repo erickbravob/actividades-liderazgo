@@ -3,363 +3,44 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Actividades de Liderazgo y Dinámica de Grupo: juego interactivo y encuesta sobre roles de equipo de Belbin.">
-  <title>Portafolio de actividades | Erick Bravo Borges</title>
-  <style>
-    :root {
-      --ink: #0d1d31;
-      --ink-2: #122945;
-      --paper: #f5f1e9;
-      --paper-2: #fffdf8;
-      --gold: #d89b42;
-      --gold-2: #f0c879;
-      --teal: #56d3c7;
-      --muted: #8795a8;
-      --line: rgba(255,255,255,.14);
-      --dark-line: rgba(13,29,49,.15);
-      --shadow: 0 24px 60px rgba(4,14,28,.22);
-      --radius: 18px;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      color: var(--ink);
-      background: var(--paper);
-      font-family: "Aptos", "Segoe UI", system-ui, sans-serif;
-      line-height: 1.55;
-    }
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: .3;
-      background-image: linear-gradient(rgba(13,29,49,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(13,29,49,.04) 1px, transparent 1px);
-      background-size: 32px 32px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,.7), transparent 58%);
-      z-index: -1;
-    }
-    a { color: inherit; }
-    button { font: inherit; }
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 16px clamp(20px, 5vw, 72px);
-      color: var(--paper);
-      background: rgba(13,29,49,.94);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--line);
-    }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: .82rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      font-weight: 800;
-    }
-    .brand-mark {
-      display: grid;
-      place-items: center;
-      width: 32px;
-      height: 32px;
-      color: var(--ink);
-      background: var(--gold-2);
-      border-radius: 50%;
-      font-size: .76rem;
-    }
-    .nav { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
-    .nav button {
-      cursor: pointer;
-      color: #d8e2ee;
-      background: transparent;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 8px 13px;
-      font-size: .78rem;
-      transition: background .2s ease, color .2s ease, transform .2s ease;
-    }
-    .nav button:hover, .nav button:focus-visible { color: var(--ink); background: var(--gold-2); transform: translateY(-2px); outline: none; }
-    .nav button.active { color: var(--ink); background: var(--teal); border-color: var(--teal); }
-    .hero {
-      position: relative;
-      overflow: hidden;
-      padding: clamp(70px, 10vw, 140px) clamp(20px, 7vw, 100px) 84px;
-      color: var(--paper);
-      background: var(--ink);
-    }
-    .hero::after {
-      content: "";
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      right: -160px;
-      top: -220px;
-      border: 1px solid rgba(86,211,199,.28);
-      border-radius: 50%;
-      box-shadow: 0 0 0 36px rgba(86,211,199,.035), 0 0 0 72px rgba(86,211,199,.025);
-    }
-    .hero-grid { position: relative; z-index: 1; max-width: 1180px; margin: auto; display: grid; grid-template-columns: 1.25fr .75fr; gap: 70px; align-items: end; }
-    .eyebrow, .section-code, .label {
-      color: var(--teal);
-      font-family: "Cascadia Code", "Courier New", monospace;
-      font-size: .72rem;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-    h1, h2, h3, p { margin-top: 0; }
-    h1 {
-      max-width: 850px;
-      margin: 16px 0 22px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(3rem, 8vw, 7.2rem);
-      line-height: .94;
-      letter-spacing: -.065em;
-      font-weight: 500;
-    }
-    .hero-copy { max-width: 650px; color: #b8c7d7; font-size: clamp(1rem, 1.8vw, 1.25rem); }
-    .hero-meta { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 30px; }
-    .pill { padding: 7px 11px; border: 1px solid rgba(255,255,255,.18); border-radius: 999px; color: #d8e2ee; font-size: .76rem; }
-    .hero-index { justify-self: end; width: min(100%, 330px); padding: 24px; border-left: 2px solid var(--gold); background: linear-gradient(135deg, rgba(255,255,255,.09), rgba(255,255,255,.02)); }
-    .hero-index strong { display: block; margin: 10px 0 4px; font-family: Georgia, serif; font-size: 2.5rem; font-weight: 500; color: var(--gold-2); }
-    .hero-index span { color: #b8c7d7; font-size: .88rem; }
-    .content { max-width: 1180px; margin: auto; padding: 54px clamp(20px, 5vw, 72px) 90px; }
-    .view { display: none; animation: rise .5s ease both; }
-    .view.active { display: block; }
-    @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
-    .section-head { display: flex; justify-content: space-between; gap: 26px; align-items: end; margin-bottom: 28px; }
-    .section-head h2 { margin: 7px 0 0; font-family: Georgia, serif; font-size: clamp(2.2rem, 5vw, 4.4rem); line-height: .98; letter-spacing: -.05em; font-weight: 500; }
-    .section-head p { max-width: 450px; margin-bottom: 0; color: #586a7d; }
-    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; }
-    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
-    .card {
-      padding: 22px;
-      background: var(--paper-2);
-      border: 1px solid var(--dark-line);
-      border-radius: var(--radius);
-      box-shadow: 0 10px 25px rgba(13,29,49,.055);
-    }
-    .card.dark { color: var(--paper); background: var(--ink); border-color: var(--ink); }
-    .card h3 { margin: 8px 0 8px; font-size: 1.05rem; }
-    .card p { color: #5b6b7c; font-size: .94rem; }
-    .dark p { color: #b7c6d4; }
-    .data-chip { color: var(--ink); background: var(--gold-2); border-radius: 7px; padding: 3px 7px; font-size: .72rem; font-weight: 800; }
-    .callout {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 16px;
-      margin: 22px 0;
-      padding: 20px;
-      border-left: 4px solid var(--gold);
-      background: #fff8e8;
-    }
-    .callout-mark { color: var(--gold); font-size: 1.5rem; line-height: 1; }
-    .callout p { margin: 0; color: #5c4c32; }
-    .game {
-      margin-top: 28px;
-      padding: clamp(22px, 4vw, 42px);
-      color: var(--paper);
-      background: var(--ink);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-    }
-    .game-top { display: flex; justify-content: space-between; gap: 18px; align-items: center; margin-bottom: 26px; }
-    .progress { flex: 1; height: 8px; overflow: hidden; background: rgba(255,255,255,.12); border-radius: 10px; }
-    .progress > span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--teal), var(--gold-2)); transition: width .35s ease; }
-    .game-score { color: var(--gold-2); font-family: "Cascadia Code", monospace; font-size: .8rem; white-space: nowrap; }
-    .question-kicker { color: var(--teal); font-family: "Cascadia Code", monospace; font-size: .78rem; text-transform: uppercase; letter-spacing: .12em; }
-    #question { max-width: 820px; margin: 12px 0 24px; font-family: Georgia, serif; font-size: clamp(1.65rem, 3vw, 2.6rem); line-height: 1.08; font-weight: 400; }
-    .answers { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
-    .answer {
-      cursor: pointer;
-      min-height: 58px;
-      padding: 14px 16px;
-      text-align: left;
-      color: #dce8f2;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.16);
-      border-radius: 12px;
-      transition: background .2s ease, transform .2s ease, border-color .2s ease;
-    }
-    .answer:hover, .answer:focus-visible { background: rgba(86,211,199,.14); border-color: var(--teal); transform: translateY(-2px); outline: none; }
-    .answer.correct { background: rgba(86,211,199,.22); border-color: var(--teal); }
-    .answer.wrong { background: rgba(214,110,81,.25); border-color: #e28a71; }
-    .feedback { min-height: 28px; margin-top: 18px; color: var(--gold-2); font-size: .9rem; }
-    .game-actions { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-top: 16px; }
-    .primary, .secondary { cursor: pointer; border-radius: 999px; padding: 11px 17px; font-weight: 800; transition: transform .2s ease, opacity .2s ease; }
-    .primary { color: var(--ink); background: var(--gold-2); border: 1px solid var(--gold-2); }
-    .secondary { color: #dce8f2; background: transparent; border: 1px solid rgba(255,255,255,.22); }
-    .primary:hover, .secondary:hover { transform: translateY(-2px); }
-    .primary:disabled { opacity: .45; cursor: not-allowed; transform: none; }
-    .role-card { position: relative; overflow: hidden; min-height: 160px; }
-    .role-card::after { content: attr(data-number); position: absolute; right: 12px; bottom: -15px; color: rgba(13,29,49,.07); font-family: Georgia, serif; font-size: 6rem; line-height: 1; }
-    .role-card h3 { position: relative; z-index: 1; }
-    .role-card p { position: relative; z-index: 1; margin-bottom: 0; }
-    .role-tag { color: #8f5c16; background: #fff0c7; border-radius: 999px; padding: 4px 8px; font-size: .7rem; font-weight: 800; }
-    .question-box { padding: 24px; color: var(--paper); background: var(--ink-2); border-radius: 18px; border: 1px solid rgba(86,211,199,.25); }
-    .question-box blockquote { margin: 14px 0 0; font-family: Georgia, serif; font-size: clamp(1.2rem, 2.1vw, 1.7rem); line-height: 1.2; color: #fff; }
-    details { margin-top: 12px; background: var(--paper-2); border: 1px solid var(--dark-line); border-radius: 14px; overflow: hidden; }
-    summary { cursor: pointer; padding: 17px 20px; color: var(--ink); font-weight: 800; list-style: none; }
-    summary::-webkit-details-marker { display: none; }
-    summary::after { content: "+"; float: right; color: var(--gold); font-size: 1.2rem; }
-    details[open] summary::after { content: "−"; }
-    .details-body { padding: 0 20px 22px; }
-    .scale { display: flex; flex-wrap: wrap; gap: 7px; margin: 14px 0; }
-    .scale span { padding: 7px 10px; color: var(--ink); background: #e9f5f2; border: 1px solid #c7e9e2; border-radius: 7px; font-size: .78rem; }
-    .survey { width: 100%; border-collapse: collapse; font-size: .82rem; }
-    .survey th, .survey td { padding: 10px 8px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--dark-line); }
-    .survey th { color: var(--paper); background: var(--ink); font-size: .72rem; letter-spacing: .05em; text-transform: uppercase; }
-    .survey th:first-child, .survey td:first-child { width: 42px; text-align: center; }
-    .survey th:last-child, .survey td:last-child { width: 120px; color: #79581f; }
-    .survey tr:nth-child(even) td { background: #fbf8f0; }
-    .interview-list { counter-reset: interview; display: grid; gap: 9px; }
-    .interview-item { display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: start; }
-    .interview-item::before { counter-increment: interview; content: counter(interview, decimal-leading-zero); color: var(--gold); font-family: "Cascadia Code", monospace; font-weight: 800; }
-    .source-list { display: grid; gap: 9px; margin: 0; padding: 0; list-style: none; }
-    .source-list li { padding: 12px 14px; border-left: 3px solid var(--gold); background: #fff9eb; font-size: .9rem; }
-    .source-list a { color: #1c5a78; word-break: break-word; }
-    .footer { padding: 28px clamp(20px, 5vw, 72px); color: #b8c7d7; background: var(--ink); font-size: .82rem; }
-    .footer-inner { max-width: 1180px; margin: auto; display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
-    @media (max-width: 850px) {
-      .hero-grid, .grid-2, .grid-3 { grid-template-columns: 1fr; }
-      .hero-index { justify-self: start; }
-      .section-head { display: block; }
-      .section-head p { margin-top: 14px; }
-      .answers { grid-template-columns: 1fr; }
-      .table-scroll { overflow-x: auto; }
-      .survey { min-width: 690px; }
-    }
-    @media (max-width: 540px) {
-      .topbar { align-items: flex-start; flex-direction: column; }
-      .nav { justify-content: flex-start; }
-      h1 { font-size: 3.3rem; }
-      .game-top { align-items: flex-start; flex-direction: column; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
-    }
-  </style>
+  <meta name="description" content="Portafolio de actividades de Liderazgo y Dinámica de Grupo.">
+  <title>Actividades de liderazgo </title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand"><span class="brand-mark">EB</span><span>Portafolio académico</span></div>
-    <nav class="nav" aria-label="Navegación de actividades">
-      <button class="active" data-target="actividad-4">Actividad 4 · Juego</button>
-      <button data-target="actividad-5">Actividad 5 · Investigación</button>
+  <header class="site-header">
+    <a class="brand" href="index.html"><span class="brand-mark">EB</span><span>Portafolio académico</span></a>
+    <nav class="site-nav" aria-label="Navegación principal">
+      <a href="actividad-4.html">Actividad 4</a>
+      <a href="actividad-5.html">Actividad 5</a>
     </nav>
   </header>
 
-  <section class="hero">
-    <div class="hero-grid">
-      <div>
-        <div class="eyebrow">Liderazgo y Dinámica de Grupo / Ingeniería de Sistemas</div>
-        <h1>Equipos que piensan, actúan y terminan mejor.</h1>
-        <p class="hero-copy">Dos actividades conectadas por una misma pregunta: ¿qué ocurre cuando las fortalezas de un equipo dejan de competir y empiezan a complementarse?</p>
-        <div class="hero-meta"><span class="pill">Erick Bravo Borges</span><span class="pill">Investigación aplicada</span><span class="pill">2026</span></div>
-      </div>
-      <div class="hero-index"><div class="label">Mapa de trabajo</div><strong>04 / 05</strong><span>Un juego para comprender el marco teórico y una encuesta para observarlo en equipos reales.</span></div>
-    </div>
-  </section>
-
-  <main class="content">
-    <section class="view active" id="actividad-4" aria-labelledby="title-a4">
-      <div class="section-head">
-        <div><div class="section-code">Actividad 04 · entregable HTML</div><h2 id="title-a4">Aprender los roles jugando.</h2></div>
-        <p>Marco teórico y juego interactivo construido sobre los nueve roles de equipo de Belbin. El juego presenta una situación, pide elegir el rol más adecuado y explica la respuesta.</p>
-      </div>
-
-      <div class="grid-2">
-        <article class="card dark"><span class="data-chip">Marco teórico</span><h3>El equilibrio es conductual</h3><p>Belbin describe tendencias de comportamiento: cómo una persona contribuye, se relaciona y responde dentro del equipo. Los roles no son cargos fijos ni etiquetas permanentes. El valor aparece en la interacción.</p></article>
-        <article class="card"><span class="data-chip">Idea central</span><h3>Fortalezas que cubren vacíos</h3><p>Un equipo puede generar ideas, evaluarlas, convertirlas en acciones, cuidar las relaciones y cerrar con calidad. Si una contribución falta, el grupo puede quedarse con ideas sin ejecución o con actividad sin dirección.</p></article>
-      </div>
-      <div class="callout"><div class="callout-mark">✦</div><p><strong>Cómo jugar:</strong> lee cada situación, elige una opción y revisa la explicación. El resultado orienta tu comprensión del marco; no es un test psicológico ni reemplaza una evaluación formal.</p></div>
-
-      <div class="game" id="game" aria-live="polite">
-        <div class="game-top"><div class="progress" aria-label="Progreso del juego"><span id="progress-bar"></span></div><div class="game-score" id="score-label">Pregunta 1 / 8</div></div>
-        <div class="question-kicker" id="question-kicker">Situación de equipo</div>
-        <h3 id="question">Cargando situación…</h3>
-        <div class="answers" id="answers"></div>
-        <div class="feedback" id="feedback"></div>
-        <div class="game-actions"><button class="secondary" id="restart" type="button">Reiniciar</button><button class="primary" id="next" type="button" disabled>Siguiente</button></div>
-      </div>
-
-      <h3 class="section-head" style="margin-top:54px;margin-bottom:18px"><span><span class="section-code">Los nueve roles</span><br><strong style="font-family:Georgia,serif;font-size:2rem;font-weight:500">Una contribución, una tensión.</strong></span><span></span></h3>
-      <div class="grid-3">
-        <article class="card role-card" data-number="01"><span class="role-tag">Acción</span><h3>Impulsor</h3><p>Activa al equipo y supera obstáculos. Su tensión: puede presionar demasiado.</p></article>
-        <article class="card role-card" data-number="02"><span class="role-tag">Acción</span><h3>Implementador</h3><p>Convierte acuerdos en acciones ordenadas. Su tensión: puede resistirse a cambios poco prácticos.</p></article>
-        <article class="card role-card" data-number="03"><span class="role-tag">Acción</span><h3>Finalizador</h3><p>Revisa detalles y plazos. Su tensión: puede preocuparse en exceso o delegar poco.</p></article>
-        <article class="card role-card" data-number="04"><span class="role-tag">Pensamiento</span><h3>Cerebro</h3><p>Genera soluciones originales. Su tensión: puede descuidar la aplicación práctica.</p></article>
-        <article class="card role-card" data-number="05"><span class="role-tag">Pensamiento</span><h3>Monitor evaluador</h3><p>Compara opciones con objetividad. Su tensión: puede parecer excesivamente crítico.</p></article>
-        <article class="card role-card" data-number="06"><span class="role-tag">Pensamiento</span><h3>Especialista</h3><p>Aporta conocimiento profundo. Su tensión: puede mirar solo su área.</p></article>
-        <article class="card role-card" data-number="07"><span class="role-tag">Social</span><h3>Coordinador</h3><p>Aclara metas y distribuye responsabilidades. Su tensión: puede delegar demasiado.</p></article>
-        <article class="card role-card" data-number="08"><span class="role-tag">Social</span><h3>Cohesionador</h3><p>Escucha, media y mantiene relaciones. Su tensión: puede evitar decisiones difíciles.</p></article>
-        <article class="card role-card" data-number="09"><span class="role-tag">Social</span><h3>Investigador de recursos</h3><p>Explora contactos y oportunidades. Su tensión: puede perder impulso cuando termina el entusiasmo.</p></article>
-      </div>
-
-      <div class="card" style="margin-top:18px"><div class="label">Referencias · APA 7.ª edición</div><ul class="source-list" style="margin-top:14px"><li>Belbin Associates. (s. f.). <em>Belbin for students</em>. <a href="https://www.belbin.com/media/1288/belbin-for-students.pdf" target="_blank" rel="noopener">belbin.com/media/1288/belbin-for-students.pdf</a></li><li>Belbin Associates. (2014). <em>A comprehensive review of Belbin team roles</em>. <a href="https://www.belbin.com/media/1158/belbin-uk-2014-a-comprehensive-review.pdf" target="_blank" rel="noopener">belbin.com/media/1158/belbin-uk-2014-a-comprehensive-review.pdf</a></li><li>Asana. (2025, 2 de octubre). <em>Roles del equipo: 9 tipos de roles para crear un equipo bien equilibrado</em>. <a href="https://asana.com/es/resources/team-roles" target="_blank" rel="noopener">asana.com/es/resources/team-roles</a></li></ul></div>
+  <main class="wrap">
+    <section class="page-intro">
+      <div class="eyebrow">Liderazgo y Dinámica de Grupo · Ingeniería de Sistemas</div>
+      <h1>Actividades de liderazgo</h1>
+      <div class="meta"><span class="tag">Actividad 4 · Juego interactivo</span><span class="tag">Actividad 5 · Investigación aplicada</span></div>
     </section>
 
-    <section class="view" id="actividad-5" aria-labelledby="title-a5">
-      <div class="section-head"><div><div class="section-code">Actividad 05 · investigación aplicada</div><h2 id="title-a5">Observar la complementariedad.</h2></div><p>La consigna pide una pregunta guía, una encuesta Likert aplicada a mínimo 17 personas y una entrevista a 2 integrantes de la materia o del grupo.</p></div>
-      <div class="question-box"><div class="label">Pregunta guía</div><blockquote>¿En qué medida la complementariedad de los roles de equipo de Belbin se relaciona con la eficacia percibida del trabajo en equipo entre los estudiantes de la materia de Liderazgo y Dinámica de Grupo?</blockquote></div>
-      <div class="grid-3" style="margin-top:18px"><article class="card"><div class="label">Muestra</div><h3>17+ estudiantes</h3><p>Aplicación anónima a compañeros del salón.</p></article><article class="card"><div class="label">Entrevistas</div><h3>Ana y Aaron</h3><p>Entrevista semiestructurada sobre experiencias grupales.</p></article><article class="card"><div class="label">Perfil personal</div><h3>Finalizador</h3><p>Revisión de detalles, calidad y cumplimiento de plazos.</p></article></div>
-
-      <details open><summary>Marco de análisis</summary><div class="details-body"><p>La investigación observa comportamientos, no etiquetas rígidas. Se analizarán tres dimensiones: presencia percibida de los roles, complementariedad entre fortalezas y eficacia percibida del equipo.</p><p>La encuesta tendrá un carácter exploratorio. Los resultados se describirán con promedios de percepción y se contrastarán con las respuestas de Ana y Aaron. No se inventarán respuestas ni se presentará causalidad absoluta.</p></div></details>
-      <details><summary>Encuesta Likert · 20 afirmaciones</summary><div class="details-body"><p>Marca una opción por afirmación: 1 = totalmente en desacuerdo; 2 = en desacuerdo; 3 = neutral; 4 = de acuerdo; 5 = totalmente de acuerdo.</p><div class="scale"><span>1 · Totalmente en desacuerdo</span><span>2 · En desacuerdo</span><span>3 · Neutral</span><span>4 · De acuerdo</span><span>5 · Totalmente de acuerdo</span></div><div class="table-scroll"><table class="survey"><thead><tr><th>#</th><th>Afirmación</th><th>Dimensión</th></tr></thead><tbody>
-        <tr><td>1</td><td>En nuestro equipo surge alguien que propone ideas originales cuando el trabajo se estanca.</td><td>Cerebro</td></tr><tr><td>2</td><td>Alguien busca información, contactos u oportunidades que ayudan al proyecto.</td><td>Investigador de recursos</td></tr><tr><td>3</td><td>Alguien aclara los objetivos y distribuye tareas según las capacidades.</td><td>Coordinador</td></tr><tr><td>4</td><td>Alguien impulsa al grupo a actuar y superar obstáculos.</td><td>Impulsor</td></tr><tr><td>5</td><td>Alguien analiza las alternativas antes de tomar decisiones importantes.</td><td>Monitor evaluador</td></tr><tr><td>6</td><td>Alguien escucha, media y ayuda a mantener buenas relaciones.</td><td>Cohesionador</td></tr><tr><td>7</td><td>Alguien convierte los acuerdos en acciones concretas y ordenadas.</td><td>Implementador</td></tr><tr><td>8</td><td>Alguien revisa los detalles y verifica que las tareas se entreguen a tiempo.</td><td>Finalizador</td></tr><tr><td>9</td><td>Alguien aporta conocimientos técnicos especializados.</td><td>Especialista</td></tr><tr><td>10</td><td>Las fortalezas de los integrantes se complementan en lugar de repetirse.</td><td>Complementariedad</td></tr><tr><td>11</td><td>Cuando una persona tiene una debilidad, otro integrante aporta una fortaleza que la compensa.</td><td>Complementariedad</td></tr><tr><td>12</td><td>Los integrantes pueden asumir funciones diferentes cuando cambian las necesidades.</td><td>Flexibilidad</td></tr><tr><td>13</td><td>El equipo coordina claramente quién hará cada tarea.</td><td>Eficacia</td></tr><tr><td>14</td><td>La distribución de tareas aprovecha las capacidades de los integrantes.</td><td>Eficacia</td></tr><tr><td>15</td><td>El equipo resuelve los desacuerdos sin afectar el avance.</td><td>Eficacia</td></tr><tr><td>16</td><td>El equipo cumple los plazos establecidos.</td><td>Eficacia</td></tr><tr><td>17</td><td>El trabajo final se revisa antes de presentarse.</td><td>Eficacia</td></tr><tr><td>18</td><td>El equipo alcanza los objetivos de sus actividades grupales.</td><td>Eficacia</td></tr><tr><td>19</td><td>La composición del equipo favorece un buen desempeño.</td><td>Eficacia</td></tr><tr><td>20</td><td>Comprendo cuál es mi aporte y cómo se relaciona con el de los demás.</td><td>Eficacia</td></tr>
-      </tbody></table></div></div></details>
-      <details><summary>Entrevista a Ana y Aaron</summary><div class="details-body"><div class="interview-list"><div class="interview-item">¿Qué conductas observas con mayor frecuencia cuando trabajan en equipo?</div><div class="interview-item">¿Qué persona o conducta propone ideas nuevas cuando el grupo se estanca?</div><div class="interview-item">¿Quién organiza, distribuye tareas o recuerda los objetivos?</div><div class="interview-item">¿Cómo se revisan los detalles, la calidad y los plazos antes de entregar?</div><div class="interview-item">¿En qué medida las fortalezas de los integrantes se complementan? Da un ejemplo.</div><div class="interview-item">¿Qué ocurre cuando hay demasiadas personas que quieren dirigir, revisar o proponer ideas?</div><div class="interview-item">¿Qué rol o conducta debería reforzarse para mejorar el desempeño?</div><div class="interview-item">¿Qué recomendación darías para mejorar la eficacia a partir de Belbin?</div></div><p style="margin-top:18px"><strong>Registro:</strong> Entrevistada/o: ____________ Fecha: __________ ¿Autorizó tomar notas? Sí [ ] No [ ]</p></div></details>
-      <details><summary>Cómo analizar después de recoger las respuestas</summary><div class="details-body"><p>Calcula el promedio de los ítems 1 al 9 para observar la presencia percibida de cada rol. Calcula el promedio de los ítems 10 al 12 para complementariedad y de los ítems 13 al 20 para eficacia percibida.</p><p>Interpretación orientativa: 1,00–2,33 nivel bajo; 2,34–3,66 nivel medio; 3,67–5,00 nivel alto. Compara estos resultados con las coincidencias y diferencias encontradas en las entrevistas.</p></div></details>
-      <div class="card" style="margin-top:18px"><div class="label">Referencias · APA 7.ª edición</div><ul class="source-list" style="margin-top:14px"><li>Belbin Associates. (s. f.). <em>Belbin for students</em>. <a href="https://www.belbin.com/media/1288/belbin-for-students.pdf" target="_blank" rel="noopener">Fuente original</a></li><li>Belbin Associates. (2014). <em>A comprehensive review of Belbin team roles</em>. <a href="https://www.belbin.com/media/1158/belbin-uk-2014-a-comprehensive-review.pdf" target="_blank" rel="noopener">Fuente original</a></li><li>Asana. (2025, 2 de octubre). <em>Roles del equipo: 9 tipos de roles para crear un equipo bien equilibrado</em>. <a href="https://asana.com/es/resources/team-roles" target="_blank" rel="noopener">Fuente original</a></li></ul></div>
+    <section class="section" aria-labelledby="actividades-title">
+      <div class="section-head">
+        <div><div class="code">Contenido</div><h2 id="actividades-title">Elige una actividad</h2></div>
+        <p>Cada actividad tiene su propia página para facilitar la lectura, la aplicación y la presentación.</p>
+      </div>
+      <div class="grid grid-2">
+        <a class="action-card" href="actividad-4.html">
+          <div><div class="eyebrow">Actividad 04</div><h3>Belbin: aprender los roles jugando</h3><p>Marco teórico breve, juego de situaciones y nueve roles de equipo.</p></div>
+          <span class="action-link">Abrir actividad 4 →</span>
+        </a>
+        <a class="action-card" href="actividad-5.html">
+          <div><div class="label">Actividad 05</div><h3>Complementariedad y eficacia</h3><p>Pregunta guía, encuesta Likert, entrevista y ruta de análisis.</p></div>
+          <span class="action-link">Abrir actividad 5 →</span>
+        </a>
+      </div>
     </section>
   </main>
-  <footer class="footer"><div class="footer-inner"><span>Erick Bravo Borges · Ingeniería de Sistemas</span><span>Actividad 4 + Actividad 5 · HTML preparado para GitHub Pages</span></div></footer>
 
-  <script>
-    const quiz = [
-      { q: "El equipo tiene muchas ideas, pero ninguna se convierte en una solución concreta. ¿Qué rol falta?", options: ["Cerebro", "Implementador", "Investigador de recursos", "Cohesionador"], correct: 1, why: "El Implementador convierte las ideas y acuerdos en acciones ordenadas." },
-      { q: "Una entrega está a punto de presentarse y alguien detecta errores, verifica el formato y revisa el plazo. ¿Qué rol representa?", options: ["Finalizador", "Impulsor", "Coordinador", "Especialista"], correct: 0, why: "El Finalizador cuida los detalles, la calidad y el cumplimiento de plazos." },
-      { q: "El equipo necesita una idea original para salir de un bloqueo técnico. ¿Qué rol puede aportar esa solución?", options: ["Cerebro", "Monitor evaluador", "Implementador", "Coordinador"], correct: 0, why: "El Cerebro cuestiona lo convencional y genera soluciones originales." },
-      { q: "Dos integrantes discuten y una persona escucha a ambos, media y recupera la colaboración. ¿Qué rol aparece?", options: ["Impulsor", "Cohesionador", "Especialista", "Finalizador"], correct: 1, why: "El Cohesionador ayuda a mantener relaciones y armonizar los conflictos." },
-      { q: "Hay tres alternativas y el grupo necesita comparar riesgos, utilidad y viabilidad antes de decidir. ¿Qué rol es clave?", options: ["Monitor evaluador", "Investigador de recursos", "Cerebro", "Impulsor"], correct: 0, why: "El Monitor evaluador analiza opciones con objetividad antes de decidir." },
-      { q: "El grupo necesita alguien que aclare objetivos y distribuya tareas según las capacidades. ¿Qué rol corresponde?", options: ["Coordinador", "Cohesionador", "Especialista", "Finalizador"], correct: 0, why: "El Coordinador clarifica metas, identifica capacidades y delega." },
-      { q: "Se requiere conocimiento técnico profundo sobre un tema específico. ¿Qué rol aporta esa contribución?", options: ["Investigador de recursos", "Especialista", "Implementador", "Impulsor"], correct: 1, why: "El Especialista aporta conocimientos y habilidades técnicas específicas." },
-      { q: "El grupo necesita contactos, información externa y oportunidades para mejorar su proyecto. ¿Qué rol conviene activar?", options: ["Investigador de recursos", "Monitor evaluador", "Finalizador", "Cerebro"], correct: 0, why: "El Investigador de recursos explora oportunidades, contactos e información externa." }
-    ];
-    let current = 0, score = 0, answered = false;
-    const $ = (id) => document.getElementById(id);
-    function renderQuestion() {
-      const item = quiz[current]; answered = false;
-      $("question-kicker").textContent = `Situación ${String(current + 1).padStart(2, "0")}`;
-      $("question").textContent = item.q;
-      $("score-label").textContent = `Pregunta ${current + 1} / ${quiz.length}`;
-      $("progress-bar").style.width = `${(current / quiz.length) * 100}%`;
-      $("feedback").textContent = "";
-      $("next").disabled = true;
-      $("next").textContent = current === quiz.length - 1 ? "Ver resultado" : "Siguiente";
-      $("answers").innerHTML = item.options.map((option, i) => `<button class="answer" data-index="${i}" type="button">${option}</button>`).join("");
-      document.querySelectorAll(".answer").forEach(btn => btn.addEventListener("click", choose));
-    }
-    function choose(e) {
-      if (answered) return;
-      answered = true;
-      const choice = Number(e.currentTarget.dataset.index), item = quiz[current];
-      document.querySelectorAll(".answer").forEach((btn, i) => { btn.disabled = true; if (i === item.correct) btn.classList.add("correct"); if (i === choice && i !== item.correct) btn.classList.add("wrong"); });
-      if (choice === item.correct) { score++; $("feedback").textContent = `Correcto. ${item.why}`; } else { $("feedback").textContent = `Revisa el marco. ${item.why}`; }
-      $("next").disabled = false;
-    }
-    $("next").addEventListener("click", () => { if (!answered) return; if (current < quiz.length - 1) { current++; renderQuestion(); } else { $("question-kicker").textContent = "Resultado"; $("question").textContent = `Obtuviste ${score} de ${quiz.length}.`; $("answers").innerHTML = `<p style="color:#b8c7d7">El objetivo es reconocer que un equipo equilibrado necesita combinar contribuciones distintas. Puedes reiniciar para volver a jugar.</p>`; $("feedback").textContent = score >= 6 ? "Lectura sólida del marco." : "Vuelve a revisar las tarjetas de roles y prueba otra vez."; $("next").disabled = true; $("progress-bar").style.width = "100%"; } });
-    $("restart").addEventListener("click", () => { current = 0; score = 0; renderQuestion(); });
-    renderQuestion();
-    document.querySelectorAll(".nav button").forEach(btn => btn.addEventListener("click", () => { document.querySelectorAll(".nav button").forEach(b => b.classList.remove("active")); btn.classList.add("active"); document.querySelectorAll(".view").forEach(v => v.classList.remove("active")); const view = document.getElementById(btn.dataset.target); view.classList.add("active"); view.scrollIntoView({ behavior: "smooth", block: "start" }); }));
-  </script>
+  <footer class="footer"><div class="wrap footer-inner"><span>Liderazgo y Dinamica de Grupos</span><span>2026</span></div></footer>
 </body>
 </html>
