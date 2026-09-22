@@ -39,10 +39,13 @@
       <div class="escape-shell" id="escape-room" aria-live="polite">
         <div class="escape-top"><div><span class="escape-kicker">Misión de cierre</span><strong id="escape-counter">Estación 1 / 3</strong></div><div class="escape-lives" id="escape-hints">Pistas: 2</div></div>
         <div class="escape-meter" aria-label="Progreso de la misión"><span id="escape-meter-fill"></span></div>
+        <div class="escape-world" aria-label="Recorrido del personaje">
+          <div class="world-sky"><span class="world-glow"></span><div class="world-stars"></div><div class="world-route"></div><div class="world-doors"><div class="world-door" id="door-0"><span class="door-light"></span><b>01</b><small>?</small></div><div class="world-door" id="door-1"><span class="door-light"></span><b>02</b><small>?</small></div><div class="world-door" id="door-2"><span class="door-light"></span><b>03</b><small>?</small></div></div><svg class="escape-player" id="escape-player" viewBox="0 0 80 100" role="img" aria-label="Personaje avanzando"><circle cx="40" cy="20" r="13" fill="#e4b58c"/><path d="M26 20c1-15 27-19 29 1-8-5-19-5-29-1Z" fill="#172d4a"/><path d="M24 96c1-23 8-34 16-34s15 11 16 34" fill="#e5b65a"/><path d="M29 63h22M31 76h19" stroke="#10233d" stroke-width="4" stroke-linecap="round"/><path d="M28 96 19 99M52 96l9 3M24 70 9 78M56 70l15 8" stroke="#55c9bd" stroke-width="5" stroke-linecap="round"/></svg><div class="world-floor"></div><div class="world-status"><span id="world-status">El personaje espera tu decisión.</span><strong id="world-action">PUERTA 01</strong></div></div>
+        </div>
         <div class="escape-map" aria-label="Estaciones de la misión">
-          <div class="escape-station active" data-step="0"><span>01</span><div><b>Detectar</b><small>Encuentra el bloqueo</small></div></div>
-          <div class="escape-station" data-step="1"><span>02</span><div><b>Activar</b><small>Elige el rol clave</small></div></div>
-          <div class="escape-station" data-step="2"><span>03</span><div><b>Liberar</b><small>Valida la entrega</small></div></div>
+          <div class="escape-station active" data-step="0"><span>01</span><div><b id="station-title-0">Detectar</b><small id="station-desc-0">Encuentra el bloqueo</small></div></div>
+          <div class="escape-station" data-step="1"><span>02</span><div><b id="station-title-1">Activar</b><small id="station-desc-1">Elige el rol clave</small></div></div>
+          <div class="escape-station" data-step="2"><span>03</span><div><b id="station-title-2">Liberar</b><small id="station-desc-2">Valida la entrega</small></div></div>
         </div>
         <div class="escape-card">
           <div class="escape-card-mark" id="escape-card-mark">01</div>
@@ -62,13 +65,34 @@
   <footer class="footer"><div class="wrap footer-inner"><span>Trabajo grupal · Liderazgo y Dinámica de Grupo</span><a href="index.html">Volver al inicio</a></div></footer>
 
   <script>
-    const stations = [
-      { label: "Diagnóstico", title: "El proyecto parece terminado, pero la entrega fue bloqueada.", brief: "El informe tiene contenido, aunque nadie comprobó requisitos, formato ni pendientes. ¿Qué debe detectarse primero?", options: ["La lista de pendientes y los requisitos de entrega", "Una nueva idea para cambiar el proyecto", "Más integrantes para presentar", "Un nombre más llamativo"], correct: 0, why: "El Finalizador parte de una revisión concreta: compara el resultado con los requisitos y hace visibles los pendientes.", hint: "Busca la opción que permita comprobar si el trabajo realmente está listo." },
-      { label: "Activación", title: "El equipo ya avanzó; ahora necesita asegurar la calidad.", brief: "¿Qué rol de Belbin debe activarse para revisar detalles, detectar errores y cuidar el plazo?", options: ["Cerebro", "Investigador de recursos", "Finalizador", "Impulsor"], correct: 2, why: "El Finalizador verifica detalles, calidad, coherencia y cumplimiento antes de presentar.", hint: "Es el rol de acción que convierte un trabajo avanzado en una entrega completa." },
-      { label: "Liberación", title: "La estación final exige ordenar el cierre.", brief: "Selecciona la secuencia que permite liberar una entrega responsable.", options: ["Revisar requisitos → corregir pendientes → comprobar → entregar", "Entregar → revisar → buscar errores → corregir", "Agregar ideas → cambiar el objetivo → entregar", "Presentar → repartir tareas → comprobar si hay tiempo"], correct: 0, why: "El cierre del Finalizador sigue un orden: revisar, corregir, comprobar y entregar con evidencia.", hint: "La entrega debe ser el último paso, después de verificar el resultado." }
+    const stationPools = [
+      [
+        { label: "Diagnóstico", short: "Detectar", desc: "Encuentra el bloqueo", title: "El proyecto parece terminado, pero la entrega fue bloqueada.", brief: "El informe tiene contenido, aunque nadie comprobó requisitos, formato ni pendientes. ¿Qué debe detectarse primero?", options: ["La lista de pendientes y los requisitos de entrega", "Una nueva idea para cambiar el proyecto", "Más integrantes para presentar", "Un nombre más llamativo"], correct: 0, why: "El Finalizador parte de una revisión concreta: compara el resultado con los requisitos y hace visibles los pendientes.", hint: "Busca la opción que permita comprobar si el trabajo realmente está listo." },
+        { label: "Diagnóstico", short: "Rastrear", desc: "Sigue la evidencia", title: "El sistema funciona, pero la demostración falla.", brief: "Antes de presentar, el equipo descubre que una función no tiene evidencia de prueba. ¿Qué acción corresponde?", options: ["Registrar la prueba y verificar el requisito", "Cambiar todo el diseño", "Ocultar el problema durante la exposición", "Agregar una función diferente"], correct: 0, why: "El Finalizador comprueba que cada requisito tenga evidencia antes de dar la entrega por cerrada.", hint: "La opción correcta deja una evidencia verificable del requisito." },
+        { label: "Diagnóstico", short: "Ordenar", desc: "Ubica el riesgo", title: "Hay tareas terminadas, pero varios pendientes no tienen responsable.", brief: "El cierre se acerca y el equipo no sabe qué falta ni quién debe resolverlo. ¿Qué debe hacer primero?", options: ["Listar pendientes, responsables y plazos", "Entregar y corregir después", "Esperar a que alguien lo recuerde", "Empezar otra tarea sin cerrar la anterior"], correct: 0, why: "El cierre comienza haciendo visible el trabajo pendiente y asignando una acción concreta.", hint: "La respuesta correcta convierte la incertidumbre en una lista verificable." }
+      ],
+      [
+        { label: "Activación", short: "Activar", desc: "Elige el rol clave", title: "El equipo ya avanzó; ahora necesita asegurar la calidad.", brief: "¿Qué rol de Belbin debe activarse para revisar detalles, detectar errores y cuidar el plazo?", options: ["Cerebro", "Investigador de recursos", "Finalizador", "Impulsor"], correct: 2, why: "El Finalizador verifica detalles, calidad, coherencia y cumplimiento antes de presentar.", hint: "Es el rol de acción que convierte un trabajo avanzado en una entrega completa." },
+        { label: "Activación", short: "Coordinar", desc: "Conecta los aportes", title: "El trabajo está repartido, pero las partes no encajan.", brief: "¿Qué rol ayuda a aclarar objetivos, responsabilidades y conexión entre las tareas?", options: ["Coordinador", "Cerebro", "Especialista", "Finalizador"], correct: 0, why: "El Coordinador organiza los aportes y permite que el Finalizador pueda revisar una entrega integrada.", hint: "Busca el rol que ordena objetivos y responsabilidades del equipo." },
+        { label: "Activación", short: "Comprobar", desc: "Protege la calidad", title: "El equipo quiere entregar rápido, pero existen tres versiones del archivo.", brief: "¿Qué rol debe asegurar que se use la versión correcta y que no queden errores?", options: ["Impulsor", "Finalizador", "Investigador de recursos", "Cerebro"], correct: 1, why: "El Finalizador controla la coherencia de la versión final y evita entregar un resultado incompleto.", hint: "Es el rol que revisa detalles y confirma qué versión está lista." }
+      ],
+      [
+        { label: "Liberación", short: "Liberar", desc: "Valida la entrega", title: "La estación final exige ordenar el cierre.", brief: "Selecciona la secuencia que permite liberar una entrega responsable.", options: ["Revisar requisitos → corregir pendientes → comprobar → entregar", "Entregar → revisar → buscar errores → corregir", "Agregar ideas → cambiar el objetivo → entregar", "Presentar → repartir tareas → comprobar si hay tiempo"], correct: 0, why: "El cierre del Finalizador sigue un orden: revisar, corregir, comprobar y entregar con evidencia.", hint: "La entrega debe ser el último paso, después de verificar el resultado." },
+        { label: "Liberación", short: "Cerrar", desc: "Sella el proyecto", title: "La puerta final solo se abre con una revisión completa.", brief: "¿Qué lista demuestra que el proyecto está listo para presentarse?", options: ["Objetivo, requisitos, evidencias, formato y responsables verificados", "Solo el título y la portada", "La opinión de una persona sin revisar el archivo", "Una nueva lluvia de ideas"], correct: 0, why: "El Finalizador confirma los elementos críticos de la entrega y documenta que fueron revisados.", hint: "La lista correcta incluye requisitos y evidencias, no solo elementos visuales." },
+        { label: "Liberación", short: "Presentar", desc: "Entrega con evidencia", title: "El equipo debe decidir si el trabajo puede salir del laboratorio.", brief: "¿Cuál es la señal más clara de que el cierre fue responsable?", options: ["El equipo puede explicar qué revisó y qué riesgos aceptó", "El archivo pesa mucho", "La presentación tiene muchas animaciones", "Todos dicen que parece terminado"], correct: 0, why: "Un cierre responsable deja trazabilidad: el equipo sabe qué verificó y qué decisión tomó.", hint: "La respuesta correcta demuestra revisión y criterio, no solo apariencia." }
+      ]
     ];
-    let station = 0, hints = 2, unlocked = false;
+    const shuffle = items => [...items].sort(() => Math.random() - 0.5);
+    let stations = [], station = 0, hints = 2, unlocked = false;
     const $ = id => document.getElementById(id);
+    function buildStations() { stations = shuffle(stationPools).map(pool => shuffle(pool)[0]); }
+    function renderWorld() {
+      const progress = station >= stations.length ? 1 : station / stations.length;
+      $("escape-player").style.setProperty("--player-progress", progress);
+      document.querySelectorAll(".world-door").forEach((door, index) => { door.classList.toggle("open", index < station || station >= stations.length); door.classList.toggle("active", index === station && station < stations.length); });
+      $("world-action").textContent = station >= stations.length ? "ENTREGA LIBERADA" : `PUERTA 0${station + 1}`;
+      $("world-status").textContent = station >= stations.length ? "El personaje llegó al cierre." : unlocked ? "Respuesta correcta. Abre la puerta para avanzar." : "El personaje espera tu decisión.";
+    }
     function renderStation() {
       const item = stations[station]; unlocked = false;
       $("escape-counter").textContent = `Estación ${station + 1} / ${stations.length}`;
@@ -81,7 +105,8 @@
       $("escape-action").disabled = true;
       $("escape-action").textContent = station === stations.length - 1 ? "Liberar entrega" : "Desbloquear estación";
       $("escape-options").innerHTML = item.options.map((option, i) => `<button class="escape-option" data-index="${i}" type="button"><span>${String.fromCharCode(65 + i)}</span>${option}</button>`).join("");
-      document.querySelectorAll(".escape-station").forEach((node, i) => node.classList.toggle("active", i === station));
+      document.querySelectorAll(".escape-station").forEach((node, i) => { node.classList.toggle("active", i === station); node.classList.toggle("cleared", i < station); $(`station-title-${i}`).textContent = stations[i].short; $(`station-desc-${i}`).textContent = stations[i].desc; });
+      renderWorld();
       document.querySelectorAll(".escape-option").forEach(button => button.addEventListener("click", chooseOption));
     }
     function chooseOption(event) {
@@ -89,12 +114,13 @@
       const choice = Number(event.currentTarget.dataset.index), item = stations[station];
       document.querySelectorAll(".escape-option").forEach(button => button.classList.remove("selected", "wrong"));
       event.currentTarget.classList.add("selected");
-      if (choice === item.correct) { unlocked = true; event.currentTarget.classList.add("correct"); $("escape-feedback").textContent = `✓ ${item.why}`; $("escape-action").disabled = false; }
+      if (choice === item.correct) { unlocked = true; event.currentTarget.classList.add("correct"); $("escape-feedback").textContent = `✓ ${item.why}`; $("escape-action").disabled = false; renderWorld(); }
       else { event.currentTarget.classList.add("wrong"); $("escape-feedback").textContent = `Aún no. ${item.hint}`; }
     }
     $("escape-hint").addEventListener("click", () => { if (hints < 1 || unlocked) return; hints--; $("escape-hints").textContent = `Pistas: ${hints}`; $("escape-feedback").textContent = `Pista: ${stations[station].hint}`; if (hints === 0) $("escape-hint").disabled = true; });
-    $("escape-action").addEventListener("click", () => { if (!unlocked) return; if (station < stations.length - 1) { station++; renderStation(); } else { $("escape-meter-fill").style.width = "100%"; $("escape-result").hidden = false; $("escape-result").innerHTML = `<span class="result-seal">✓</span><div><strong>Entrega liberada</strong><p>Aplicaste el rol Finalizador: detectaste el riesgo, activaste el rol adecuado y validaste el cierre.</p><button class="btn btn-primary" id="escape-restart" type="button">Jugar de nuevo</button></div>`; $("escape-action").disabled = true; $("escape-result").scrollIntoView({ behavior: "smooth", block: "nearest" }); $("escape-restart").addEventListener("click", restart); } });
-    function restart() { station = 0; hints = 2; $("escape-hints").textContent = "Pistas: 2"; $("escape-hint").disabled = false; $("escape-result").hidden = true; renderStation(); }
+    $("escape-action").addEventListener("click", () => { if (!unlocked) return; if (station < stations.length - 1) { station++; renderStation(); } else { station = stations.length; $("escape-meter-fill").style.width = "100%"; renderWorld(); $("escape-result").hidden = false; $("escape-result").innerHTML = `<span class="result-seal">✓</span><div><strong>Entrega liberada</strong><p>Aplicaste el rol Finalizador: detectaste el riesgo, activaste el rol adecuado y validaste el cierre.</p><button class="btn btn-primary" id="escape-restart" type="button">Jugar de nuevo</button></div>`; $("escape-action").disabled = true; $("escape-result").scrollIntoView({ behavior: "smooth", block: "nearest" }); $("escape-restart").addEventListener("click", restart); } });
+    function restart() { station = 0; hints = 2; buildStations(); $("escape-hints").textContent = "Pistas: 2"; $("escape-hint").disabled = false; $("escape-result").hidden = true; renderStation(); }
+    buildStations();
     renderStation();
   </script>
 </body>
