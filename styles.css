@@ -368,7 +368,7 @@ details[open] summary::after { content: "−"; }
 .mission-card { display: flex; flex-direction: column; }
 .mission-card .challenge-board { flex: 1 1 auto; }
 .mission-actions { margin-top: auto; padding-top: 10px; }
-@media (max-width: 850px) {
+@media (max-width: 650px) {
   .platform-shell {
     grid-template-columns: 1fr;
     grid-template-areas:
