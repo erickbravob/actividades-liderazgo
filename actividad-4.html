@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Actividad 4: marco teórico y juego sobre el rol Finalizador de Belbin.">
-  <title>Actividad 4 | Rol Finalizador</title>
+  <meta name="description" content="Actividad 4: marco teórico y misión interactiva sobre el rol Finalizador de Belbin.">
+  <title>Actividad 4 | Operación Cierre</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -19,12 +19,12 @@
     <section class="page-intro compact-intro">
       <div class="eyebrow">Actividad 04 · Marco aplicado</div>
       <h1>Belbin y el rol Finalizador</h1>
-      <p class="lead">Comprende cómo la revisión, la calidad y el cumplimiento de plazos convierten un trabajo en una entrega completa.</p>
+      <p class="lead">Una misión interactiva para convertir un trabajo avanzado en una entrega completa, revisada y lista para presentar.</p>
       <div class="meta"><span class="tag">Ingeniería de Sistemas</span><span class="tag">Trabajo grupal</span><span class="tag">Juego interactivo</span></div>
     </section>
 
     <section class="section theory-section" aria-labelledby="theory-title">
-      <div class="section-head compact-head"><div><div class="code">Marco teórico</div><h2 id="theory-title">Cuatro ideas para comprender el cierre</h2></div><p>Los conceptos se presentan de forma breve para conectarlos directamente con el juego.</p></div>
+      <div class="section-head compact-head"><div><div class="code">Marco teórico</div><h2 id="theory-title">Cuatro ideas para comprender el cierre</h2></div><p>Los conceptos se presentan de forma breve y se aplican dentro de la misión.</p></div>
       <div class="concept-orbit">
         <article class="concept-bubble bubble-a"><span class="bubble-index">01</span><h3>Trabajo en equipo</h3><p>Coordina aportes distintos alrededor de un objetivo común. Los roles describen formas de contribuir, no cargos fijos.</p><p>La complementariedad aparece cuando las ideas, la ejecución y la revisión se conectan antes de entregar.</p></article>
         <article class="concept-bubble bubble-b"><span class="bubble-index">02</span><h3>Roles de Belbin</h3><p>El modelo reúne nueve roles en acción, pensamiento y relaciones sociales.</p><p>El Finalizador pertenece a los roles de acción porque transforma un trabajo avanzado en un resultado completo y presentable.</p></article>
@@ -35,93 +35,135 @@
     </section>
 
     <section class="section game-section" aria-labelledby="game-title">
-      <div class="game-heading"><div><div class="code">Aplicación · Escape room</div><h2 id="game-title">La entrega está bloqueada</h2></div><p>Resuelve tres estaciones y aplica el rol Finalizador para liberar el proyecto.</p></div>
-      <div class="escape-shell" id="escape-room" aria-live="polite">
-        <div class="escape-top"><div><span class="escape-kicker">Misión de cierre</span><strong id="escape-counter">Estación 1 / 3</strong></div><div class="escape-lives" id="escape-hints">Pistas: 2</div></div>
-        <div class="escape-meter" aria-label="Progreso de la misión"><span id="escape-meter-fill"></span></div>
-        <div class="escape-world" aria-label="Recorrido del personaje">
-          <div class="world-sky"><span class="world-glow"></span><div class="world-stars"></div><div class="world-route"></div><div class="world-doors"><div class="world-door" id="door-0"><span class="door-light"></span><b>01</b><small>?</small></div><div class="world-door" id="door-1"><span class="door-light"></span><b>02</b><small>?</small></div><div class="world-door" id="door-2"><span class="door-light"></span><b>03</b><small>?</small></div></div><svg class="escape-player" id="escape-player" viewBox="0 0 80 100" role="img" aria-label="Personaje avanzando"><circle cx="40" cy="20" r="13" fill="#e4b58c"/><path d="M26 20c1-15 27-19 29 1-8-5-19-5-29-1Z" fill="#172d4a"/><path d="M24 96c1-23 8-34 16-34s15 11 16 34" fill="#e5b65a"/><path d="M29 63h22M31 76h19" stroke="#10233d" stroke-width="4" stroke-linecap="round"/><path d="M28 96 19 99M52 96l9 3M24 70 9 78M56 70l15 8" stroke="#55c9bd" stroke-width="5" stroke-linecap="round"/></svg><div class="world-floor"></div><div class="world-status"><span id="world-status">El personaje espera tu decisión.</span><strong id="world-action">PUERTA 01</strong></div></div>
+      <div class="game-heading"><div><div class="code">Misión interactiva · Operación Cierre</div><h2 id="game-title">Libera la entrega</h2></div><p>Recorre cinco salas, reúne los sellos de calidad y llega al portal final antes de perder tus vidas.</p></div>
+      <div class="platform-shell" id="platform-game" aria-live="polite">
+        <div class="platform-top"><div><span class="platform-kicker">Misión de cierre</span><strong id="game-room">Sala 1 / 5</strong></div><div class="game-hud"><span class="game-lives" id="game-lives">Vidas: 3</span><span class="game-score" id="game-score">Sellos: 0 / 5</span></div></div>
+        <div class="platform-progress" aria-label="Progreso de la misión"><span id="game-progress-fill"></span></div>
+
+        <div class="platform-scene" id="platform-scene" aria-label="Mundo de la misión">
+          <div class="scene-glow"></div><div class="scene-grid"></div><div class="scene-cloud cloud-a"></div><div class="scene-cloud cloud-b"></div>
+          <div class="scene-badges" aria-hidden="true"><span>◈</span><span>✦</span><span>◇</span><span>✧</span></div>
+          <div class="platform-doors" id="platform-doors">
+            <div class="platform-door" id="platform-door-0"><b>01</b><span class="door-icon">◌</span><small>Radar</small></div>
+            <div class="platform-door" id="platform-door-1"><b>02</b><span class="door-icon">⚙</span><small>Roles</small></div>
+            <div class="platform-door" id="platform-door-2"><b>03</b><span class="door-icon">⌕</span><small>Auditoría</small></div>
+            <div class="platform-door" id="platform-door-3"><b>04</b><span class="door-icon">⇄</span><small>Orden</small></div>
+            <div class="platform-door" id="platform-door-4"><b>05</b><span class="door-icon">▣</span><small>Portal</small></div>
+          </div>
+          <div class="scene-track"></div>
+          <svg class="platform-player" id="game-player" viewBox="0 0 96 118" role="img" aria-label="Personaje de la misión">
+            <g class="player-shadow"><ellipse cx="48" cy="111" rx="21" ry="5" fill="#071425" opacity=".45"/></g>
+            <g class="player-body">
+              <path d="M35 34h26v18H35z" fill="#d99668"/>
+              <circle cx="48" cy="23" r="17" fill="#e7b58a"/>
+              <path d="M30 23c1-19 34-24 37 1-8-7-22-8-37-1Z" fill="#101f35"/>
+              <path d="M39 25h3M54 25h3" stroke="#182b42" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M42 33c4 2 8 2 12 0" stroke="#182b42" stroke-width="2" stroke-linecap="round" fill="none"/>
+              <path d="M36 48c4-4 20-4 24 0l8 37H28z" fill="#e5b65a" stroke="#10233d" stroke-width="3"/>
+              <path d="M39 51v30M57 51v30" stroke="#10233d" stroke-width="3" stroke-linecap="round"/>
+              <path d="M35 56 14 72M61 56l21 16" stroke="#55c9bd" stroke-width="7" stroke-linecap="round"/>
+              <path d="M38 84 28 106M58 84l10 22" stroke="#142b48" stroke-width="9" stroke-linecap="round"/>
+              <path d="M21 108h15M60 108h15" stroke="#e5b65a" stroke-width="7" stroke-linecap="round"/>
+              <circle cx="76" cy="70" r="7" fill="#55c9bd" stroke="#10233d" stroke-width="2"/>
+            </g>
+          </svg>
+          <div class="scene-status"><span id="scene-status">El personaje espera una decisión.</span><strong id="scene-action">PUERTA 01</strong></div>
         </div>
-        <div class="escape-map" aria-label="Estaciones de la misión">
-          <div class="escape-station active" data-step="0"><span>01</span><div><b id="station-title-0">Detectar</b><small id="station-desc-0">Encuentra el bloqueo</small></div></div>
-          <div class="escape-station" data-step="1"><span>02</span><div><b id="station-title-1">Activar</b><small id="station-desc-1">Elige el rol clave</small></div></div>
-          <div class="escape-station" data-step="2"><span>03</span><div><b id="station-title-2">Liberar</b><small id="station-desc-2">Valida la entrega</small></div></div>
+
+        <div class="mission-map" id="mission-map" aria-label="Salas de la misión"></div>
+
+        <div class="mission-card" id="mission-card">
+          <div class="mission-card-mark" id="mission-card-mark">01</div><div class="label" id="challenge-label">Radar de pendientes</div>
+          <h3 id="challenge-title">Cargando misión…</h3><p id="challenge-brief"></p>
+          <div class="challenge-board" id="challenge-board"></div>
+          <div class="challenge-feedback" id="challenge-feedback"></div>
+          <div class="mission-actions"><button class="btn btn-secondary" id="game-hint" type="button">Pedir pista</button><button class="btn btn-primary" id="game-confirm" type="button" disabled>Confirmar acción</button><button class="btn btn-primary" id="game-next" type="button" hidden>Avanzar</button></div>
         </div>
-        <div class="escape-card">
-          <div class="escape-card-mark" id="escape-card-mark">01</div>
-          <div class="label" id="escape-label">Diagnóstico</div>
-          <h3 id="escape-title">Cargando misión…</h3>
-          <p id="escape-brief"></p>
-          <div class="escape-options" id="escape-options"></div>
-          <div class="escape-feedback" id="escape-feedback"></div>
-          <div class="escape-actions"><button class="btn btn-secondary" id="escape-hint" type="button">Pedir pista</button><button class="btn btn-primary" id="escape-action" type="button" disabled>Desbloquear</button></div>
-        </div>
-        <div class="escape-result" id="escape-result" hidden></div>
+        <div class="platform-result" id="platform-result" hidden></div>
       </div>
-      <p class="micro-note">El juego aplica el marco de Belbin; no es un test psicológico. El Finalizador ayuda a detectar pendientes, verificar la calidad y cerrar la entrega.</p>
+      <p class="micro-note">La misión aplica el marco de Belbin en situaciones de trabajo. El Finalizador detecta riesgos, verifica la calidad y documenta el cierre.</p>
     </section>
   </main>
 
   <footer class="footer"><div class="wrap footer-inner"><span>Trabajo grupal · Liderazgo y Dinámica de Grupo</span><a href="index.html">Volver al inicio</a></div></footer>
 
   <script>
-    const stationPools = [
+    const $ = id => document.getElementById(id);
+    const shuffle = items => { const copy = [...items]; for (let i = copy.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [copy[i], copy[j]] = [copy[j], copy[i]]; } return copy; };
+    const roomPools = [
       [
-        { label: "Diagnóstico", short: "Detectar", desc: "Encuentra el bloqueo", title: "El proyecto parece terminado, pero la entrega fue bloqueada.", brief: "El informe tiene contenido, aunque nadie comprobó requisitos, formato ni pendientes. ¿Qué debe detectarse primero?", options: ["La lista de pendientes y los requisitos de entrega", "Una nueva idea para cambiar el proyecto", "Más integrantes para presentar", "Un nombre más llamativo"], correct: 0, why: "El Finalizador parte de una revisión concreta: compara el resultado con los requisitos y hace visibles los pendientes.", hint: "Busca la opción que permita comprobar si el trabajo realmente está listo." },
-        { label: "Diagnóstico", short: "Rastrear", desc: "Sigue la evidencia", title: "El sistema funciona, pero la demostración falla.", brief: "Antes de presentar, el equipo descubre que una función no tiene evidencia de prueba. ¿Qué acción corresponde?", options: ["Registrar la prueba y verificar el requisito", "Cambiar todo el diseño", "Ocultar el problema durante la exposición", "Agregar una función diferente"], correct: 0, why: "El Finalizador comprueba que cada requisito tenga evidencia antes de dar la entrega por cerrada.", hint: "La opción correcta deja una evidencia verificable del requisito." },
-        { label: "Diagnóstico", short: "Ordenar", desc: "Ubica el riesgo", title: "Hay tareas terminadas, pero varios pendientes no tienen responsable.", brief: "El cierre se acerca y el equipo no sabe qué falta ni quién debe resolverlo. ¿Qué debe hacer primero?", options: ["Listar pendientes, responsables y plazos", "Entregar y corregir después", "Esperar a que alguien lo recuerde", "Empezar otra tarea sin cerrar la anterior"], correct: 0, why: "El cierre comienza haciendo visible el trabajo pendiente y asignando una acción concreta.", hint: "La respuesta correcta convierte la incertidumbre en una lista verificable." }
+        { room: "Radar", label: "Sala 01 · Radar de pendientes", type: "multi", title: "La entrega parece lista, pero el cierre no está controlado.", brief: "Selecciona los tres elementos que el equipo debe revisar antes de avanzar.", hint: "El Finalizador necesita requisitos visibles, responsables y evidencia.", why: "Detectaste lo que podía bloquear la entrega y convertiste el riesgo en acciones verificables.", items: [{ id: "requirements", label: "Requisitos de entrega", detail: "Qué debe cumplir el producto" }, { id: "ideas", label: "Nueva idea visual", detail: "Aún no está priorizada" }, { id: "owner", label: "Responsables y plazos", detail: "Quién resuelve cada pendiente" }, { id: "evidence", label: "Evidencias de prueba", detail: "Cómo se comprobó el resultado" }, { id: "slogan", label: "Frase para la portada", detail: "No bloquea el cierre" }], correct: ["requirements", "owner", "evidence"] },
+        { room: "Radar", label: "Sala 01 · Radar de pendientes", type: "multi", title: "El sistema funciona, pero la demostración está incompleta.", brief: "Marca los elementos que deben quedar visibles para entregar con trazabilidad.", hint: "Piensa en aquello que otra persona podría comprobar sin preguntarte.", why: "Una entrega Finalizadora deja requisitos, pruebas y decisiones documentadas.", items: [{ id: "test", label: "Resultado de la prueba", detail: "Evidencia verificable" }, { id: "color", label: "Cambiar el color", detail: "Mejora estética, no es prioridad" }, { id: "version", label: "Versión final identificada", detail: "Evita trabajar sobre un archivo antiguo" }, { id: "owner", label: "Pendientes con responsable", detail: "Cada acción tiene dueño" }, { id: "idea", label: "Otra lluvia de ideas", detail: "Puede esperar" }], correct: ["test", "version", "owner"] },
+        { room: "Radar", label: "Sala 01 · Radar de pendientes", type: "multi", title: "Faltan minutos para presentar y el equipo trabaja en paralelo.", brief: "Elige los tres controles que reducen el riesgo de entregar algo incompleto.", hint: "Prioriza coherencia, requisitos y la última versión.", why: "Priorizaste los controles que protegen la entrega en lugar de agregar trabajo nuevo.", items: [{ id: "checklist", label: "Lista de requisitos", detail: "Criterio de aceptación" }, { id: "latest", label: "Archivo más reciente", detail: "Fuente única de trabajo" }, { id: "review", label: "Revisión cruzada", detail: "Otra persona verifica" }, { id: "animation", label: "Más animaciones", detail: "No corrige pendientes" }, { id: "logo", label: "Nuevo logotipo", detail: "No es crítico" }], correct: ["checklist", "latest", "review"] }
       ],
       [
-        { label: "Activación", short: "Activar", desc: "Elige el rol clave", title: "El equipo ya avanzó; ahora necesita asegurar la calidad.", brief: "¿Qué rol de Belbin debe activarse para revisar detalles, detectar errores y cuidar el plazo?", options: ["Cerebro", "Investigador de recursos", "Finalizador", "Impulsor"], correct: 2, why: "El Finalizador verifica detalles, calidad, coherencia y cumplimiento antes de presentar.", hint: "Es el rol de acción que convierte un trabajo avanzado en una entrega completa." },
-        { label: "Activación", short: "Coordinar", desc: "Conecta los aportes", title: "El trabajo está repartido, pero las partes no encajan.", brief: "¿Qué rol ayuda a aclarar objetivos, responsabilidades y conexión entre las tareas?", options: ["Coordinador", "Cerebro", "Especialista", "Finalizador"], correct: 0, why: "El Coordinador organiza los aportes y permite que el Finalizador pueda revisar una entrega integrada.", hint: "Busca el rol que ordena objetivos y responsabilidades del equipo." },
-        { label: "Activación", short: "Comprobar", desc: "Protege la calidad", title: "El equipo quiere entregar rápido, pero existen tres versiones del archivo.", brief: "¿Qué rol debe asegurar que se use la versión correcta y que no queden errores?", options: ["Impulsor", "Finalizador", "Investigador de recursos", "Cerebro"], correct: 1, why: "El Finalizador controla la coherencia de la versión final y evita entregar un resultado incompleto.", hint: "Es el rol que revisa detalles y confirma qué versión está lista." }
+        { room: "Roles", label: "Sala 02 · Laboratorio de roles", type: "single", title: "El equipo ya avanzó; ahora necesita activar el rol adecuado.", brief: "Selecciona quién debe revisar detalles, detectar errores y cuidar el plazo.", hint: "Es un rol de acción que convierte el trabajo avanzado en una entrega completa.", why: "Activaste al Finalizador en el momento en que el equipo necesitaba calidad y cumplimiento.", options: [{ id: "brain", label: "Cerebro", detail: "Genera ideas originales" }, { id: "resource", label: "Investigador de recursos", detail: "Busca oportunidades y contactos" }, { id: "finisher", label: "Finalizador", detail: "Revisa, comprueba y cierra" }, { id: "shaper", label: "Impulsor", detail: "Mueve al equipo a la acción" }], correct: "finisher" },
+        { room: "Roles", label: "Sala 02 · Laboratorio de roles", type: "single", title: "Las partes del proyecto no encajan entre sí.", brief: "Elige el rol que debe ordenar objetivos, responsabilidades y conexiones del equipo.", hint: "Antes de revisar la calidad, alguien debe integrar los aportes.", why: "El Coordinador organiza los aportes para que el Finalizador pueda comprobar una entrega integrada.", options: [{ id: "coordinator", label: "Coordinador", detail: "Aclara objetivos y distribuye tareas" }, { id: "specialist", label: "Especialista", detail: "Aporta conocimiento técnico" }, { id: "monitor", label: "Monitor evaluador", detail: "Analiza alternativas" }, { id: "finisher", label: "Finalizador", detail: "Verifica y cierra" }], correct: "coordinator" },
+        { room: "Roles", label: "Sala 02 · Laboratorio de roles", type: "single", title: "Hay tres versiones del archivo y nadie sabe cuál presentar.", brief: "Selecciona el rol que debe comprobar la versión, los detalles y el cumplimiento.", hint: "La respuesta protege la calidad del resultado final.", why: "El Finalizador evita que el equipo presente una versión incompleta o desactualizada.", options: [{ id: "shaper", label: "Impulsor", detail: "Supera obstáculos y presiona por avanzar" }, { id: "finisher", label: "Finalizador", detail: "Verifica la versión final" }, { id: "teamworker", label: "Cohesionador", detail: "Mantiene buenas relaciones" }, { id: "plant", label: "Cerebro", detail: "Propone soluciones originales" }], correct: "finisher" }
       ],
       [
-        { label: "Liberación", short: "Liberar", desc: "Valida la entrega", title: "La estación final exige ordenar el cierre.", brief: "Selecciona la secuencia que permite liberar una entrega responsable.", options: ["Revisar requisitos → corregir pendientes → comprobar → entregar", "Entregar → revisar → buscar errores → corregir", "Agregar ideas → cambiar el objetivo → entregar", "Presentar → repartir tareas → comprobar si hay tiempo"], correct: 0, why: "El cierre del Finalizador sigue un orden: revisar, corregir, comprobar y entregar con evidencia.", hint: "La entrega debe ser el último paso, después de verificar el resultado." },
-        { label: "Liberación", short: "Cerrar", desc: "Sella el proyecto", title: "La puerta final solo se abre con una revisión completa.", brief: "¿Qué lista demuestra que el proyecto está listo para presentarse?", options: ["Objetivo, requisitos, evidencias, formato y responsables verificados", "Solo el título y la portada", "La opinión de una persona sin revisar el archivo", "Una nueva lluvia de ideas"], correct: 0, why: "El Finalizador confirma los elementos críticos de la entrega y documenta que fueron revisados.", hint: "La lista correcta incluye requisitos y evidencias, no solo elementos visuales." },
-        { label: "Liberación", short: "Presentar", desc: "Entrega con evidencia", title: "El equipo debe decidir si el trabajo puede salir del laboratorio.", brief: "¿Cuál es la señal más clara de que el cierre fue responsable?", options: ["El equipo puede explicar qué revisó y qué riesgos aceptó", "El archivo pesa mucho", "La presentación tiene muchas animaciones", "Todos dicen que parece terminado"], correct: 0, why: "Un cierre responsable deja trazabilidad: el equipo sabe qué verificó y qué decisión tomó.", hint: "La respuesta correcta demuestra revisión y criterio, no solo apariencia." }
+        { room: "Auditoría", label: "Sala 03 · Auditoría visual", type: "find", title: "El informe tiene seis controles y tres contienen un riesgo.", brief: "Marca únicamente los elementos que impedirían una entrega confiable.", hint: "Busca contradicciones, requisitos sin evidencia y datos que no coinciden.", why: "Encontraste los defectos críticos antes de que llegaran a la presentación.", items: [{ id: "ok1", label: "Requisito 1 · evidencia adjunta", detail: "Correcto" }, { id: "risk1", label: "Versión 2 en portada / versión 3 en anexo", detail: "Inconsistencia" }, { id: "ok2", label: "Responsable identificado", detail: "Correcto" }, { id: "risk2", label: "Prueba mencionada sin resultado", detail: "Evidencia incompleta" }, { id: "risk3", label: "Plazo vencido sin decisión registrada", detail: "Riesgo sin tratamiento" }, { id: "ok3", label: "Formato solicitado aplicado", detail: "Correcto" }], correct: ["risk1", "risk2", "risk3"] },
+        { room: "Auditoría", label: "Sala 03 · Auditoría visual", type: "find", title: "El tablero muestra cuatro señales de calidad.", brief: "Señala las tres que revelan un problema que debe corregirse antes de entregar.", hint: "Elige lo que no puede explicarse con evidencia.", why: "Separaste los detalles correctos de los riesgos que sí exigían intervención.", items: [{ id: "risk1", label: "Dos responsables para la misma tarea", detail: "No hay decisión final" }, { id: "ok1", label: "Fuente citada y enlazada", detail: "Trazable" }, { id: "risk2", label: "Resultado sin fecha de revisión", detail: "No se puede confirmar vigencia" }, { id: "ok2", label: "Criterio de aceptación visible", detail: "Comprobable" }, { id: "risk3", label: "Pendiente marcado como terminado", detail: "Estado incorrecto" }, { id: "ok3", label: "Archivo con nombre y versión", detail: "Identificable" }], correct: ["risk1", "risk2", "risk3"] },
+        { room: "Auditoría", label: "Sala 03 · Auditoría visual", type: "find", title: "El equipo pide una última revisión antes del pitch.", brief: "Marca los tres hallazgos que deben pasar a corrección inmediata.", hint: "Un error de datos, un requisito omitido y una referencia rota son críticos.", why: "La auditoría priorizó los errores que afectan la validez y presentación del trabajo.", items: [{ id: "risk1", label: "Cifra del resumen no coincide", detail: "Dato inconsistente" }, { id: "risk2", label: "Requisito obligatorio sin respuesta", detail: "Falta contenido" }, { id: "ok1", label: "Título coincide con el objetivo", detail: "Correcto" }, { id: "ok2", label: "Tabla con fuente completa", detail: "Correcto" }, { id: "risk3", label: "Enlace de referencia roto", detail: "Fuente no verificable" }, { id: "ok3", label: "Nombre del equipo actualizado", detail: "Correcto" }], correct: ["risk1", "risk2", "risk3"] }
+      ],
+      [
+        { room: "Orden", label: "Sala 04 · Secuencia de cierre", type: "order", title: "La puerta de control exige una secuencia responsable.", brief: "Pulsa las acciones en el orden correcto: desde la revisión hasta la entrega.", hint: "Entregar debe ser el último paso.", why: "Ordenaste el cierre como lo haría un Finalizador: revisar, corregir, comprobar y presentar.", items: [{ id: "review", label: "Revisar requisitos" }, { id: "fix", label: "Corregir pendientes" }, { id: "verify", label: "Comprobar evidencias" }, { id: "deliver", label: "Entregar versión final" }], correct: ["review", "fix", "verify", "deliver"] },
+        { room: "Orden", label: "Sala 04 · Secuencia de cierre", type: "order", title: "El equipo debe cerrar una tarea con trazabilidad.", brief: "Ordena el flujo que deja claro qué se decidió y cómo se validó.", hint: "Primero se identifica el objetivo; después se registra y verifica.", why: "La secuencia conecta objetivo, acción, evidencia y registro de cierre.", items: [{ id: "goal", label: "Confirmar objetivo" }, { id: "action", label: "Ejecutar la tarea" }, { id: "evidence", label: "Guardar evidencia" }, { id: "record", label: "Registrar el cierre" }], correct: ["goal", "action", "evidence", "record"] },
+        { room: "Orden", label: "Sala 04 · Secuencia de cierre", type: "order", title: "Una incidencia aparece antes de la presentación.", brief: "Organiza la respuesta más segura para no ocultar el riesgo.", hint: "Primero se hace visible el problema y luego se decide su tratamiento.", why: "La secuencia evita ocultar el riesgo y deja una decisión documentada.", items: [{ id: "detect", label: "Detectar la incidencia" }, { id: "assess", label: "Evaluar su impacto" }, { id: "decide", label: "Decidir la corrección" }, { id: "document", label: "Documentar el resultado" }], correct: ["detect", "assess", "decide", "document"] }
+      ],
+      [
+        { room: "Portal", label: "Sala 05 · Ruta crítica", type: "single", title: "El portal final solo acepta una ruta de entrega segura.", brief: "Escoge el camino que protege calidad, evidencia y cumplimiento.", hint: "La ruta correcta incluye verificación antes de presentar.", why: "Elegiste una ruta que prioriza la revisión y evita entregar por intuición.", options: [{ id: "shortcut", label: "Atajo", detail: "Presentar ahora y corregir si preguntan" }, { id: "safe", label: "Ruta verificada", detail: "Revisar requisitos, corregir, comprobar y entregar" }, { id: "loop", label: "Bucle abierto", detail: "Agregar ideas y cambiar el objetivo" }, { id: "silent", label: "Ruta silenciosa", detail: "No registrar riesgos para ahorrar tiempo" }], correct: "safe" },
+        { room: "Portal", label: "Sala 05 · Ruta crítica", type: "single", title: "El equipo está listo para cerrar el proyecto.", brief: "Elige la señal que demuestra que la entrega puede liberarse.", hint: "La apariencia no reemplaza una comprobación.", why: "Una entrega se libera cuando el equipo puede explicar qué verificó y qué riesgo aceptó.", options: [{ id: "look", label: "Se ve terminada", detail: "Criterio visual" }, { id: "time", label: "Ya no queda tiempo", detail: "Presión del plazo" }, { id: "trace", label: "Revisión trazable", detail: "Requisitos, evidencias y decisiones comprobadas" }, { id: "vote", label: "Todos están de acuerdo", detail: "Opinión sin verificación" }], correct: "trace" },
+        { room: "Portal", label: "Sala 05 · Ruta crítica", type: "single", title: "El trabajo debe salir del laboratorio sin perder calidad.", brief: "Selecciona la decisión final del equipo.", hint: "El Finalizador no busca perfección infinita; confirma lo crítico y cierra.", why: "Validaste los elementos críticos y documentaste lo que quedó decidido.", options: [{ id: "freeze", label: "Congelar sin revisar", detail: "Cerrar por cansancio" }, { id: "critical", label: "Validar lo crítico", detail: "Comprobar requisitos, evidencias y riesgos" }, { id: "expand", label: "Ampliar el alcance", detail: "Agregar trabajo nuevo" }, { id: "delegate", label: "Dejarlo para después", detail: "Trasladar el problema" }], correct: "critical" }
       ]
     ];
-    const shuffle = items => [...items].sort(() => Math.random() - 0.5);
-    let stations = [], station = 0, hints = 2, unlocked = false;
-    const $ = id => document.getElementById(id);
-    function buildStations() { stations = shuffle(stationPools).map(pool => shuffle(pool)[0]); }
-    function renderWorld() {
-      const progress = station >= stations.length ? 1 : station / stations.length;
-      $("escape-player").style.setProperty("--player-progress", progress);
-      document.querySelectorAll(".world-door").forEach((door, index) => { door.classList.toggle("open", index < station || station >= stations.length); door.classList.toggle("active", index === station && station < stations.length); });
-      $("world-action").textContent = station >= stations.length ? "ENTREGA LIBERADA" : `PUERTA 0${station + 1}`;
-      $("world-status").textContent = station >= stations.length ? "El personaje llegó al cierre." : unlocked ? "Respuesta correcta. Abre la puerta para avanzar." : "El personaje espera tu decisión.";
+    let rooms = [], currentRoom = 0, lives = 3, seals = 0, hints = 2, selection = [], unlocked = false, gameEnded = false;
+    function selectedSetMatches(values, correct) { return values.length === correct.length && values.every(value => correct.includes(value)); }
+    function roomIcon(room) { return ({ Radar: "◌", Roles: "⚙", Auditoría: "⌕", Orden: "⇄", Portal: "▣" })[room] || "◇"; }
+    function buildMission() { rooms = shuffle(roomPools).map(pool => ({ ...shuffle(pool)[0] })); }
+    function renderMap() { $("mission-map").innerHTML = rooms.map((item, index) => `<div class="mission-room ${index === currentRoom ? "active" : ""} ${index < currentRoom ? "cleared" : ""}"><span>${roomIcon(item.room)}</span><div><b>${String(index + 1).padStart(2, "0")}</b><small>${item.room}</small></div></div>`).join(""); }
+    function renderScene() {
+      const progress = gameEnded && seals === rooms.length ? 1 : currentRoom / rooms.length;
+      $("game-player").style.setProperty("--player-progress", progress);
+      rooms.forEach((_, index) => { const door = $(`platform-door-${index}`); door.classList.toggle("open", index < currentRoom || (gameEnded && seals === rooms.length)); door.classList.toggle("active", index === currentRoom && !gameEnded); door.querySelector(".door-icon").textContent = roomIcon(rooms[index].room); door.querySelector("small").textContent = rooms[index].room; });
+      $("scene-action").textContent = gameEnded ? (seals === rooms.length ? "PORTAL ABIERTO" : "MISIÓN FALLIDA") : `PUERTA ${String(currentRoom + 1).padStart(2, "0")}`;
+      $("scene-status").textContent = gameEnded ? (seals === rooms.length ? "El personaje llegó al cierre." : "El personaje debe reiniciar la misión.") : unlocked ? "Sala superada. El camino está abierto." : "El personaje espera una decisión.";
+      $("game-room").textContent = gameEnded ? (seals === rooms.length ? "Misión completada" : "Misión detenida") : `Sala ${currentRoom + 1} / ${rooms.length}`;
+      $("game-lives").textContent = `Vidas: ${lives}`;
+      $("game-score").textContent = `Sellos: ${seals} / ${rooms.length}`;
+      $("game-progress-fill").style.width = `${progress * 100}%`;
+      $("platform-scene").classList.toggle("game-over", gameEnded && seals !== rooms.length);
     }
-    function renderStation() {
-      const item = stations[station]; unlocked = false;
-      $("escape-counter").textContent = `Estación ${station + 1} / ${stations.length}`;
-      $("escape-meter-fill").style.width = `${(station / stations.length) * 100}%`;
-      $("escape-card-mark").textContent = `0${station + 1}`;
-      $("escape-label").textContent = item.label;
-      $("escape-title").textContent = item.title;
-      $("escape-brief").textContent = item.brief;
-      $("escape-feedback").textContent = "";
-      $("escape-action").disabled = true;
-      $("escape-action").textContent = station === stations.length - 1 ? "Liberar entrega" : "Desbloquear estación";
-      $("escape-options").innerHTML = item.options.map((option, i) => `<button class="escape-option" data-index="${i}" type="button"><span>${String.fromCharCode(65 + i)}</span>${option}</button>`).join("");
-      document.querySelectorAll(".escape-station").forEach((node, i) => { node.classList.toggle("active", i === station); node.classList.toggle("cleared", i < station); $(`station-title-${i}`).textContent = stations[i].short; $(`station-desc-${i}`).textContent = stations[i].desc; });
-      renderWorld();
-      document.querySelectorAll(".escape-option").forEach(button => button.addEventListener("click", chooseOption));
+    function choiceCard(item, selected) { return `<button type="button" class="challenge-choice ${selected ? "selected" : ""}" data-id="${item.id}"><span class="choice-icon">${selected ? "✓" : "◇"}</span><span><b>${item.label}</b><small>${item.detail || ""}</small></span></button>`; }
+    function renderChallenge() {
+      const item = rooms[currentRoom]; selection = []; unlocked = false;
+      $("challenge-label").textContent = item.label; $("challenge-title").textContent = item.title; $("challenge-brief").textContent = item.brief; $("mission-card-mark").textContent = String(currentRoom + 1).padStart(2, "0"); $("challenge-feedback").textContent = "";
+      $("game-confirm").hidden = false; $("game-confirm").disabled = true; $("game-confirm").textContent = item.type === "order" ? "Confirmar secuencia" : "Confirmar acción"; $("game-next").hidden = true; $("game-hint").disabled = hints === 0; $("game-hint").textContent = hints ? `Pedir pista (${hints})` : "Sin pistas";
+      if (item.type === "order") $("challenge-board").innerHTML = `<div class="challenge-instruction">Pulsa cada acción en el orden correcto.</div><div class="order-grid">${shuffle(item.items).map(option => choiceCard(option, false)).join("")}</div>`;
+      else if (item.type === "multi" || item.type === "find") $("challenge-board").innerHTML = `<div class="challenge-instruction">${item.type === "find" ? "Marca solo los hallazgos que representan un riesgo." : "Selecciona los elementos que deben pasar el control."}</div><div class="challenge-grid">${shuffle(item.items).map(option => choiceCard(option, false)).join("")}</div>`;
+      else $("challenge-board").innerHTML = `<div class="challenge-instruction">Elige una ruta para continuar.</div><div class="challenge-grid single-grid">${shuffle(item.options).map(option => choiceCard(option, false)).join("")}</div>`;
+      $("challenge-board").querySelectorAll(".challenge-choice").forEach(button => button.addEventListener("click", () => selectChoice(button, item)));
+      renderMap(); renderScene();
     }
-    function chooseOption(event) {
-      if (unlocked) return;
-      const choice = Number(event.currentTarget.dataset.index), item = stations[station];
-      document.querySelectorAll(".escape-option").forEach(button => button.classList.remove("selected", "wrong"));
-      event.currentTarget.classList.add("selected");
-      if (choice === item.correct) { unlocked = true; event.currentTarget.classList.add("correct"); $("escape-feedback").textContent = `✓ ${item.why}`; $("escape-action").disabled = false; renderWorld(); }
-      else { event.currentTarget.classList.add("wrong"); $("escape-feedback").textContent = `Aún no. ${item.hint}`; }
+    function selectChoice(button, item) {
+      if (unlocked || gameEnded) return; const id = button.dataset.id;
+      if (item.type === "order") { if (selection.includes(id)) return; selection.push(id); button.classList.add("selected"); button.querySelector(".choice-icon").textContent = selection.length; if (selection.length === item.items.length) $("game-confirm").disabled = false; return; }
+      if (item.type === "multi" || item.type === "find") { selection = selection.includes(id) ? selection.filter(value => value !== id) : [...selection, id]; button.classList.toggle("selected", selection.includes(id)); button.querySelector(".choice-icon").textContent = selection.includes(id) ? "✓" : "◇"; $("game-confirm").disabled = selection.length === 0; return; }
+      selection = [id]; $("challenge-board").querySelectorAll(".challenge-choice").forEach(node => node.classList.toggle("selected", node === button)); $("game-confirm").disabled = false;
     }
-    $("escape-hint").addEventListener("click", () => { if (hints < 1 || unlocked) return; hints--; $("escape-hints").textContent = `Pistas: ${hints}`; $("escape-feedback").textContent = `Pista: ${stations[station].hint}`; if (hints === 0) $("escape-hint").disabled = true; });
-    $("escape-action").addEventListener("click", () => { if (!unlocked) return; if (station < stations.length - 1) { station++; renderStation(); } else { station = stations.length; $("escape-meter-fill").style.width = "100%"; renderWorld(); $("escape-result").hidden = false; $("escape-result").innerHTML = `<span class="result-seal">✓</span><div><strong>Entrega liberada</strong><p>Aplicaste el rol Finalizador: detectaste el riesgo, activaste el rol adecuado y validaste el cierre.</p><button class="btn btn-primary" id="escape-restart" type="button">Jugar de nuevo</button></div>`; $("escape-action").disabled = true; $("escape-result").scrollIntoView({ behavior: "smooth", block: "nearest" }); $("escape-restart").addEventListener("click", restart); } });
-    function restart() { station = 0; hints = 2; buildStations(); $("escape-hints").textContent = "Pistas: 2"; $("escape-hint").disabled = false; $("escape-result").hidden = true; renderStation(); }
-    buildStations();
-    renderStation();
+    function loseLife(message) { lives--; $("game-lives").textContent = `Vidas: ${lives}`; $("challenge-feedback").textContent = `✕ ${message}`; $("platform-scene").classList.remove("hit"); void $("platform-scene").offsetWidth; $("platform-scene").classList.add("hit"); if (lives <= 0) finishGame(false); }
+    function confirmChallenge() {
+      if (!selection.length || unlocked || gameEnded) return; const item = rooms[currentRoom];
+      const correct = item.type === "order" ? selection.join("|") === item.correct.join("|") : item.type === "multi" || item.type === "find" ? selectedSetMatches(selection, item.correct) : selection[0] === item.correct;
+      if (!correct) { loseLife(item.type === "order" ? "La secuencia se rompió. Elige el orden con cuidado." : "Ese control no resuelve el riesgo de esta sala."); if (!gameEnded && item.type === "order") { selection = []; $("challenge-board").querySelectorAll(".challenge-choice").forEach(node => { node.classList.remove("selected"); node.querySelector(".choice-icon").textContent = "◇"; }); $("game-confirm").disabled = true; } return; }
+      unlocked = true; seals++; $("challenge-feedback").textContent = `✓ ${item.why}`; $("game-confirm").hidden = true; $("game-next").hidden = false; $("game-next").textContent = currentRoom === rooms.length - 1 ? "Abrir portal final" : "Avanzar a la siguiente sala"; $("challenge-board").querySelectorAll(".challenge-choice").forEach(node => { node.disabled = true; if (selection.includes(node.dataset.id)) node.classList.add("correct"); }); renderScene();
+    }
+    function advance() { if (!unlocked || gameEnded) return; if (currentRoom === rooms.length - 1) { finishGame(true); return; } currentRoom++; renderChallenge(); }
+    function finishGame(won) { gameEnded = true; $("game-confirm").hidden = true; $("game-next").hidden = true; $("game-hint").hidden = true; $("platform-result").hidden = false; $("platform-result").innerHTML = won ? `<span class="result-seal">✓</span><div><strong>Portal abierto</strong><p>Reuniste los sellos, activaste los roles adecuados y aplicaste el criterio del Finalizador para cerrar la entrega.</p><button class="btn btn-primary" id="game-restart" type="button">Jugar otra misión</button></div>` : `<span class="result-seal danger">!</span><div><strong>Misión fallida</strong><p>El equipo agotó sus vidas antes de validar el cierre. Reinicia para intentar otra ruta con desafíos diferentes.</p><button class="btn btn-primary" id="game-restart" type="button">Reiniciar misión</button></div>`; renderScene(); $("game-restart").addEventListener("click", restartGame); }
+    function restartGame() { currentRoom = 0; lives = 3; seals = 0; hints = 2; gameEnded = false; $("platform-result").hidden = true; $("game-hint").hidden = false; buildMission(); renderChallenge(); }
+    $("game-confirm").addEventListener("click", confirmChallenge); $("game-next").addEventListener("click", advance);
+    $("game-hint").addEventListener("click", () => { if (hints === 0 || unlocked || gameEnded) return; hints--; $("challenge-feedback").textContent = `Pista: ${rooms[currentRoom].hint}`; $("game-hint").textContent = hints ? `Pedir pista (${hints})` : "Sin pistas"; if (hints === 0) $("game-hint").disabled = true; });
+    buildMission(); renderChallenge();
   </script>
 </body>
 </html>
