@@ -343,3 +343,52 @@ details[open] summary::after { content: "−"; }
   .analysis-bar > div { min-width: 0; }
   .analysis-bar > div span { overflow-wrap: anywhere; }
 }
+
+
+/* Sala de control: personaje y decisión comparten el mismo campo visual. */
+.platform-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1.06fr) minmax(360px, .94fr);
+  grid-template-areas:
+    "top top"
+    "progress progress"
+    "scene card"
+    "map map"
+    "result result";
+  gap: 14px;
+  align-items: stretch;
+}
+.platform-shell > .platform-top { grid-area: top; }
+.platform-shell > .platform-progress { grid-area: progress; margin: 0; }
+.platform-shell > .platform-scene { grid-area: scene; min-height: 320px; }
+.platform-shell > .mission-card { grid-area: card; min-height: 320px; }
+.platform-shell > .mission-map { grid-area: map; margin: 0; }
+.platform-shell > .platform-result { grid-area: result; margin: 0; }
+.platform-scene, .mission-card { min-width: 0; }
+.mission-card { display: flex; flex-direction: column; }
+.mission-card .challenge-board { flex: 1 1 auto; }
+.mission-actions { margin-top: auto; padding-top: 10px; }
+@media (max-width: 850px) {
+  .platform-shell {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "top"
+      "progress"
+      "scene"
+      "card"
+      "map"
+      "result";
+  }
+  .platform-shell > .platform-scene,
+  .platform-shell > .mission-card { min-height: 0; }
+  .platform-shell > .platform-scene { min-height: 245px; }
+}
+@media (max-width: 650px) {
+  .platform-shell { gap: 10px; padding: 13px; }
+  .platform-shell > .platform-scene { min-height: 182px; }
+  .platform-shell > .mission-card { padding: 18px 15px 15px; }
+  .platform-shell > .mission-map { margin: 0; }
+  .mission-card-mark { top: 13px; right: 16px; font-size: 2.35rem; }
+  .mission-card h3 { max-width: calc(100% - 45px); }
+  .mission-actions { margin-top: 4px; }
+}
