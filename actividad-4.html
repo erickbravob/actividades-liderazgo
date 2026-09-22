@@ -35,58 +35,67 @@
     </section>
 
     <section class="section game-section" aria-labelledby="game-title">
-      <div class="game-heading"><div><div class="code">Aplicación</div><h2 id="game-title">Elige el rol que falta</h2></div><p>Lee cada situación, selecciona una respuesta y revisa la explicación.</p></div>
-      <div class="quiz" id="quiz" aria-live="polite">
-        <div class="quiz-top"><div class="progress" aria-label="Progreso del juego"><span id="progress-bar"></span></div><div class="quiz-score" id="score-label">Pregunta 1 / 8</div></div>
-        <div class="label">Situación de equipo</div>
-        <h3 id="question">Cargando situación…</h3>
-        <div class="answers" id="answers"></div>
-        <div class="feedback" id="feedback"></div>
-        <div class="result" id="result" hidden></div>
-        <div class="quiz-actions"><button class="btn btn-secondary" id="restart" type="button">Reiniciar</button><button class="btn btn-primary" id="next" type="button" disabled>Siguiente</button></div>
+      <div class="game-heading"><div><div class="code">Aplicación · Escape room</div><h2 id="game-title">La entrega está bloqueada</h2></div><p>Resuelve tres estaciones y aplica el rol Finalizador para liberar el proyecto.</p></div>
+      <div class="escape-shell" id="escape-room" aria-live="polite">
+        <div class="escape-top"><div><span class="escape-kicker">Misión de cierre</span><strong id="escape-counter">Estación 1 / 3</strong></div><div class="escape-lives" id="escape-hints">Pistas: 2</div></div>
+        <div class="escape-meter" aria-label="Progreso de la misión"><span id="escape-meter-fill"></span></div>
+        <div class="escape-map" aria-label="Estaciones de la misión">
+          <div class="escape-station active" data-step="0"><span>01</span><div><b>Detectar</b><small>Encuentra el bloqueo</small></div></div>
+          <div class="escape-station" data-step="1"><span>02</span><div><b>Activar</b><small>Elige el rol clave</small></div></div>
+          <div class="escape-station" data-step="2"><span>03</span><div><b>Liberar</b><small>Valida la entrega</small></div></div>
+        </div>
+        <div class="escape-card">
+          <div class="escape-card-mark" id="escape-card-mark">01</div>
+          <div class="label" id="escape-label">Diagnóstico</div>
+          <h3 id="escape-title">Cargando misión…</h3>
+          <p id="escape-brief"></p>
+          <div class="escape-options" id="escape-options"></div>
+          <div class="escape-feedback" id="escape-feedback"></div>
+          <div class="escape-actions"><button class="btn btn-secondary" id="escape-hint" type="button">Pedir pista</button><button class="btn btn-primary" id="escape-action" type="button" disabled>Desbloquear</button></div>
+        </div>
+        <div class="escape-result" id="escape-result" hidden></div>
       </div>
-      <p class="micro-note">El juego sirve para comprender el marco de Belbin; no es un test psicológico.</p>
+      <p class="micro-note">El juego aplica el marco de Belbin; no es un test psicológico. El Finalizador ayuda a detectar pendientes, verificar la calidad y cerrar la entrega.</p>
     </section>
   </main>
 
   <footer class="footer"><div class="wrap footer-inner"><span>Trabajo grupal · Liderazgo y Dinámica de Grupo</span><a href="index.html">Volver al inicio</a></div></footer>
 
   <script>
-    const quiz = [
-      { q: "El equipo tiene muchas ideas, pero ninguna se convierte en una solución concreta. ¿Qué rol falta?", options: ["Cerebro", "Implementador", "Investigador de recursos", "Cohesionador"], correct: 1, why: "El Implementador convierte ideas y acuerdos en acciones ordenadas." },
-      { q: "Una entrega está por presentarse y alguien detecta errores, verifica el formato y revisa el plazo. ¿Qué rol representa?", options: ["Finalizador", "Impulsor", "Coordinador", "Especialista"], correct: 0, why: "El Finalizador cuida detalles, calidad y plazos." },
-      { q: "El equipo necesita una idea original para salir de un bloqueo técnico. ¿Qué rol puede aportarla?", options: ["Cerebro", "Monitor evaluador", "Implementador", "Coordinador"], correct: 0, why: "El Cerebro genera soluciones originales." },
-      { q: "Dos integrantes discuten y una persona escucha, media y recupera la colaboración. ¿Qué rol aparece?", options: ["Impulsor", "Cohesionador", "Especialista", "Finalizador"], correct: 1, why: "El Cohesionador ayuda a mantener relaciones y armonizar conflictos." },
-      { q: "Hay tres alternativas y el grupo necesita comparar riesgos y viabilidad antes de decidir. ¿Qué rol es clave?", options: ["Monitor evaluador", "Investigador de recursos", "Cerebro", "Impulsor"], correct: 0, why: "El Monitor evaluador analiza opciones con objetividad." },
-      { q: "El grupo necesita aclarar objetivos y distribuir tareas según capacidades. ¿Qué rol corresponde?", options: ["Coordinador", "Cohesionador", "Especialista", "Finalizador"], correct: 0, why: "El Coordinador clarifica metas y delega." },
-      { q: "Se requiere conocimiento técnico profundo sobre un tema específico. ¿Qué rol aporta esa contribución?", options: ["Investigador de recursos", "Especialista", "Implementador", "Impulsor"], correct: 1, why: "El Especialista aporta conocimiento técnico específico." },
-      { q: "El grupo necesita contactos, información externa y oportunidades para mejorar el proyecto. ¿Qué rol conviene activar?", options: ["Investigador de recursos", "Monitor evaluador", "Finalizador", "Cerebro"], correct: 0, why: "El Investigador de recursos explora oportunidades e información externa." }
+    const stations = [
+      { label: "Diagnóstico", title: "El proyecto parece terminado, pero la entrega fue bloqueada.", brief: "El informe tiene contenido, aunque nadie comprobó requisitos, formato ni pendientes. ¿Qué debe detectarse primero?", options: ["La lista de pendientes y los requisitos de entrega", "Una nueva idea para cambiar el proyecto", "Más integrantes para presentar", "Un nombre más llamativo"], correct: 0, why: "El Finalizador parte de una revisión concreta: compara el resultado con los requisitos y hace visibles los pendientes.", hint: "Busca la opción que permita comprobar si el trabajo realmente está listo." },
+      { label: "Activación", title: "El equipo ya avanzó; ahora necesita asegurar la calidad.", brief: "¿Qué rol de Belbin debe activarse para revisar detalles, detectar errores y cuidar el plazo?", options: ["Cerebro", "Investigador de recursos", "Finalizador", "Impulsor"], correct: 2, why: "El Finalizador verifica detalles, calidad, coherencia y cumplimiento antes de presentar.", hint: "Es el rol de acción que convierte un trabajo avanzado en una entrega completa." },
+      { label: "Liberación", title: "La estación final exige ordenar el cierre.", brief: "Selecciona la secuencia que permite liberar una entrega responsable.", options: ["Revisar requisitos → corregir pendientes → comprobar → entregar", "Entregar → revisar → buscar errores → corregir", "Agregar ideas → cambiar el objetivo → entregar", "Presentar → repartir tareas → comprobar si hay tiempo"], correct: 0, why: "El cierre del Finalizador sigue un orden: revisar, corregir, comprobar y entregar con evidencia.", hint: "La entrega debe ser el último paso, después de verificar el resultado." }
     ];
-    let current = 0, score = 0, answered = false;
+    let station = 0, hints = 2, unlocked = false;
     const $ = id => document.getElementById(id);
-    function renderQuestion() {
-      const item = quiz[current]; answered = false;
-      $("question").textContent = item.q;
-      $("score-label").textContent = `Pregunta ${current + 1} / ${quiz.length}`;
-      $("progress-bar").style.width = `${(current / quiz.length) * 100}%`;
-      $("feedback").textContent = "";
-      $("result").hidden = true;
-      $("next").disabled = true;
-      $("next").textContent = current === quiz.length - 1 ? "Ver resultado" : "Siguiente";
-      $("answers").innerHTML = item.options.map((option, i) => `<button class="answer" data-index="${i}" type="button">${option}</button>`).join("");
-      document.querySelectorAll(".answer").forEach(button => button.addEventListener("click", choose));
+    function renderStation() {
+      const item = stations[station]; unlocked = false;
+      $("escape-counter").textContent = `Estación ${station + 1} / ${stations.length}`;
+      $("escape-meter-fill").style.width = `${(station / stations.length) * 100}%`;
+      $("escape-card-mark").textContent = `0${station + 1}`;
+      $("escape-label").textContent = item.label;
+      $("escape-title").textContent = item.title;
+      $("escape-brief").textContent = item.brief;
+      $("escape-feedback").textContent = "";
+      $("escape-action").disabled = true;
+      $("escape-action").textContent = station === stations.length - 1 ? "Liberar entrega" : "Desbloquear estación";
+      $("escape-options").innerHTML = item.options.map((option, i) => `<button class="escape-option" data-index="${i}" type="button"><span>${String.fromCharCode(65 + i)}</span>${option}</button>`).join("");
+      document.querySelectorAll(".escape-station").forEach((node, i) => node.classList.toggle("active", i === station));
+      document.querySelectorAll(".escape-option").forEach(button => button.addEventListener("click", chooseOption));
     }
-    function choose(event) {
-      if (answered) return;
-      answered = true;
-      const choice = Number(event.currentTarget.dataset.index), item = quiz[current];
-      document.querySelectorAll(".answer").forEach((button, i) => { button.disabled = true; if (i === item.correct) button.classList.add("correct"); if (i === choice && i !== item.correct) button.classList.add("wrong"); });
-      if (choice === item.correct) { score++; $("feedback").textContent = `Correcto. ${item.why}`; } else { $("feedback").textContent = `Revisa el marco. ${item.why}`; }
-      $("next").disabled = false;
+    function chooseOption(event) {
+      if (unlocked) return;
+      const choice = Number(event.currentTarget.dataset.index), item = stations[station];
+      document.querySelectorAll(".escape-option").forEach(button => button.classList.remove("selected", "wrong"));
+      event.currentTarget.classList.add("selected");
+      if (choice === item.correct) { unlocked = true; event.currentTarget.classList.add("correct"); $("escape-feedback").textContent = `✓ ${item.why}`; $("escape-action").disabled = false; }
+      else { event.currentTarget.classList.add("wrong"); $("escape-feedback").textContent = `Aún no. ${item.hint}`; }
     }
-    $("next").addEventListener("click", () => { if (!answered) return; if (current < quiz.length - 1) { current++; renderQuestion(); } else { const percentage = Math.round((score / quiz.length) * 100); $("question").textContent = "Juego terminado"; $("answers").innerHTML = `<p class="game-end">Reinicia para volver a jugar y comparar tu comprensión.</p>`; $("feedback").textContent = ""; $("result").hidden = false; $("result").innerHTML = `<strong>Resultado: ${score} / ${quiz.length} (${percentage}%)</strong><br>${score >= 6 ? "Reconoces correctamente la mayoría de los roles de equipo." : "Revisa el marco teórico y vuelve a intentarlo."}`; $("next").disabled = true; $("progress-bar").style.width = "100%"; } });
-    $("restart").addEventListener("click", () => { current = 0; score = 0; renderQuestion(); });
-    renderQuestion();
+    $("escape-hint").addEventListener("click", () => { if (hints < 1 || unlocked) return; hints--; $("escape-hints").textContent = `Pistas: ${hints}`; $("escape-feedback").textContent = `Pista: ${stations[station].hint}`; if (hints === 0) $("escape-hint").disabled = true; });
+    $("escape-action").addEventListener("click", () => { if (!unlocked) return; if (station < stations.length - 1) { station++; renderStation(); } else { $("escape-meter-fill").style.width = "100%"; $("escape-result").hidden = false; $("escape-result").innerHTML = `<span class="result-seal">✓</span><div><strong>Entrega liberada</strong><p>Aplicaste el rol Finalizador: detectaste el riesgo, activaste el rol adecuado y validaste el cierre.</p><button class="btn btn-primary" id="escape-restart" type="button">Jugar de nuevo</button></div>`; $("escape-action").disabled = true; $("escape-result").scrollIntoView({ behavior: "smooth", block: "nearest" }); $("escape-restart").addEventListener("click", restart); } });
+    function restart() { station = 0; hints = 2; $("escape-hints").textContent = "Pistas: 2"; $("escape-hint").disabled = false; $("escape-result").hidden = true; renderStation(); }
+    renderStation();
   </script>
 </body>
 </html>
