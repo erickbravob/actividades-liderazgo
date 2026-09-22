@@ -4,65 +4,64 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Actividad 5: encuesta sobre complementariedad de roles y eficacia percibida.">
-  <title>Actividad 5 | Investigación sobre equipos</title>
+  <title>Actividad 5 | Complementariedad y eficacia</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="index.html"><span class="brand-mark">EB</span><span>Portafolio académico</span></a>
+    <a class="brand" href="index.html"><span class="brand-mark">LD</span><span>Liderazgo y dinámica de grupo</span></a>
     <nav class="site-nav" aria-label="Navegación principal">
       <a href="index.html">Inicio</a><a href="actividad-4.html">Actividad 4</a>
     </nav>
   </header>
 
-  <main class="wrap">
-    <section class="page-intro">
+  <main class="wrap activity-page">
+    <section class="page-intro compact-intro">
       <div class="eyebrow">Actividad 05 · Investigación aplicada</div>
       <h1>Complementariedad y eficacia</h1>
-      <p class="lead">Propuesta de investigación sobre la relación entre los roles de Belbin y la eficacia percibida del trabajo en equipo.</p>
-      <div class="meta"><span class="tag">Encuesta: mínimo 17 estudiantes</span><span class="tag">Entrevistas: Ana y Aaron</span><span class="tag">Roles de equipo de Belbin</span></div>
+      <p class="lead">Estudio exploratorio sobre la relación entre los roles de Belbin y la eficacia percibida del trabajo en equipo.</p>
+      <div class="meta"><span class="tag">Encuesta: mínimo 17 estudiantes</span><span class="tag">Entrevistas: Ana y Aaron</span><span class="tag">Escala Likert</span></div>
     </section>
 
-    <section class="section">
-      <div class="question-box"><div class="label">Pregunta guía</div><blockquote>¿En qué medida la complementariedad de los roles de equipo de Belbin se relaciona con la eficacia percibida del trabajo en equipo entre los estudiantes de la materia de Liderazgo y Dinámica de Grupo?</blockquote></div>
-      <div class="stat-strip">
-        <div class="stat"><div class="label">Muestra</div><strong>17+ estudiantes</strong><span>Aplicación anónima al salón.</span></div>
-        <div class="stat"><div class="label">Entrevistas</div><strong>Ana y Aaron</strong><span>Experiencias de trabajo grupal.</span></div>
-        <div class="stat"><div class="label">Enfoque</div><strong>Exploratorio</strong><span>Percepciones, no causalidad absoluta.</span></div>
-      </div>
-      <div class="route" aria-label="Pasos de la investigación">
-        <div class="route-step"><div class="label">01</div><strong>Aplicar</strong><span>Comparte la encuesta.</span></div>
-        <div class="route-step"><div class="label">02</div><strong>Entrevistar</strong><span>Pregunta a Ana y Aaron.</span></div>
-        <div class="route-step"><div class="label">03</div><strong>Calcular</strong><span>Obtén promedios por dimensión.</span></div>
-        <div class="route-step"><div class="label">04</div><strong>Comparar</strong><span>Contrasta encuesta y entrevistas.</span></div>
+    <section class="section research-section" aria-labelledby="research-title">
+      <div class="section-head compact-head"><div><div class="code">Pregunta guía</div><h2 id="research-title">¿Cómo se relacionan los roles?</h2></div><p>La encuesta recoge percepciones del grupo y las entrevistas aportan contexto.</p></div>
+      <blockquote class="research-question">¿En qué medida la complementariedad de los roles de equipo de Belbin se relaciona con la eficacia percibida del trabajo en equipo entre los estudiantes de Liderazgo y Dinámica de Grupo?</blockquote>
+      <div class="research-bubbles">
+        <div class="mini-bubble"><span class="bubble-index">01</span><strong>Encuesta</strong><span>17 o más estudiantes del salón.</span></div>
+        <div class="mini-bubble"><span class="bubble-index">02</span><strong>Entrevista</strong><span>Ana y Aaron, integrantes registrados.</span></div>
+        <div class="mini-bubble"><span class="bubble-index">03</span><strong>Análisis</strong><span>Promedios por roles, complementariedad y eficacia.</span></div>
       </div>
     </section>
 
-    <section class="survey-panel" id="encuesta" aria-labelledby="survey-title">
-      <div class="survey-toolbar">
-        <div><div class="label">Instrumento de recolección</div><h3 id="survey-title">Encuesta Likert · 20 afirmaciones</h3><p>Selecciona una opción por afirmación.</p></div>
-        <div class="survey-count" id="survey-count">0 / 20 respondidas</div>
-      </div>
-      <div class="survey-tools"><label for="respondent-code" class="label" style="align-self:center">Código opcional</label><input id="respondent-code" type="text" placeholder="Ej.: E01" maxlength="20" style="max-width:150px;padding:8px;border:1px solid var(--line);border-radius:7px"><span class="survey-status">Las respuestas se guardan en la hoja del proyecto.</span></div>
+    <section class="section survey-launch" id="encuesta" aria-labelledby="survey-launch-title">
+      <div class="launch-copy"><div class="code">Instrumento de recolección</div><h2 id="survey-launch-title">Encuesta Likert</h2><p>20 afirmaciones sobre roles de equipo, complementariedad y eficacia percibida. Las respuestas se almacenan en la hoja del proyecto.</p></div>
+      <button class="btn btn-primary launch-button" id="open-survey" type="button">Abrir encuesta <span aria-hidden="true">↗</span></button>
+    </section>
+
+    <section class="analysis-tools" aria-label="Análisis acumulado">
+      <div><div class="code">Resultados</div><h2>Análisis acumulado</h2><p id="analysis-status">Consulta las respuestas registradas cuando quieras.</p></div>
+      <div class="analysis-actions"><button class="btn" id="show-analysis-main" type="button">Ver análisis guardado</button><button class="btn" id="export-csv" type="button">Exportar CSV</button></div>
+    </section>
+    <div class="survey-summary" id="survey-summary" aria-live="polite"><div class="summary-title">Resumen de respuestas</div><div class="summary-grid"><div class="summary-metric"><strong id="saved-count">0</strong><span>respuestas guardadas</span></div><div class="summary-metric"><strong id="roles-average">—</strong><span>roles percibidos</span></div><div class="summary-metric"><strong id="complement-average">—</strong><span>complementariedad</span></div><div class="summary-metric"><strong id="efficacy-average">—</strong><span>eficacia percibida</span></div></div></div>
+
+    <section class="section compact-sections">
+      <details><summary>Entrevista semiestructurada a Ana y Aaron</summary><div class="details-body"><ol class="interview-list"><li>¿Qué conductas observas con mayor frecuencia cuando trabajan en equipo?</li><li>¿Quién propone ideas, organiza tareas y revisa los detalles?</li><li>¿En qué medida las fortalezas se complementan? Da un ejemplo.</li><li>¿Qué ocurre cuando varias personas quieren dirigir, revisar o proponer?</li><li>¿Qué rol debería reforzarse para mejorar la eficacia?</li><li>¿Qué recomendación darías a partir de Belbin?</li></ol><p><strong>Registro:</strong> Entrevistada/o: ____________ Fecha: __________</p></div></details>
+      <details><summary>Criterio de análisis</summary><div class="details-body"><p>Promedia los ítems 1 al 9 para roles; 10 al 12 para complementariedad; y 13 al 20 para eficacia. Interpreta 1,00–2,33 como bajo; 2,34–3,66 como medio; y 3,67–5,00 como alto.</p></div></details>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="wrap footer-inner"><span>Trabajo grupal · Liderazgo y Dinámica de Grupo</span><a href="index.html">Volver al inicio</a></div></footer>
+
+  <dialog class="survey-dialog" id="survey-dialog" aria-labelledby="dialog-title">
+    <div class="modal-shell">
+      <div class="modal-head"><div><div class="code">Instrumento de recolección</div><h2 id="dialog-title">Encuesta sobre equipos</h2><p>Selecciona una respuesta por afirmación.</p></div><button class="modal-close" id="close-survey" type="button" aria-label="Cerrar encuesta">×</button></div>
+      <div class="survey-tools"><label for="respondent-code" class="label">Código opcional</label><input id="respondent-code" type="text" placeholder="Ej.: E01" maxlength="20"><span class="survey-status">Las respuestas se guardan en Google Sheets.</span></div>
       <form id="survey-form">
         <div class="survey-items" id="survey-items"></div>
         <div class="survey-actions"><button class="btn btn-primary" id="survey-submit" type="submit" disabled>Guardar respuesta</button><span class="survey-status" id="survey-status">Completa las 20 respuestas para guardar.</span></div>
       </form>
-      <div class="survey-tools"><button class="btn" id="show-analysis" type="button">Ver análisis guardado</button><button class="btn" id="export-csv" type="button">Exportar CSV</button></div>
-      <div class="survey-summary" id="survey-summary"><strong>Análisis acumulado</strong><div class="summary-grid"><div class="summary-metric"><strong id="saved-count">0</strong><span>respuestas guardadas</span></div><div class="summary-metric"><strong id="roles-average">—</strong><span>roles percibidos</span></div><div class="summary-metric"><strong id="complement-average">—</strong><span>complementariedad</span></div><div class="summary-metric"><strong id="efficacy-average">—</strong><span>eficacia percibida</span></div></div></div>
-    </section>
-
-    <section class="section">
-      <details open><summary>Entrevista semiestructurada a Ana y Aaron</summary><div class="details-body"><ol class="interview-list"><li>¿Qué conductas observas con mayor frecuencia cuando trabajan en equipo?</li><li>¿Qué persona o conducta propone ideas nuevas cuando el grupo se estanca?</li><li>¿Quién organiza, distribuye tareas o recuerda los objetivos?</li><li>¿Cómo se revisan los detalles, la calidad y los plazos antes de entregar?</li><li>¿En qué medida las fortalezas de los integrantes se complementan? Da un ejemplo.</li><li>¿Qué ocurre cuando varias personas quieren dirigir, revisar o proponer ideas?</li><li>¿Qué rol o conducta debería reforzarse para mejorar el desempeño?</li><li>¿Qué recomendación darías para mejorar la eficacia a partir de Belbin?</li></ol><p style="margin-top:12px"><strong>Registro:</strong> Entrevistada/o: ____________ Fecha: __________ ¿Autorizó tomar notas? Sí [ ] No [ ]</p></div></details>
-      <details><summary>Cómo analizar los resultados</summary><div class="details-body"><p>Calcula el promedio de los ítems 1 al 9 para observar la presencia percibida de cada rol. Calcula los ítems 10 al 12 para complementariedad y los ítems 13 al 20 para eficacia percibida.</p><p>Interpretación orientativa: 1,00–2,33 bajo; 2,34–3,66 medio; 3,67–5,00 alto. Contrasta los resultados con las coincidencias y diferencias de las entrevistas.</p></div></details>
-      <details><summary>Marco de análisis</summary><div class="details-body"><p>Se analizarán comportamientos, no etiquetas rígidas. La encuesta es exploratoria: describe percepciones y permite compararlas con las entrevistas, sin afirmar causalidad absoluta.</p></div></details>
-    </section>
-
-    <section class="section">
-      <div class="card"><div class="label">Referencias · APA 7.ª edición</div><ul class="source-list" style="margin-top:12px"><li>Belbin Associates. (s. f.). <em>Belbin for students</em>. <a href="https://www.belbin.com/media/1288/belbin-for-students.pdf" target="_blank" rel="noopener">Fuente original</a></li><li>Belbin Associates. (2014). <em>A comprehensive review of Belbin team roles</em>. <a href="https://www.belbin.com/media/1158/belbin-uk-2014-a-comprehensive-review.pdf" target="_blank" rel="noopener">Fuente original</a></li><li>Asana. (2025, 2 de octubre). <em>Roles del equipo: 9 tipos de roles para crear un equipo bien equilibrado</em>. <a href="https://asana.com/es/resources/team-roles" target="_blank" rel="noopener">Fuente original</a></li></ul></div>
-    </section>
-  </main>
-  <footer class="footer"><div class="wrap footer-inner"><span>Trabajo grupal · Liderazgo y Dinámica de Grupo</span><a href="index.html">Volver al inicio</a></div></footer>
+    </div>
+  </dialog>
 
   <script>
     const statements = [
@@ -87,17 +86,28 @@
       ["La composición del equipo favorece un buen desempeño.", "Eficacia"],
       ["Comprendo cuál es mi aporte y cómo se relaciona con el de los demás.", "Eficacia"]
     ];
-    const scale = ["1", "2", "3", "4", "5"];
-    const scaleText = ["TD", "D", "N", "A", "TA"];
-    document.getElementById("survey-items").innerHTML = statements.map(([text, dimension], index) => `<div class="survey-item"><div class="survey-text"><span class="survey-number">${index + 1}</span>${text}<span class="role-tag" style="margin-left:7px">${dimension}</span></div><div class="choices" role="radiogroup" aria-label="Pregunta ${index + 1}">${scale.map((value, option) => `<label class="choice"><input type="radio" name="item-${index + 1}" value="${value}"><span>${value}</span><small>${scaleText[option]}</small></label>`).join("")}</div></div>`).join("");
+    const scale = [
+      ["1", "Totalmente en desacuerdo"],
+      ["2", "En desacuerdo"],
+      ["3", "Ni de acuerdo ni en desacuerdo"],
+      ["4", "De acuerdo"],
+      ["5", "Totalmente de acuerdo"]
+    ];
+    document.getElementById("survey-items").innerHTML = statements.map(([text, dimension], index) => `<div class="survey-item"><div class="survey-text"><span class="survey-number">${index + 1}</span><span>${text}</span><span class="role-tag">${dimension}</span></div><div class="choices" role="radiogroup" aria-label="Pregunta ${index + 1}">${scale.map(([value, label]) => `<label class="choice" title="${label}"><input type="radio" name="item-${index + 1}" value="${value}"><span>${value}</span><small>${label}</small></label>`).join("")}</div></div>`).join("");
     const REMOTE_URL = "https://script.google.com/macros/s/AKfycbxszb5tDQZXo38TnkI1FjRYzJdsaFjtqRotf_ODFdXP2PIlZ7oWuXD_U0kV0MZezQTk/exec";
     const STORAGE_KEY = "actividad5_respuestas_respaldo";
+    const dialog = document.getElementById("survey-dialog");
     const form = document.getElementById("survey-form"), count = document.getElementById("survey-count"), submit = document.getElementById("survey-submit"), status = document.getElementById("survey-status");
+    function openSurvey() { if (typeof dialog.showModal === "function") dialog.showModal(); else dialog.setAttribute("open", ""); }
+    function closeSurvey() { if (dialog.open) dialog.close(); else dialog.removeAttribute("open"); }
+    document.getElementById("open-survey").addEventListener("click", openSurvey);
+    document.getElementById("close-survey").addEventListener("click", closeSurvey);
+    dialog.addEventListener("click", event => { if (event.target === dialog) closeSurvey(); });
+    if (window.location.hash === "#encuesta") openSurvey();
     function updateSurvey() {
       const answered = statements.filter((_, i) => form.querySelector(`input[name="item-${i + 1}"]:checked`)).length;
-      count.textContent = `${answered} / ${statements.length} respondidas`;
       submit.disabled = answered !== statements.length;
-      status.textContent = answered === statements.length ? "Lista para guardar." : "Completa las 20 respuestas para guardar.";
+      status.textContent = answered === statements.length ? "Lista para guardar." : `Faltan ${statements.length - answered} respuestas.`;
     }
     form.addEventListener("change", updateSurvey);
     function readResponses() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); } catch { return []; } }
@@ -121,36 +131,37 @@
         setTimeout(() => { if (window[callback]) { cleanup(); reject(new Error("Tiempo de espera agotado.")); } }, 10000);
       });
     }
-    async function updateAnalysis() {
-      const responses = readResponses();
-      paintAnalysis({ count: responses.length, roles: average(responses, 0, 9), complementarity: average(responses, 9, 12), efficacy: average(responses, 12, 20) });
-      try { paintAnalysis(await getRemoteSummary()); } catch { status.textContent = "Respuesta guardada. El análisis remoto se actualizará al consultar de nuevo."; }
+    async function showAnalysis() {
+      const summary = document.getElementById("survey-summary");
+      summary.classList.add("visible");
+      document.getElementById("analysis-status").textContent = "Consultando respuestas acumuladas…";
+      try { paintAnalysis(await getRemoteSummary()); document.getElementById("analysis-status").textContent = "Análisis actualizado."; }
+      catch { paintAnalysis({ count: readResponses().length, roles: average(readResponses(), 0, 9), complementarity: average(readResponses(), 9, 12), efficacy: average(readResponses(), 12, 20) }); document.getElementById("analysis-status").textContent = "Se muestran los datos disponibles localmente."; }
     }
     form.addEventListener("submit", async event => {
       event.preventDefault();
       const answers = statements.map((_, index) => Number(form.querySelector(`input[name="item-${index + 1}"]:checked`).value));
       const responses = readResponses();
-      responses.push({ code: document.getElementById("respondent-code").value.trim() || `R${String(responses.length + 1).padStart(2, "0")}`, answers, date: new Date().toISOString() });
+      const code = document.getElementById("respondent-code").value.trim() || `R${String(responses.length + 1).padStart(2, "0")}`;
+      responses.push({ code, answers, date: new Date().toISOString() });
       localStorage.setItem(STORAGE_KEY, JSON.stringify(responses));
-      status.textContent = "Enviando respuesta a la hoja…";
-      status.style.color = "#147f82";
-      const payload = { code: document.getElementById("respondent-code").value.trim() || `R${String(responses.length).padStart(2, "0")}`, answers };
+      status.textContent = "Enviando respuesta a Google Sheets…";
+      const payload = { code, answers };
       try {
         await fetch(REMOTE_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" }, body: new URLSearchParams({ data: JSON.stringify(payload) }) });
         status.textContent = "Respuesta guardada en la hoja del proyecto.";
-        await updateAnalysis();
-      } catch { status.textContent = "No se pudo enviar. Conservamos un respaldo local para reintentar."; }
+        form.reset(); updateSurvey();
+      } catch { status.textContent = "No se pudo enviar. Conservamos un respaldo local."; }
     });
-    document.getElementById("show-analysis").addEventListener("click", async () => { document.getElementById("survey-summary").classList.add("visible"); status.textContent = "Consultando respuestas acumuladas…"; try { paintAnalysis(await getRemoteSummary()); status.textContent = "Análisis actualizado."; } catch { await updateAnalysis(); } });
+    document.getElementById("show-analysis-main").addEventListener("click", showAnalysis);
     document.getElementById("export-csv").addEventListener("click", () => {
       const responses = readResponses();
-      if (!responses.length) { status.textContent = "Todavía no hay respuestas guardadas."; return; }
+      if (!responses.length) { document.getElementById("analysis-status").textContent = "Todavía no hay respuestas guardadas."; return; }
       const header = ["codigo", ...statements.map((_, index) => `item_${index + 1}`), "fecha"];
       const rows = responses.map(item => [item.code, ...item.answers, item.date].join(","));
       const blob = new Blob([[header.join(","), ...rows].join("\n")], { type: "text/csv;charset=utf-8" });
       const link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download = "respuestas_actividad_5.csv"; link.click(); URL.revokeObjectURL(link.href);
     });
-    updateAnalysis();
     updateSurvey();
   </script>
 </body>
