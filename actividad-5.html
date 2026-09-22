@@ -39,10 +39,10 @@
     </section>
 
     <section class="analysis-tools" aria-label="Análisis acumulado">
-      <div><div class="code">Resultados</div><h2>Análisis acumulado</h2><p id="analysis-status">Consulta las respuestas registradas cuando quieras.</p></div>
-      <div class="analysis-actions"><button class="btn" id="show-analysis-main" type="button">Ver análisis guardado</button><button class="btn" id="export-csv" type="button">Exportar CSV</button></div>
+      <div><div class="code">Resultados</div><h2>Análisis acumulado</h2><p id="analysis-status">El análisis se recalcula con las respuestas disponibles.</p></div>
+      <div class="analysis-actions"><button class="btn" id="show-analysis-main" type="button">Actualizar análisis</button><button class="btn" id="export-csv" type="button">Exportar CSV</button></div>
     </section>
-    <div class="survey-summary" id="survey-summary" aria-live="polite"><div class="summary-title">Resumen de respuestas</div><div class="summary-grid"><div class="summary-metric"><strong id="saved-count">0</strong><span>respuestas guardadas</span></div><div class="summary-metric"><strong id="roles-average">—</strong><span>roles percibidos</span></div><div class="summary-metric"><strong id="complement-average">—</strong><span>complementariedad</span></div><div class="summary-metric"><strong id="efficacy-average">—</strong><span>eficacia percibida</span></div></div></div>
+    <div class="survey-summary visible" id="survey-summary" aria-live="polite"><div class="summary-title">Resumen de respuestas</div><div class="summary-grid"><div class="summary-metric"><strong id="saved-count">0</strong><span>respuestas guardadas</span></div><div class="summary-metric"><strong id="roles-average">—</strong><span>roles percibidos</span></div><div class="summary-metric"><strong id="complement-average">—</strong><span>complementariedad</span></div><div class="summary-metric"><strong id="efficacy-average">—</strong><span>eficacia percibida</span></div></div><div class="dynamic-analysis"><div><div class="summary-title">Lectura automática</div><p id="analysis-text">Cargando análisis de las respuestas…</p></div><div class="analysis-bars" id="analysis-bars" aria-label="Indicadores dinámicos"></div></div></div>
 
     <section class="section compact-sections">
       <details><summary>Entrevista semiestructurada a Ana y Aaron</summary><div class="details-body"><ol class="interview-list"><li>¿Qué conductas observas con mayor frecuencia cuando trabajan en equipo?</li><li>¿Quién propone ideas, organiza tareas y revisa los detalles?</li><li>¿En qué medida las fortalezas se complementan? Da un ejemplo.</li><li>¿Qué ocurre cuando varias personas quieren dirigir, revisar o proponer?</li><li>¿Qué rol debería reforzarse para mejorar la eficacia?</li><li>¿Qué recomendación darías a partir de Belbin?</li></ol><p><strong>Registro:</strong> Entrevistada/o: ____________ Fecha: __________</p></div></details>
@@ -111,13 +111,62 @@
     }
     form.addEventListener("change", updateSurvey);
     function readResponses() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); } catch { return []; } }
-    function average(responses, start, end) { const values = responses.flatMap(item => item.answers.slice(start, end)); return values.length ? (values.reduce((sum, value) => sum + value, 0) / values.length).toFixed(2) : "—"; }
-    function paintAnalysis(summary) {
-      const safe = summary || { count: 0, roles: null, complementarity: null, efficacy: null };
-      document.getElementById("saved-count").textContent = safe.count || 0;
-      document.getElementById("roles-average").textContent = safe.roles ?? "—";
-      document.getElementById("complement-average").textContent = safe.complementarity ?? "—";
-      document.getElementById("efficacy-average").textContent = safe.efficacy ?? "—";
+    function finite(value) { const number = Number(value); return Number.isFinite(number) ? number : null; }
+    function rowAnswers(row) {
+      if (Array.isArray(row)) { const values = row.map(finite).filter(value => value !== null); return values.length >= statements.length ? values.slice(-statements.length) : null; }
+      const candidate = row?.answers || row?.respuestas || row?.values || row?.data;
+      if (Array.isArray(candidate)) { const values = candidate.map(finite); return values.length >= statements.length ? values.slice(0, statements.length) : null; }
+      if (row && typeof row === "object") {
+        const keys = Object.keys(row).filter(key => /^(item|pregunta|q)[-_]?\d+$/i.test(key)).sort((a, b) => Number(a.match(/\d+/)[0]) - Number(b.match(/\d+/)[0]));
+        const values = keys.map(key => finite(row[key]));
+        return values.length >= statements.length && values.every(value => value !== null) ? values.slice(0, statements.length) : null;
+      }
+      return null;
+    }
+    function pearson(rows) {
+      const pairs = rows.map(answers => [averageNumber(answers, 9, 12), averageNumber(answers, 12, 20)]).filter(pair => pair.every(value => value !== null));
+      if (pairs.length < 2) return null;
+      const x = pairs.map(pair => pair[0]), y = pairs.map(pair => pair[1]);
+      const mx = x.reduce((sum, value) => sum + value, 0) / x.length, my = y.reduce((sum, value) => sum + value, 0) / y.length;
+      const numerator = x.reduce((sum, value, index) => sum + (value - mx) * (y[index] - my), 0);
+      const denominator = Math.sqrt(x.reduce((sum, value) => sum + (value - mx) ** 2, 0) * y.reduce((sum, value) => sum + (value - my) ** 2, 0));
+      return denominator ? Number((numerator / denominator).toFixed(2)) : null;
+    }
+    function averageNumber(answers, start, end) { const values = answers.slice(start, end).map(finite).filter(value => value !== null); return values.length ? values.reduce((sum, value) => sum + value, 0) / values.length : null; }
+    function averageText(value) { return value === null ? "—" : Number(value).toFixed(2); }
+    function calculateModel(rows, source = {}) {
+      const valid = rows.map(rowAnswers).filter(Boolean);
+      const roleValues = valid.flatMap(answers => answers.slice(0, 9));
+      const roleAverages = statements.slice(0, 9).map((statement, index) => averageNumber(valid.map(answers => answers[index]), 0, valid.length));
+      const roles = roleValues.length ? roleValues.reduce((sum, value) => sum + value, 0) / roleValues.length : finite(source.roles ?? source.rolesAverage);
+      const complementValues = valid.map(answers => averageNumber(answers, 9, 12)).filter(value => value !== null);
+      const efficacyValues = valid.map(answers => averageNumber(answers, 12, 20)).filter(value => value !== null);
+      const complementarity = complementValues.length ? complementValues.reduce((sum, value) => sum + value, 0) / complementValues.length : finite(source.complementarity ?? source.complementarityAverage);
+      const efficacy = efficacyValues.length ? efficacyValues.reduce((sum, value) => sum + value, 0) / efficacyValues.length : finite(source.efficacy ?? source.efficacyAverage);
+      return { count: finite(source.count ?? source.total ?? source.responsesCount) ?? valid.length, roles, complementarity, efficacy, roleAverages, correlation: pearson(valid) };
+    }
+    function normalizeRemote(payload) {
+      const source = payload?.summary || payload?.result || (Array.isArray(payload) ? {} : payload || {});
+      const raw = Array.isArray(payload) ? payload : payload?.responses || payload?.respuestas || payload?.rows || source.responses || source.rows || [];
+      return calculateModel(raw, source);
+    }
+    function level(value) { return value === null ? "sin datos" : value < 2.34 ? "bajo" : value < 3.67 ? "medio" : "alto"; }
+    function relation(model) {
+      if (model.count === 0) return "Todavía no hay respuestas suficientes para generar un análisis.";
+      const base = `Con ${model.count} respuesta${model.count === 1 ? "" : "s"}, la complementariedad alcanza ${averageText(model.complementarity)} (${level(model.complementarity)}) y la eficacia percibida ${averageText(model.efficacy)} (${level(model.efficacy)}).`;
+      if (model.correlation !== null) return `${base} La relación lineal observada entre ambas dimensiones es ${model.correlation >= .3 ? "positiva" : model.correlation <= -.3 ? "negativa" : "débil o no concluyente"} (r = ${model.correlation}). Esta lectura es descriptiva y puede cambiar al aumentar la muestra.`;
+      if (model.complementarity !== null && model.efficacy !== null) return `${base} La diferencia entre ambos promedios es ${averageText(Math.abs(model.complementarity - model.efficacy))} puntos. Se requiere una muestra mayor para estimar una relación estadística.`;
+      return `${base} Faltan datos para comparar las dos dimensiones.`;
+    }
+    function paintAnalysis(payload) {
+      const model = payload?.count !== undefined && payload?.complementarity !== undefined ? payload : normalizeRemote(payload);
+      document.getElementById("saved-count").textContent = model.count || 0;
+      document.getElementById("roles-average").textContent = averageText(model.roles);
+      document.getElementById("complement-average").textContent = averageText(model.complementarity);
+      document.getElementById("efficacy-average").textContent = averageText(model.efficacy);
+      document.getElementById("analysis-text").textContent = relation(model);
+      const bars = [["Roles percibidos", model.roles], ["Complementariedad", model.complementarity], ["Eficacia percibida", model.efficacy]];
+      document.getElementById("analysis-bars").innerHTML = bars.map(([label, value]) => `<div class="analysis-bar"><div><span>${label}</span><strong>${averageText(value)}</strong></div><i><b style="width:${value === null ? 0 : (value / 5) * 100}%"></b></i></div>`).join("");
     }
     function getRemoteSummary() {
       return new Promise((resolve, reject) => {
@@ -135,8 +184,8 @@
       const summary = document.getElementById("survey-summary");
       summary.classList.add("visible");
       document.getElementById("analysis-status").textContent = "Consultando respuestas acumuladas…";
-      try { paintAnalysis(await getRemoteSummary()); document.getElementById("analysis-status").textContent = "Análisis actualizado."; }
-      catch { paintAnalysis({ count: readResponses().length, roles: average(readResponses(), 0, 9), complementarity: average(readResponses(), 9, 12), efficacy: average(readResponses(), 12, 20) }); document.getElementById("analysis-status").textContent = "Se muestran los datos disponibles localmente."; }
+      try { paintAnalysis(normalizeRemote(await getRemoteSummary())); document.getElementById("analysis-status").textContent = `Actualizado: ${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}.`; }
+      catch { paintAnalysis(normalizeRemote(readResponses())); document.getElementById("analysis-status").textContent = "Se muestran los datos locales mientras se consulta la hoja."; }
     }
     form.addEventListener("submit", async event => {
       event.preventDefault();
@@ -151,6 +200,7 @@
         await fetch(REMOTE_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" }, body: new URLSearchParams({ data: JSON.stringify(payload) }) });
         status.textContent = "Respuesta guardada en la hoja del proyecto.";
         form.reset(); updateSurvey();
+        setTimeout(showAnalysis, 700);
       } catch { status.textContent = "No se pudo enviar. Conservamos un respaldo local."; }
     });
     document.getElementById("show-analysis-main").addEventListener("click", showAnalysis);
@@ -163,6 +213,8 @@
       const link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download = "respuestas_actividad_5.csv"; link.click(); URL.revokeObjectURL(link.href);
     });
     updateSurvey();
+    showAnalysis();
+    setInterval(() => { if (document.visibilityState === "visible") showAnalysis(); }, 30000);
   </script>
 </body>
 </html>
