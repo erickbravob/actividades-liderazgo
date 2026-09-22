@@ -20,7 +20,7 @@
       <div class="eyebrow">Actividad 05 · Investigación aplicada</div>
       <h1>Complementariedad y eficacia</h1>
       <p class="lead">Propuesta de investigación sobre la relación entre los roles de Belbin y la eficacia percibida del trabajo en equipo.</p>
-      <div class="meta"><span class="tag">Encuesta: mínimo 17 estudiantes</span><span class="tag">Entrevistas: Ana y Aaron</span><span class="tag">Investigador: Erick · Finalizador</span></div>
+      <div class="meta"><span class="tag">Encuesta: mínimo 17 estudiantes</span><span class="tag">Entrevistas: Ana y Aaron</span><span class="tag">Roles de equipo de Belbin</span></div>
     </section>
 
     <section class="section">
@@ -40,13 +40,16 @@
 
     <section class="survey-panel" id="encuesta" aria-labelledby="survey-title">
       <div class="survey-toolbar">
-        <div><div class="label">Instrumento de recolección</div><h3 id="survey-title">Encuesta Likert · 20 afirmaciones</h3><p>Selecciona una opción por afirmación. La página no envía ni guarda respuestas.</p></div>
+        <div><div class="label">Instrumento de recolección</div><h3 id="survey-title">Encuesta Likert · 20 afirmaciones</h3><p>Selecciona una opción por afirmación.</p></div>
         <div class="survey-count" id="survey-count">0 / 20 respondidas</div>
       </div>
+      <div class="survey-tools"><label for="respondent-code" class="label" style="align-self:center">Código opcional</label><input id="respondent-code" type="text" placeholder="Ej.: E01" maxlength="20" style="max-width:150px;padding:8px;border:1px solid var(--line);border-radius:7px"><span class="survey-status">Las respuestas se guardan en la hoja del proyecto.</span></div>
       <form id="survey-form">
         <div class="survey-items" id="survey-items"></div>
-        <div class="survey-actions"><button class="btn btn-primary" id="survey-submit" type="submit" disabled>Revisar respuestas</button><span class="survey-status" id="survey-status">Completa las 20 respuestas para revisar.</span></div>
+        <div class="survey-actions"><button class="btn btn-primary" id="survey-submit" type="submit" disabled>Guardar respuesta</button><span class="survey-status" id="survey-status">Completa las 20 respuestas para guardar.</span></div>
       </form>
+      <div class="survey-tools"><button class="btn" id="show-analysis" type="button">Ver análisis guardado</button><button class="btn" id="export-csv" type="button">Exportar CSV</button></div>
+      <div class="survey-summary" id="survey-summary"><strong>Análisis acumulado</strong><div class="summary-grid"><div class="summary-metric"><strong id="saved-count">0</strong><span>respuestas guardadas</span></div><div class="summary-metric"><strong id="roles-average">—</strong><span>roles percibidos</span></div><div class="summary-metric"><strong id="complement-average">—</strong><span>complementariedad</span></div><div class="summary-metric"><strong id="efficacy-average">—</strong><span>eficacia percibida</span></div></div></div>
     </section>
 
     <section class="section">
@@ -59,7 +62,7 @@
       <div class="card"><div class="label">Referencias · APA 7.ª edición</div><ul class="source-list" style="margin-top:12px"><li>Belbin Associates. (s. f.). <em>Belbin for students</em>. <a href="https://www.belbin.com/media/1288/belbin-for-students.pdf" target="_blank" rel="noopener">Fuente original</a></li><li>Belbin Associates. (2014). <em>A comprehensive review of Belbin team roles</em>. <a href="https://www.belbin.com/media/1158/belbin-uk-2014-a-comprehensive-review.pdf" target="_blank" rel="noopener">Fuente original</a></li><li>Asana. (2025, 2 de octubre). <em>Roles del equipo: 9 tipos de roles para crear un equipo bien equilibrado</em>. <a href="https://asana.com/es/resources/team-roles" target="_blank" rel="noopener">Fuente original</a></li></ul></div>
     </section>
   </main>
-  <footer class="footer"><div class="wrap footer-inner"><span>Erick Bravo Borges · Ingeniería de Sistemas</span><a href="index.html">Volver al inicio</a></div></footer>
+  <footer class="footer"><div class="wrap footer-inner"><span>Trabajo grupal · Liderazgo y Dinámica de Grupo</span><a href="index.html">Volver al inicio</a></div></footer>
 
   <script>
     const statements = [
@@ -87,15 +90,67 @@
     const scale = ["1", "2", "3", "4", "5"];
     const scaleText = ["TD", "D", "N", "A", "TA"];
     document.getElementById("survey-items").innerHTML = statements.map(([text, dimension], index) => `<div class="survey-item"><div class="survey-text"><span class="survey-number">${index + 1}</span>${text}<span class="role-tag" style="margin-left:7px">${dimension}</span></div><div class="choices" role="radiogroup" aria-label="Pregunta ${index + 1}">${scale.map((value, option) => `<label class="choice"><input type="radio" name="item-${index + 1}" value="${value}"><span>${value}</span><small>${scaleText[option]}</small></label>`).join("")}</div></div>`).join("");
+    const REMOTE_URL = "https://script.google.com/macros/s/AKfycbxszb5tDQZXo38TnkI1FjRYzJdsaFjtqRotf_ODFdXP2PIlZ7oWuXD_U0kV0MZezQTk/exec";
+    const STORAGE_KEY = "actividad5_respuestas_respaldo";
     const form = document.getElementById("survey-form"), count = document.getElementById("survey-count"), submit = document.getElementById("survey-submit"), status = document.getElementById("survey-status");
     function updateSurvey() {
       const answered = statements.filter((_, i) => form.querySelector(`input[name="item-${i + 1}"]:checked`)).length;
       count.textContent = `${answered} / ${statements.length} respondidas`;
       submit.disabled = answered !== statements.length;
-      status.textContent = answered === statements.length ? "Puedes revisar el instrumento completo." : "Completa las 20 respuestas para revisar.";
+      status.textContent = answered === statements.length ? "Lista para guardar." : "Completa las 20 respuestas para guardar.";
     }
     form.addEventListener("change", updateSurvey);
-    form.addEventListener("submit", event => { event.preventDefault(); status.textContent = "Instrumento completo. Registra las respuestas en tu formulario de aplicación."; status.style.color = "#147f82"; });
+    function readResponses() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); } catch { return []; } }
+    function average(responses, start, end) { const values = responses.flatMap(item => item.answers.slice(start, end)); return values.length ? (values.reduce((sum, value) => sum + value, 0) / values.length).toFixed(2) : "—"; }
+    function paintAnalysis(summary) {
+      const safe = summary || { count: 0, roles: null, complementarity: null, efficacy: null };
+      document.getElementById("saved-count").textContent = safe.count || 0;
+      document.getElementById("roles-average").textContent = safe.roles ?? "—";
+      document.getElementById("complement-average").textContent = safe.complementarity ?? "—";
+      document.getElementById("efficacy-average").textContent = safe.efficacy ?? "—";
+    }
+    function getRemoteSummary() {
+      return new Promise((resolve, reject) => {
+        const callback = `surveySummary_${Date.now()}`;
+        const script = document.createElement("script");
+        const cleanup = () => { delete window[callback]; script.remove(); };
+        window[callback] = data => { cleanup(); resolve(data); };
+        script.onerror = () => { cleanup(); reject(new Error("No se pudo consultar el análisis remoto.")); };
+        script.src = `${REMOTE_URL}?callback=${callback}&t=${Date.now()}`;
+        document.body.appendChild(script);
+        setTimeout(() => { if (window[callback]) { cleanup(); reject(new Error("Tiempo de espera agotado.")); } }, 10000);
+      });
+    }
+    async function updateAnalysis() {
+      const responses = readResponses();
+      paintAnalysis({ count: responses.length, roles: average(responses, 0, 9), complementarity: average(responses, 9, 12), efficacy: average(responses, 12, 20) });
+      try { paintAnalysis(await getRemoteSummary()); } catch { status.textContent = "Respuesta guardada. El análisis remoto se actualizará al consultar de nuevo."; }
+    }
+    form.addEventListener("submit", async event => {
+      event.preventDefault();
+      const answers = statements.map((_, index) => Number(form.querySelector(`input[name="item-${index + 1}"]:checked`).value));
+      const responses = readResponses();
+      responses.push({ code: document.getElementById("respondent-code").value.trim() || `R${String(responses.length + 1).padStart(2, "0")}`, answers, date: new Date().toISOString() });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(responses));
+      status.textContent = "Enviando respuesta a la hoja…";
+      status.style.color = "#147f82";
+      const payload = { code: document.getElementById("respondent-code").value.trim() || `R${String(responses.length).padStart(2, "0")}`, answers };
+      try {
+        await fetch(REMOTE_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" }, body: new URLSearchParams({ data: JSON.stringify(payload) }) });
+        status.textContent = "Respuesta guardada en la hoja del proyecto.";
+        await updateAnalysis();
+      } catch { status.textContent = "No se pudo enviar. Conservamos un respaldo local para reintentar."; }
+    });
+    document.getElementById("show-analysis").addEventListener("click", async () => { document.getElementById("survey-summary").classList.add("visible"); status.textContent = "Consultando respuestas acumuladas…"; try { paintAnalysis(await getRemoteSummary()); status.textContent = "Análisis actualizado."; } catch { await updateAnalysis(); } });
+    document.getElementById("export-csv").addEventListener("click", () => {
+      const responses = readResponses();
+      if (!responses.length) { status.textContent = "Todavía no hay respuestas guardadas."; return; }
+      const header = ["codigo", ...statements.map((_, index) => `item_${index + 1}`), "fecha"];
+      const rows = responses.map(item => [item.code, ...item.answers, item.date].join(","));
+      const blob = new Blob([[header.join(","), ...rows].join("\n")], { type: "text/csv;charset=utf-8" });
+      const link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download = "respuestas_actividad_5.csv"; link.click(); URL.revokeObjectURL(link.href);
+    });
+    updateAnalysis();
     updateSurvey();
   </script>
 </body>

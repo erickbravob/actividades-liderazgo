@@ -20,7 +20,7 @@
       <div class="eyebrow">Actividad 04 · Liderazgo y Dinámica de Grupo</div>
       <h1>Aprender los roles jugando</h1>
       <p class="lead">Juego interactivo basado en los nueve roles de equipo de Belbin. Lee la situación, elige el rol y revisa la explicación.</p>
-      <div class="meta"><span class="tag">Ingeniería de Sistemas</span><span class="tag">Erick Bravo Borges</span><span class="tag">Marco aplicado</span></div>
+      <div class="meta"><span class="tag">Ingeniería de Sistemas</span><span class="tag">Trabajo grupal</span><span class="tag">Marco aplicado</span></div>
     </section>
 
     <section class="section">
@@ -42,6 +42,7 @@
         <h3 id="question">Cargando situación…</h3>
         <div class="answers" id="answers"></div>
         <div class="feedback" id="feedback"></div>
+        <div class="result" id="result" hidden></div>
         <div class="quiz-actions"><button class="btn btn-secondary" id="restart" type="button">Reiniciar</button><button class="btn btn-primary" id="next" type="button" disabled>Siguiente</button></div>
       </div>
     </section>
@@ -65,7 +66,7 @@
       <div class="card"><div class="label">Referencias · APA 7.ª edición</div><ul class="source-list" style="margin-top:12px"><li>Belbin Associates. (s. f.). <em>Belbin for students</em>. <a href="https://www.belbin.com/media/1288/belbin-for-students.pdf" target="_blank" rel="noopener">Fuente original</a></li><li>Belbin Associates. (2014). <em>A comprehensive review of Belbin team roles</em>. <a href="https://www.belbin.com/media/1158/belbin-uk-2014-a-comprehensive-review.pdf" target="_blank" rel="noopener">Fuente original</a></li><li>Asana. (2025, 2 de octubre). <em>Roles del equipo: 9 tipos de roles para crear un equipo bien equilibrado</em>. <a href="https://asana.com/es/resources/team-roles" target="_blank" rel="noopener">Fuente original</a></li></ul></div>
     </section>
   </main>
-  <footer class="footer"><div class="wrap footer-inner"><span>Erick Bravo Borges · Ingeniería de Sistemas</span><a href="index.html">Volver al inicio</a></div></footer>
+  <footer class="footer"><div class="wrap footer-inner"><span>Trabajo grupal · Liderazgo y Dinámica de Grupo</span><a href="index.html">Volver al inicio</a></div></footer>
 
   <script>
     const quiz = [
@@ -86,6 +87,7 @@
       $("score-label").textContent = `Pregunta ${current + 1} / ${quiz.length}`;
       $("progress-bar").style.width = `${(current / quiz.length) * 100}%`;
       $("feedback").textContent = "";
+      $("result").hidden = true;
       $("next").disabled = true;
       $("next").textContent = current === quiz.length - 1 ? "Ver resultado" : "Siguiente";
       $("answers").innerHTML = item.options.map((option, i) => `<button class="answer" data-index="${i}" type="button">${option}</button>`).join("");
@@ -99,7 +101,7 @@
       if (choice === item.correct) { score++; $("feedback").textContent = `Correcto. ${item.why}`; } else { $("feedback").textContent = `Revisa el marco. ${item.why}`; }
       $("next").disabled = false;
     }
-    $("next").addEventListener("click", () => { if (!answered) return; if (current < quiz.length - 1) { current++; renderQuestion(); } else { $("question").textContent = `Obtuviste ${score} de ${quiz.length}.`; $("answers").innerHTML = `<p style="color:#c2d0dd">Reinicia para volver a jugar y comparar tu comprensión.</p>`; $("feedback").textContent = score >= 6 ? "Lectura sólida del marco." : "Revisa las tarjetas de roles y prueba otra vez."; $("next").disabled = true; $("progress-bar").style.width = "100%"; } });
+    $("next").addEventListener("click", () => { if (!answered) return; if (current < quiz.length - 1) { current++; renderQuestion(); } else { const percentage = Math.round((score / quiz.length) * 100); $("question").textContent = "Juego terminado"; $("answers").innerHTML = `<p style="color:#c2d0dd">Reinicia para volver a jugar y comparar tu comprensión.</p>`; $("feedback").textContent = ""; $("result").hidden = false; $("result").innerHTML = `<strong>Resultado: ${score} / ${quiz.length} (${percentage}%)</strong><br>${score >= 6 ? "Reconoces correctamente la mayoría de los roles de equipo." : "Revisa las tarjetas de roles y vuelve a intentarlo."}`; $("next").disabled = true; $("progress-bar").style.width = "100%"; } });
     $("restart").addEventListener("click", () => { current = 0; score = 0; renderQuestion(); });
     renderQuestion();
   </script>
