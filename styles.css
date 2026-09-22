@@ -262,3 +262,84 @@ details[open] summary::after { content: "−"; }
 .escape-station.cleared span { color: var(--navy); background: var(--teal); }
 @media (max-width: 650px) { .world-sky { min-height: 155px; } .world-door { width: 43px; height: 70px; } .escape-player { width: 40px; height: 51px; } .world-status { font-size: .58rem; } .world-status strong { font-size: .55rem; } }
 @media (prefers-reduced-motion: reduce) { .world-door, .escape-player { transition: none; } }
+
+/* Operación Cierre: plataforma original para aplicar el rol Finalizador. */
+.platform-shell { position: relative; padding: 21px; color: #eaf3f7; background: radial-gradient(circle at 88% 5%, rgba(85,201,189,.2), transparent 24%), linear-gradient(135deg, #0b1c35, #163b61 66%, #1e5a70); border-radius: 26px 14px 26px 14px; box-shadow: 0 18px 38px rgba(16,35,61,.16); overflow: hidden; }
+.platform-top { display: flex; align-items: end; justify-content: space-between; gap: 14px; }
+.platform-kicker { display: block; margin-bottom: 4px; color: var(--teal); font: 700 .66rem "Cascadia Code", Consolas, monospace; letter-spacing: .13em; text-transform: uppercase; }
+.platform-top strong { font-size: .93rem; }
+.game-hud { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
+.game-hud span { padding: 6px 10px; border-radius: 999px; font-size: .7rem; font-weight: 800; }
+.game-lives { color: #fff; background: #a95358; }
+.game-score { color: var(--navy); background: var(--gold); }
+.platform-progress { height: 6px; margin: 14px 0 16px; overflow: hidden; background: rgba(255,255,255,.16); border-radius: 99px; }
+.platform-progress span { display: block; width: 0; height: 100%; background: linear-gradient(90deg, var(--teal), var(--gold)); border-radius: inherit; transition: width .5s ease; }
+.platform-scene { position: relative; min-height: 240px; overflow: hidden; background: linear-gradient(180deg, #0c1e39 0%, #173d5b 66%, #1e666d 100%); border: 1px solid rgba(85,201,189,.32); border-radius: 18px 10px 18px 10px; transition: filter .25s ease; }
+.platform-scene.hit { animation: scene-hit .32s ease both; }
+.platform-scene.game-over { filter: grayscale(.65) brightness(.74); }
+@keyframes scene-hit { 20%, 60% { transform: translateX(-4px); } 40%, 80% { transform: translateX(4px); } }
+.scene-glow { position: absolute; top: -90px; right: 11%; width: 210px; height: 210px; background: rgba(229,182,90,.13); border-radius: 50%; box-shadow: 0 0 80px rgba(85,201,189,.2); }
+.scene-grid { position: absolute; right: 0; bottom: 34px; left: 0; height: 110px; background: linear-gradient(rgba(85,201,189,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(85,201,189,.1) 1px, transparent 1px); background-size: 38px 27px; transform: perspective(140px) rotateX(52deg) scale(1.2); transform-origin: bottom; opacity: .4; }
+.scene-cloud { position: absolute; width: 90px; height: 15px; border: 1px solid rgba(185,241,230,.25); border-radius: 99px; opacity: .5; }
+.scene-cloud::before, .scene-cloud::after { position: absolute; bottom: -1px; border: 1px solid rgba(185,241,230,.25); border-bottom: 0; border-radius: 40px 40px 0 0; content: ""; }
+.scene-cloud::before { left: 18px; width: 25px; height: 20px; } .scene-cloud::after { right: 16px; width: 35px; height: 27px; }
+.cloud-a { top: 35px; left: 8%; } .cloud-b { top: 68px; right: 22%; transform: scale(.72); }
+.scene-badges { position: absolute; top: 18px; right: 8%; left: 8%; display: flex; justify-content: space-between; color: rgba(229,182,90,.7); font-size: 1.05rem; }
+.platform-doors { position: absolute; right: 5%; bottom: 48px; left: 5%; display: flex; justify-content: space-between; align-items: end; }
+.platform-door { position: relative; display: grid; width: 70px; height: 102px; place-items: center; color: #a2bdca; background: linear-gradient(90deg, #142a45, #28536c); border: 2px solid #4e8490; border-bottom: 0; border-radius: 11px 11px 0 0; box-shadow: inset 0 0 0 4px rgba(255,255,255,.04), 0 -10px 22px rgba(85,201,189,.1); transition: transform .45s ease, opacity .3s ease, filter .3s ease; }
+.platform-door::after { position: absolute; right: 9px; bottom: 0; left: 9px; height: 5px; background: #0d2038; content: ""; }
+.platform-door b { position: absolute; top: 8px; font: 800 .64rem "Cascadia Code", Consolas, monospace; }
+.platform-door small { position: absolute; right: 2px; bottom: 8px; left: 2px; color: #b3ced7; text-align: center; font-size: .52rem; }
+.door-icon { color: var(--gold); font-size: 1.7rem; font-weight: 800; }
+.platform-door.active { filter: drop-shadow(0 0 11px rgba(229,182,90,.55)); transform: translateY(-3px); }
+.platform-door.active::before { position: absolute; top: -9px; width: 9px; height: 9px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 14px rgba(229,182,90,.95); content: ""; }
+.platform-door.open { color: var(--teal); background: #071425; opacity: .72; transform: translateY(-8px) scale(.93); }
+.platform-door.open .door-icon { color: var(--teal); }
+.platform-door.open small { color: var(--teal); }
+.scene-track { position: absolute; right: 0; bottom: 0; left: 0; height: 48px; background: repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0 2px, transparent 2px 14px), #0b213a; border-top: 1px solid rgba(85,201,189,.42); }
+.platform-player { --player-progress: 0; position: absolute; z-index: 4; bottom: 38px; left: calc(6% + (var(--player-progress) * 88%)); width: 59px; height: 73px; filter: drop-shadow(0 7px 5px rgba(0,0,0,.3)); transform: translateX(-50%); transition: left .65s cubic-bezier(.2,.8,.2,1); }
+.player-body { transform-origin: 48px 83px; animation: player-idle 1.8s ease-in-out infinite; }
+@keyframes player-idle { 50% { transform: translateY(-2px); } }
+.scene-status { position: absolute; right: 16px; bottom: 10px; left: 16px; z-index: 5; display: flex; justify-content: space-between; gap: 12px; color: #b8d1dc; font-size: .66rem; }
+.scene-status strong { color: var(--gold); font: 800 .63rem "Cascadia Code", Consolas, monospace; letter-spacing: .08em; }
+.mission-map { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 7px; margin: 14px 0; }
+.mission-room { display: flex; align-items: center; gap: 7px; min-width: 0; padding: 8px; color: #9eb7c6; background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.12); border-radius: 11px; opacity: .65; transition: opacity .2s ease, transform .2s ease, border-color .2s ease; }
+.mission-room.active { color: #fff; border-color: var(--teal); opacity: 1; transform: translateY(-2px); }
+.mission-room.cleared { color: #ccebe4; border-color: rgba(85,201,189,.5); opacity: .9; }
+.mission-room > span { display: grid; flex: 0 0 27px; place-items: center; width: 27px; height: 27px; color: var(--navy); background: rgba(255,255,255,.78); border-radius: 50%; font-size: .85rem; }
+.mission-room.active > span, .mission-room.cleared > span { background: var(--teal); }
+.mission-room b, .mission-room small { display: block; } .mission-room b { font-size: .66rem; } .mission-room small { margin-top: 1px; color: #abc1cd; font-size: .59rem; }
+.mission-card { position: relative; min-height: 320px; padding: 24px 25px 20px; color: var(--ink); background: var(--white); border-radius: 19px 11px 19px 11px; }
+.mission-card-mark { position: absolute; top: 16px; right: 22px; color: #d6e8e7; font: 800 2.8rem/1 "Cascadia Code", Consolas, monospace; letter-spacing: -.08em; }
+.mission-card .label { position: relative; z-index: 1; }
+.mission-card h3 { position: relative; z-index: 1; max-width: 730px; margin: 8px 0 7px; color: var(--navy); font-size: clamp(1.1rem, 2.4vw, 1.52rem); }
+.mission-card > p { position: relative; z-index: 1; max-width: 760px; margin-bottom: 13px; color: var(--muted); font-size: .84rem; }
+.challenge-instruction { margin-bottom: 8px; color: #147f82; font-size: .74rem; font-weight: 800; }
+.challenge-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px; }
+.challenge-choice { cursor: pointer; display: flex; align-items: center; gap: 9px; min-height: 55px; padding: 9px 10px; color: var(--ink); text-align: left; background: #f4f8f7; border: 1px solid #d9e5e4; border-radius: 11px; font-size: .76rem; line-height: 1.22; transition: transform .16s ease, border-color .16s ease, background .16s ease; }
+.challenge-choice:hover, .challenge-choice:focus-visible { border-color: var(--teal); background: #e8f7f3; outline: none; transform: translateY(-1px); }
+.challenge-choice.selected { border-color: #147f82; background: #e1f4f0; }
+.challenge-choice.correct { color: #155d69; border-color: #42b5a7; background: #d9f3ed; }
+.challenge-choice:disabled { cursor: default; }
+.choice-icon { display: grid; flex: 0 0 24px; place-items: center; width: 24px; height: 24px; color: var(--navy); background: #d9efeb; border-radius: 50%; font-size: .72rem; font-weight: 900; }
+.challenge-choice b, .challenge-choice small { display: block; } .challenge-choice small { margin-top: 2px; color: var(--muted); font-size: .63rem; }
+.order-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 8px; }
+.order-grid .challenge-choice { flex-direction: column; justify-content: center; text-align: center; }
+.challenge-feedback { min-height: 29px; margin-top: 10px; color: #147f82; font-size: .76rem; line-height: 1.35; }
+.mission-actions { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; margin-top: 3px; }
+.mission-actions .btn-secondary { color: var(--navy); background: #edf3f2; border-color: #cfdedd; }
+.platform-result { display: flex; align-items: center; gap: 14px; margin-top: 13px; padding: 15px 17px; color: var(--navy); background: #e5f5f1; border: 1px solid #a9ded4; border-radius: 15px; animation: unlock-in .35s ease both; }
+.platform-result strong { font-size: 1rem; } .platform-result p { margin: 3px 0 9px; color: #426174; font-size: .78rem; }
+.platform-result .danger { color: #fff; background: #a95358; }
+@media (max-width: 850px) { .mission-map { grid-template-columns: repeat(5, minmax(105px,1fr)); overflow-x: auto; padding-bottom: 3px; } }
+@media (max-width: 650px) { .platform-shell { padding: 15px; } .platform-top { align-items: start; flex-direction: column; } .game-hud { justify-content: flex-start; } .platform-scene { min-height: 205px; } .platform-door { width: 49px; height: 78px; } .platform-door small { font-size: .44rem; } .door-icon { font-size: 1.2rem; } .platform-player { width: 49px; height: 61px; bottom: 37px; } .scene-status { right: 10px; bottom: 8px; left: 10px; font-size: .57rem; } .scene-status strong { font-size: .53rem; } .mission-map { grid-template-columns: repeat(5, 104px); } .mission-card { padding: 20px 16px 17px; } .challenge-grid, .order-grid { grid-template-columns: 1fr; } .order-grid .challenge-choice { flex-direction: row; justify-content: flex-start; text-align: left; } }
+@media (prefers-reduced-motion: reduce) { .platform-progress span, .platform-door, .platform-player, .mission-room, .challenge-choice, .player-body { transition: none; animation: none; } }
+
+@media (max-width: 650px) {
+  .dynamic-analysis { display: block; min-width: 0; }
+  .dynamic-analysis > div { min-width: 0; }
+  .dynamic-analysis p { max-width: none; overflow-wrap: anywhere; word-break: normal; }
+  .analysis-bars { margin-top: 14px; }
+  .analysis-bar > div { min-width: 0; }
+  .analysis-bar > div span { overflow-wrap: anywhere; }
+}
