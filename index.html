@@ -3,44 +3,60 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Portafolio de actividades de Liderazgo y Dinámica de Grupo.">
-  <title>Actividades de liderazgo </title>
+  <meta name="description" content="Actividades de Liderazgo y Dinámica de Grupo para Ingeniería de Sistemas.">
+  <title>Liderazgo y Dinámica de Grupo</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="home-page">
   <header class="site-header">
-    <a class="brand" href="index.html"><span class="brand-mark">EB</span><span>Portafolio académico</span></a>
+    <a class="brand" href="index.html"><span class="brand-mark">LD</span><span>Liderazgo y dinámica de grupo</span></a>
     <nav class="site-nav" aria-label="Navegación principal">
       <a href="actividad-4.html">Actividad 4</a>
       <a href="actividad-5.html">Actividad 5</a>
+      <a class="nav-survey" href="actividad-5.html#encuesta">Encuesta ↗</a>
     </nav>
   </header>
 
   <main class="wrap">
-    <section class="page-intro">
-      <div class="eyebrow">Liderazgo y Dinámica de Grupo · Ingeniería de Sistemas</div>
-      <h1>Actividades de liderazgo</h1>
-      <div class="meta"><span class="tag">Actividad 4 · Juego interactivo</span><span class="tag">Actividad 5 · Investigación aplicada</span></div>
+    <section class="home-hero" aria-labelledby="home-title">
+      <div class="home-hero-copy">
+        <div class="eyebrow">Ingeniería de Sistemas · Liderazgo</div>
+        <h1 id="home-title">Aprender a trabajar mejor en equipo.</h1>
+        <p class="lead">Dos actividades conectadas: comprender los roles de Belbin y recoger evidencia sobre la eficacia percibida del grupo.</p>
+        <div class="home-actions">
+          <a class="btn btn-primary" href="actividad-4.html">Ver Actividad 4</a>
+          <a class="btn btn-outline-dark" href="actividad-5.html">Ver Actividad 5</a>
+        </div>
+        <div class="home-share"><span class="code">Acceso directo</span><a href="actividad-5.html#encuesta">Abrir la encuesta para compartirla ↗</a></div>
+      </div>
+      <div class="home-signal" aria-label="Ruta de las actividades">
+        <div class="signal-top"><span class="signal-dot"></span><span>Ruta del proyecto</span></div>
+        <div class="signal-track"><span></span></div>
+        <div class="signal-step"><strong>04</strong><div><b>Belbin</b><small>Marco y juego</small></div></div>
+        <div class="signal-step"><strong>05</strong><div><b>Evidencia</b><small>Encuesta y análisis</small></div></div>
+        <div class="signal-foot"><span>2 actividades</span><span>1 pregunta guía</span></div>
+      </div>
     </section>
 
-    <section class="section" aria-labelledby="actividades-title">
-      <div class="section-head">
-        <div><div class="code">Contenido</div><h2 id="actividades-title">Elige una actividad</h2></div>
-        <p>Cada actividad tiene su propia página para facilitar la lectura, la aplicación y la presentación.</p>
-      </div>
-      <div class="grid grid-2">
-        <a class="action-card" href="actividad-4.html">
-          <div><div class="eyebrow">Actividad 04</div><h3>Belbin: aprender los roles jugando</h3><p>Marco teórico breve, juego de situaciones y nueve roles de equipo.</p></div>
-          <span class="action-link">Abrir actividad 4 →</span>
-        </a>
-        <a class="action-card" href="actividad-5.html">
-          <div><div class="label">Actividad 05</div><h3>Complementariedad y eficacia</h3><p>Pregunta guía, encuesta Likert, entrevista y ruta de análisis.</p></div>
-          <span class="action-link">Abrir actividad 5 →</span>
-        </a>
-      </div>
+    <section class="home-grid" aria-label="Accesos a las actividades">
+      <a class="home-card home-card-teal" href="actividad-4.html">
+        <span class="home-card-code">ACTIVIDAD 04</span>
+        <div><h2>Roles que completan el trabajo</h2><p>Marco teórico breve y juego interactivo sobre el rol Finalizador.</p></div>
+        <span class="home-card-link">Entrar al juego <span>↗</span></span>
+      </a>
+      <a class="home-card home-card-gold" href="actividad-5.html">
+        <span class="home-card-code">ACTIVIDAD 05</span>
+        <div><h2>Complementariedad y eficacia</h2><p>Investigación aplicada con encuesta, entrevistas y análisis acumulado.</p></div>
+        <span class="home-card-link">Ver investigación <span>↗</span></span>
+      </a>
+    </section>
+
+    <section class="home-survey" aria-labelledby="home-survey-title">
+      <div><div class="code">Para el grupo</div><h2 id="home-survey-title">Encuesta lista para responder</h2><p>Comparte el enlace directo y las respuestas quedarán disponibles para el análisis.</p></div>
+      <a class="btn btn-primary" href="actividad-5.html#encuesta">Abrir formulario ↗</a>
     </section>
   </main>
 
-  <footer class="footer"><div class="wrap footer-inner"><span>Liderazgo y Dinamica de Grupos</span><span>2026</span></div></footer>
+  <footer class="footer"><div class="wrap footer-inner"><span>Trabajo grupal · Liderazgo y Dinámica de Grupo</span><span>2026</span></div></footer>
 </body>
 </html>
