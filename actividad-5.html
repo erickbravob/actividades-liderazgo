@@ -152,10 +152,19 @@
     }
     function level(value) { return value === null ? "sin datos" : value < 2.34 ? "bajo" : value < 3.67 ? "medio" : "alto"; }
     function relation(model) {
-      if (model.count === 0) return "Todavía no hay respuestas suficientes para generar un análisis.";
+      if (model.count === 0) return "No hay respuestas registradas para generar la lectura automática.";
       const base = `Con ${model.count} respuesta${model.count === 1 ? "" : "s"}, la complementariedad alcanza ${averageText(model.complementarity)} (${level(model.complementarity)}) y la eficacia percibida ${averageText(model.efficacy)} (${level(model.efficacy)}).`;
-      if (model.correlation !== null) return `${base} La relación lineal observada entre ambas dimensiones es ${model.correlation >= .3 ? "positiva" : model.correlation <= -.3 ? "negativa" : "débil o no concluyente"} (r = ${model.correlation}). Esta lectura es descriptiva y puede cambiar al aumentar la muestra.`;
-      if (model.complementarity !== null && model.efficacy !== null) return `${base} La diferencia entre ambos promedios es ${averageText(Math.abs(model.complementarity - model.efficacy))} puntos. Se requiere una muestra mayor para estimar una relación estadística.`;
+      if (model.correlation !== null) return `${base} La relación lineal observada entre ambas dimensiones es ${model.correlation >= .3 ? "positiva" : model.correlation <= -.3 ? "negativa" : "débil"} (r = ${model.correlation}). En las respuestas registradas, esta relación muestra cómo la percepción de los roles se vincula con la eficacia del equipo.`;
+      if (model.complementarity !== null && model.efficacy !== null) {
+        const difference = model.complementarity - model.efficacy;
+        const absoluteDifference = Math.abs(difference);
+        const interpretation = absoluteDifference < .2
+          ? "Ambos resultados son muy similares, lo que refleja coherencia entre la forma en que se complementan los roles y la eficacia percibida."
+          : difference > 0
+            ? "La complementariedad supera a la eficacia percibida; el equipo reconoce una buena distribución de aportes, aunque todavía debe convertirla en resultados más efectivos."
+            : "La eficacia percibida supera a la complementariedad; el equipo logra resultados, aunque puede fortalecer la claridad y el equilibrio de los roles.";
+        return `${base} La diferencia entre ambos promedios es ${averageText(absoluteDifference)} puntos. ${interpretation}`;
+      }
       return `${base} Faltan datos para comparar las dos dimensiones.`;
     }
     function paintAnalysis(payload) {
