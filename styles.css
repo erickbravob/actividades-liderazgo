@@ -232,3 +232,33 @@ details[open] summary::after { content: "−"; }
 @keyframes unlock-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 650px) { .escape-map, .escape-options { grid-template-columns: 1fr; } .escape-card { padding: 21px 17px 17px; } .escape-top { align-items: start; flex-direction: column; } }
 @media (prefers-reduced-motion: reduce) { .escape-station, .escape-option, .escape-result, .escape-meter span { transition: none; animation: none; } }
+
+.escape-world { position: relative; margin: 0 0 15px; overflow: hidden; border: 1px solid rgba(85,201,189,.3); border-radius: 18px 10px 18px 10px; }
+.world-sky { position: relative; min-height: 170px; overflow: hidden; background: linear-gradient(180deg, #0c1d35 0%, #173b5c 75%, #1c5a66 100%); }
+.world-glow { position: absolute; top: -85px; right: 12%; width: 180px; height: 180px; background: rgba(229,182,90,.12); border-radius: 50%; box-shadow: 0 0 70px rgba(85,201,189,.18); }
+.world-stars, .world-stars::before, .world-stars::after { position: absolute; width: 3px; height: 3px; background: #b9f1e6; border-radius: 50%; content: ""; box-shadow: 75px 22px #b9f1e6, 160px 49px #e5b65a, 246px 17px #b9f1e6, 337px 37px #b9f1e6, 468px 19px #e5b65a, 580px 51px #b9f1e6, 690px 25px #b9f1e6, 780px 42px #e5b65a; opacity: .65; }
+.world-stars { top: 22px; left: 32px; }
+.world-stars::before { top: 39px; left: 200px; transform: scale(.65); }
+.world-stars::after { top: 14px; left: 430px; transform: scale(.7); }
+.world-route { position: absolute; right: 9%; bottom: 50px; left: 9%; height: 2px; background: linear-gradient(90deg, var(--teal), var(--gold), var(--teal)); opacity: .55; }
+.world-route::after { position: absolute; top: -4px; right: 0; width: 10px; height: 10px; border: 2px solid var(--gold); border-radius: 50%; content: ""; }
+.world-doors { position: absolute; right: 7%; bottom: 51px; left: 7%; display: flex; justify-content: space-between; }
+.world-door { position: relative; display: grid; place-items: center; width: 55px; height: 83px; color: #9cb7c6; background: linear-gradient(90deg, #162c46, #244c68); border: 2px solid #467b8a; border-bottom: 0; border-radius: 9px 9px 0 0; box-shadow: inset 0 0 0 4px rgba(255,255,255,.04), 0 -10px 20px rgba(85,201,189,.08); transition: transform .4s ease, opacity .25s ease, filter .25s ease; }
+.world-door::after { position: absolute; right: 8px; bottom: 0; left: 8px; height: 5px; background: #0d2038; content: ""; }
+.world-door b { font: 800 .67rem "Cascadia Code", Consolas, monospace; }
+.world-door small { position: absolute; top: 33px; color: var(--gold); font-size: 1.35rem; font-weight: 900; }
+.door-light { position: absolute; top: -8px; width: 9px; height: 9px; background: #d97763; border-radius: 50%; box-shadow: 0 0 12px rgba(217,119,99,.75); }
+.world-door.active { filter: drop-shadow(0 0 9px rgba(229,182,90,.5)); }
+.world-door.active .door-light { background: var(--gold); box-shadow: 0 0 13px rgba(229,182,90,.9); }
+.world-door.open { color: var(--teal); background: #071425; opacity: .72; transform: translateY(-7px) scale(.94); }
+.world-door.open small { color: var(--teal); }
+.world-door.open .door-light { background: var(--teal); box-shadow: 0 0 14px rgba(85,201,189,.95); }
+.escape-player { --player-progress: 0; position: absolute; z-index: 3; bottom: 41px; left: calc(6% + (var(--player-progress) * 88%)); width: 47px; height: 59px; filter: drop-shadow(0 6px 5px rgba(0,0,0,.28)); transform: translateX(-50%); transition: left .55s cubic-bezier(.2,.8,.2,1); }
+.escape-player::after { position: absolute; content: ""; }
+.world-floor { position: absolute; right: 0; bottom: 0; left: 0; height: 51px; background: repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0 2px, transparent 2px 14px), #0d233b; border-top: 1px solid rgba(85,201,189,.34); }
+.world-status { position: absolute; right: 15px; bottom: 9px; left: 15px; z-index: 4; display: flex; justify-content: space-between; gap: 12px; color: #b8d1dc; font-size: .66rem; }
+.world-status strong { color: var(--gold); font: 800 .63rem "Cascadia Code", Consolas, monospace; letter-spacing: .08em; }
+.escape-station.cleared { border-color: rgba(85,201,189,.5); color: #ccebe4; opacity: .85; }
+.escape-station.cleared span { color: var(--navy); background: var(--teal); }
+@media (max-width: 650px) { .world-sky { min-height: 155px; } .world-door { width: 43px; height: 70px; } .escape-player { width: 40px; height: 51px; } .world-status { font-size: .58rem; } .world-status strong { font-size: .55rem; } }
+@media (prefers-reduced-motion: reduce) { .world-door, .escape-player { transition: none; } }
