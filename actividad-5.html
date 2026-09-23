@@ -8,10 +8,10 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="site-header">
+  <header class="site-header project-header">
     <a class="brand" href="index.html"><span class="brand-mark">LD</span><span>Liderazgo y dinámica de grupo</span></a>
     <nav class="site-nav" aria-label="Navegación principal">
-      <a href="index.html">Inicio</a><a href="actividad-4.html">Actividad 4</a><a href="actividad-6.html" target="_blank" rel="noopener">Actividad 6 ↗</a><a class="nav-survey" href="actividad-5.html#encuesta">Encuesta ↗</a>
+      <a href="index.html">Inicio</a><a href="actividad-4.html">Actividad 4</a><a href="actividad-5.html" aria-current="page">Actividad 5</a><a href="actividad-6.html">Actividad 6</a><a class="nav-survey" href="actividad-5.html#encuesta">Encuesta</a>
     </nav>
   </header>
 
@@ -32,6 +32,7 @@
         <div class="mini-bubble"><span class="bubble-index">03</span><strong>Análisis</strong><span>Promedios por roles, complementariedad y eficacia.</span></div>
       </div>
     </section>
+    <section class="bridge-strip" aria-label="Conexión entre actividades"><div><div class="code">Conexión metodológica</div><strong>La encuesta nace del marco de la Actividad 4</strong><p>Los nueve roles y el énfasis en complementariedad se convierten aquí en ítems Likert. Las respuestas alimentan los resultados y la discusión de la Actividad 6.</p></div><div class="bridge-links"><a href="actividad-4.html">Revisar marco y juego →</a><a href="actividad-6.html">Abrir informe IMRD →</a></div></section>
 
     <section class="section survey-launch" id="encuesta" aria-labelledby="survey-launch-title">
       <div class="launch-copy"><div class="code">Instrumento de recolección</div><h2 id="survey-launch-title">Encuesta Likert</h2><p>20 afirmaciones sobre roles de equipo, complementariedad y eficacia percibida. Las respuestas se almacenan en la hoja del proyecto.</p></div>
@@ -43,6 +44,11 @@
       <div class="analysis-actions"><button class="btn" id="show-analysis-main" type="button">Actualizar análisis</button><button class="btn" id="export-csv" type="button">Exportar CSV</button></div>
     </section>
     <div class="survey-summary visible" id="survey-summary" aria-live="polite"><div class="summary-title">Resumen de respuestas</div><div class="summary-grid"><div class="summary-metric"><strong id="saved-count">0</strong><span>respuestas guardadas</span></div><div class="summary-metric"><strong id="roles-average">—</strong><span>roles percibidos</span></div><div class="summary-metric"><strong id="complement-average">—</strong><span>complementariedad</span></div><div class="summary-metric"><strong id="efficacy-average">—</strong><span>eficacia percibida</span></div></div><div class="dynamic-analysis"><div><div class="summary-title">Lectura automática</div><p id="analysis-text">Cargando análisis de las respuestas…</p></div><div class="analysis-bars" id="analysis-bars" aria-label="Indicadores dinámicos"></div></div></div>
+
+    <section class="imrd-launch" aria-labelledby="imrd-launch-title">
+      <div><div class="code">Actividad 6 · Entregable IMRD</div><h2 id="imrd-launch-title">Análisis del estudio</h2><p>La encuesta y las entrevistas alimentan el informe IMRD: introducción, método, resultados, discusión y referencias.</p></div>
+      <a class="btn btn-primary" href="actividad-6.html">Abrir Actividad 6</a>
+    </section>
 
     <section class="section compact-sections">
       <details><summary>Entrevista semiestructurada a Ana y Aaron</summary><div class="details-body"><ol class="interview-list"><li>¿Qué conductas observas con mayor frecuencia cuando trabajan en equipo?</li><li>¿Quién propone ideas, organiza tareas y revisa los detalles?</li><li>¿En qué medida las fortalezas se complementan? Da un ejemplo.</li><li>¿Qué ocurre cuando varias personas quieren dirigir, revisar o proponer?</li><li>¿Qué rol debería reforzarse para mejorar la eficacia?</li><li>¿Qué recomendación darías a partir de Belbin?</li></ol><p><strong>Registro:</strong> Entrevistada/o: ____________ Fecha: __________</p></div></details>
@@ -104,12 +110,15 @@
     document.getElementById("close-survey").addEventListener("click", closeSurvey);
     dialog.addEventListener("click", event => { if (event.target === dialog) closeSurvey(); });
     if (window.location.hash === "#encuesta") openSurvey();
+    const codeInput = document.getElementById("respondent-code");
     function updateSurvey() {
       const answered = statements.filter((_, i) => form.querySelector(`input[name="item-${i + 1}"]:checked`)).length;
-      submit.disabled = answered !== statements.length;
-      status.textContent = answered === statements.length ? "Lista para guardar." : `Faltan ${statements.length - answered} respuestas.`;
+      const hasCode = codeInput.value.trim().length > 0;
+      submit.disabled = answered !== statements.length || !hasCode;
+      status.textContent = !hasCode ? "Escribe el código del participante." : answered === statements.length ? "Lista para guardar." : `Faltan ${statements.length - answered} respuestas.`;
     }
     form.addEventListener("change", updateSurvey);
+    codeInput.addEventListener("input", updateSurvey);
     function readResponses() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); } catch { return []; } }
     function finite(value) { const number = Number(value); return Number.isFinite(number) ? number : null; }
     function rowAnswers(row) {
@@ -198,9 +207,10 @@
     }
     form.addEventListener("submit", async event => {
       event.preventDefault();
+      const code = codeInput.value.trim();
+      if (!code) { codeInput.reportValidity(); status.textContent = "El código del participante es obligatorio."; return; }
       const answers = statements.map((_, index) => Number(form.querySelector(`input[name="item-${index + 1}"]:checked`).value));
       const responses = readResponses();
-      const code = document.getElementById("respondent-code").value.trim() || `R${String(responses.length + 1).padStart(2, "0")}`;
       responses.push({ code, answers, date: new Date().toISOString() });
       localStorage.setItem(STORAGE_KEY, JSON.stringify(responses));
       status.textContent = "Enviando respuesta a Google Sheets…";
@@ -208,7 +218,7 @@
       try {
         await fetch(REMOTE_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" }, body: new URLSearchParams({ data: JSON.stringify(payload) }) });
         status.textContent = "Respuesta guardada en la hoja del proyecto.";
-        form.reset(); updateSurvey();
+        form.reset(); codeInput.value = ""; updateSurvey();
         setTimeout(showAnalysis, 700);
       } catch { status.textContent = "No se pudo enviar. Conservamos un respaldo local."; }
     });
