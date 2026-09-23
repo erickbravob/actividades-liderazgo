@@ -11,7 +11,7 @@
   <header class="site-header">
     <a class="brand" href="index.html"><span class="brand-mark">LD</span><span>Liderazgo y dinámica de grupo</span></a>
     <nav class="site-nav" aria-label="Navegación principal">
-      <a href="index.html">Inicio</a><a href="actividad-4.html">Actividad 4</a><a class="nav-survey" href="actividad-5.html#encuesta">Encuesta ↗</a>
+      <a href="index.html">Inicio</a><a href="actividad-4.html">Actividad 4</a><a href="actividad-6.html" target="_blank" rel="noopener">Actividad 6 ↗</a><a class="nav-survey" href="actividad-5.html#encuesta">Encuesta ↗</a>
     </nav>
   </header>
 
@@ -55,7 +55,7 @@
   <dialog class="survey-dialog" id="survey-dialog" aria-labelledby="dialog-title">
     <div class="modal-shell">
       <div class="modal-head"><div><div class="code">Instrumento de recolección</div><h2 id="dialog-title">Encuesta sobre equipos</h2><p>Selecciona una respuesta por afirmación.</p></div><button class="modal-close" id="close-survey" type="button" aria-label="Cerrar encuesta">×</button></div>
-      <div class="survey-tools"><label for="respondent-code" class="label">Código opcional</label><input id="respondent-code" type="text" placeholder="Ej.: E01" maxlength="20"><span class="survey-status">Las respuestas se guardan en Google Sheets.</span></div>
+      <div class="survey-tools"><label for="respondent-code" class="label">Código del participante *</label><input id="respondent-code" form="survey-form" type="text" placeholder="Ej.: E01" maxlength="20" autocomplete="off" required aria-required="true"><span class="survey-status">Obligatorio para identificar la respuesta sin usar el nombre.</span></div>
       <form id="survey-form">
         <div class="survey-items" id="survey-items"></div>
         <div class="survey-actions"><button class="btn btn-primary" id="survey-submit" type="submit" disabled>Guardar respuesta</button><span class="survey-status" id="survey-status">Completa las 20 respuestas para guardar.</span></div>
