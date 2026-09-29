@@ -589,6 +589,50 @@ details[open] summary::after { content: "−"; }
 @media (max-width: 800px) { .final-masthead { grid-template-columns: 1fr; min-height: 0; padding-top: 43px; }.final-cover-mark { width: 190px; min-height: 190px; justify-self: end; }.final-cover-mark span { font-size: 10rem; }.final-section-heading, .final-two-col, .field-layout { grid-template-columns: 1fr; display: grid; gap: 18px; }.final-timeline { grid-template-columns: repeat(2,1fr); }.final-timeline > div:nth-child(2) { border-right: 0; }.final-timeline > div:nth-child(3), .final-timeline > div:nth-child(4) { border-top: 1px solid #cac4ba; }.role-matrix { grid-template-columns: repeat(2,1fr); }.transform-grid { grid-template-columns: repeat(2,1fr); }.team-grid { grid-template-columns: repeat(2,1fr); }.team-grid article:last-child { grid-column: span 2; }.recommendation-grid { grid-template-columns: repeat(2,1fr); } }
 @media (max-width: 520px) { .final-shell { width: min(100% - 24px, 1180px); }.final-masthead h1 { font-size: clamp(2.7rem, 15vw, 4.2rem); }.final-meta { display: grid; gap: 7px; }.final-toolbar { align-items: flex-start; flex-direction: column; }.final-contents { display: grid; grid-template-columns: repeat(2,1fr); }.final-contents a, .final-contents a + a { min-width: 0; padding: 7px 8px 7px 0; border-right: 0; }.final-contents a:nth-child(even) { padding-left: 8px; border-left: 1px solid #cac4ba; }.final-section { padding: 44px 0 28px; }.role-matrix, .transform-grid, .team-grid, .recommendation-grid, .evidence-grid { grid-template-columns: 1fr; }.team-grid article:last-child { grid-column: auto; }.role-tile { min-height: 0; }.editorial-insight, .lencioni-reading { grid-template-columns: 1fr; gap: 9px; }.dysfunction-pyramid { margin-top: 20px; }.pyramid-step, .step-trust, .step-conflict, .step-commitment, .step-accountability, .step-results { width: 100%; margin: 0; }.field-method { grid-template-columns: 1fr; gap: 3px; }.field-method span { margin-bottom: 8px; } }
 
+/* Marco editorial del visor: evita que las hojas queden pegadas a sus bordes. */
+.final-page .book-stage > .book-page {
+  box-sizing: border-box;
+  padding: clamp(42px, 5.2vw, 74px) clamp(38px, 6vw, 84px) clamp(58px, 6vw, 78px);
+}
+
+.final-page .book-stage > .book-page.book-page-cover {
+  padding-top: clamp(34px, 4vw, 56px);
+}
+
+.final-page .book-stage > .book-page.final-dark-section,
+.final-page .book-stage > .book-page.field-section,
+.final-page .book-stage > .book-page.final-recommendations {
+  padding-left: clamp(38px, 6vw, 84px);
+  padding-right: clamp(38px, 6vw, 84px);
+}
+
+.final-page .book-stage > .book-page > .final-section-label:first-child,
+.final-page .book-stage > .book-page > .final-kicker:first-child {
+  margin-top: 0;
+}
+
+@media (max-width: 800px) {
+  .final-page .book-stage > .book-page,
+  .final-page .book-stage > .book-page.final-dark-section,
+  .final-page .book-stage > .book-page.field-section,
+  .final-page .book-stage > .book-page.final-recommendations {
+    padding: 34px 30px 58px;
+  }
+}
+
+@media (max-width: 520px) {
+  .final-page .book-stage > .book-page,
+  .final-page .book-stage > .book-page.final-dark-section,
+  .final-page .book-stage > .book-page.field-section,
+  .final-page .book-stage > .book-page.final-recommendations {
+    padding: 28px 22px 48px;
+  }
+
+  .final-page .book-stage > .book-page.book-page-cover {
+    padding-top: 28px;
+  }
+}
+
 /* IMRD: análisis independiente del resumen estadístico. */
 .imrd-analysis {
   margin-top: 16px;

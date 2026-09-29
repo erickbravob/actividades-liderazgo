@@ -334,6 +334,7 @@
           const isActive = pageIndex === active;
           page.classList.toggle("is-active", isActive);
           page.setAttribute("aria-hidden", String(!isActive));
+          if (isActive) page.scrollTop = 0;
         });
         current.textContent = String(active + 1).padStart(2, "0");
         range.value = String(active);
