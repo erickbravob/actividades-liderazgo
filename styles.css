@@ -1402,6 +1402,102 @@ details[open] summary::after { content: "−"; }
   }
 }
 
+/* Ajuste editorial compacto: conserva el contenido y reduce los saltos innecesarios. */
+.final-page .book-stage {
+  min-height: min(72vh, 680px);
+  max-height: min(72vh, 680px);
+}
+.final-page .book-page {
+  padding: clamp(20px, 2.8vw, 36px) clamp(22px, 3.8vw, 52px) 30px;
+}
+.final-page .book-page .final-section-heading {
+  margin: 0 0 14px;
+}
+.final-page .book-page .final-section h2 {
+  max-width: 760px;
+  font-size: clamp(1.7rem, 3vw, 2.45rem);
+  line-height: 1.02;
+  letter-spacing: -.038em;
+}
+.final-page .book-page .final-masthead h1 {
+  max-width: 690px;
+  font-size: clamp(2.35rem, 4.8vw, 4.5rem);
+  line-height: .94;
+  letter-spacing: -.055em;
+}
+.final-page .book-page .final-deck {
+  margin-top: 14px;
+  max-width: 580px;
+  font-size: .86rem;
+  line-height: 1.38;
+}
+.final-page .book-page .final-meta { margin-top: 16px; }
+.final-page .book-page .final-two-col {
+  gap: 24px;
+  margin: 12px 0 22px;
+}
+.final-page .book-page .final-two-col p {
+  margin-bottom: 8px;
+  font-size: .78rem;
+  line-height: 1.38;
+}
+.final-page .book-page .final-question { padding: 16px; }
+.final-page .book-page .final-question p {
+  margin: 8px 0 16px;
+  font-size: 1.15rem;
+  line-height: 1.16;
+}
+.final-page .book-page .article-copy {
+  gap: 0 20px;
+  margin: 10px 0 16px;
+  padding: 7px 0 2px;
+}
+.final-page .book-page .article-copy p {
+  padding: 7px 0 8px 13px;
+  font-size: .69rem;
+  line-height: 1.42;
+}
+.final-page .book-page .article-copy p::before { top: 12px; width: 5px; height: 5px; }
+.final-page .book-page .final-photo-feature img { max-height: 220px; }
+.final-page .book-page .final-timeline > div { min-height: 106px; padding-top: 10px; padding-bottom: 10px; }
+.final-page .book-page .final-timeline strong { margin: 8px 0 4px; font-size: 1.1rem; }
+.final-page .book-page .final-timeline p { font-size: .66rem; line-height: 1.35; }
+.final-page .book-page .role-tile { min-height: 132px; padding: 12px 13px; }
+.final-page .book-page .role-tile h3 { margin: 16px 0 5px; font-size: 1.05rem; }
+.final-page .book-page .role-tile p { min-height: 42px; font-size: .68rem; line-height: 1.35; }
+.final-page .book-page .role-tile small { margin-top: 8px; font-size: .55rem; }
+.final-page .book-page .dysfunction-pyramid { margin: 14px 0; }
+.final-page .book-page .pyramid-step { min-height: 40px; padding: 7px 12px; }
+.final-page .book-page .pyramid-step small { font-size: .62rem; line-height: 1.25; }
+.final-page .book-page .dysfunction-member-grid { gap: 7px; margin: 14px 0; }
+.final-page .book-page .dysfunction-member-grid article { padding: 10px 9px 11px; }
+.final-page .book-page .dysfunction-member-grid span { margin-bottom: 6px; font-size: .5rem; }
+.final-page .book-page .dysfunction-member-grid h3 { margin: 0 0 6px; font-size: .83rem; line-height: 1.12; }
+.final-page .book-page .dysfunction-member-grid p { font-size: .6rem; line-height: 1.33; }
+.final-page .book-page .lencioni-context { margin: 12px 0 8px; padding: 8px 11px; font-size: .66rem; line-height: 1.35; }
+.final-page .book-page .lencioni-reading { padding: 10px 0; }
+.final-page .book-page .lencioni-reading p { font-size: .68rem; line-height: 1.4; }
+.final-page .book-page .lencioni-reading p:not(:first-of-type) { grid-column: 2; }
+
+@media (max-width: 800px) {
+  .final-page .book-stage { min-height: 68vh; max-height: 68vh; }
+  .final-page .book-page { padding: 24px 24px 28px; }
+  .final-page .book-page .final-masthead h1 { font-size: clamp(2.15rem, 7.8vw, 3.6rem); }
+  .final-page .book-page .article-copy p { font-size: .7rem; }
+}
+
+@media (max-width: 520px) {
+  .final-page .book-stage { min-height: 64vh; max-height: 64vh; }
+  .final-page .book-page { padding: 22px 18px 24px; }
+  .final-page .book-page .final-section h2 { font-size: clamp(1.55rem, 8vw, 2.1rem); }
+  .final-page .book-page .final-masthead h1 { font-size: clamp(2rem, 11vw, 3.1rem); }
+  .final-page .book-page .article-copy { grid-template-columns: 1fr 1fr; gap: 0 12px; }
+  .final-page .book-page .article-copy p { font-size: .64rem; line-height: 1.34; }
+  .final-page .book-page .final-timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .final-page .book-page .dysfunction-member-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .final-page .book-page .lencioni-reading p:not(:first-of-type) { grid-column: 1; }
+}
+
 /* Logotipos oficiales proporcionados para la portada. */
 .final-page .book-stage > .book-page .final-cover-mark {
   grid-template-columns: 66px minmax(0, 1fr);
