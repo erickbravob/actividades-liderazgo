@@ -1255,6 +1255,122 @@ details[open] summary::after { content: "−"; }
   hyphens: auto;
 }
 
+/* Lectura de revista: cinco párrafos breves por sección, en columnas editoriales. */
+.final-page .article-copy {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 28px;
+  margin: 18px 0 26px;
+  padding: 16px 0 4px;
+  border-top: 1px solid #cac4ba;
+  border-bottom: 1px solid #cac4ba;
+}
+
+.final-page .article-copy p {
+  position: relative;
+  margin: 0;
+  padding: 11px 0 12px 17px;
+  color: #4d4a50;
+  font-size: .78rem;
+  line-height: 1.58;
+}
+
+.final-page .article-copy p::before {
+  position: absolute;
+  top: 16px;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  content: "";
+  background: var(--final-red);
+  border-radius: 50%;
+}
+
+.final-page .article-copy-dark {
+  border-color: #46464b;
+}
+
+.final-page .article-copy-dark p {
+  color: #e5e1e3;
+}
+
+.final-page .article-copy-dark p::before {
+  background: var(--final-red-soft);
+}
+
+.dysfunction-member-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 9px;
+  margin: 22px 0 20px;
+}
+
+.lencioni-context {
+  margin: 20px 0 12px;
+  padding: 11px 14px;
+  color: #d7d2d5;
+  border-left: 3px solid var(--final-gold);
+  background: rgba(255,255,255,.04);
+  font-size: .76rem;
+  line-height: 1.55;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.dysfunction-member-grid article {
+  min-width: 0;
+  padding: 14px 13px 15px;
+  background: #1f2024;
+  border: 1px solid #404146;
+  border-top: 3px solid var(--final-red-soft);
+}
+
+.dysfunction-member-grid article:nth-child(1),
+.dysfunction-member-grid article:nth-child(4) {
+  border-top-color: var(--final-teal);
+}
+
+.dysfunction-member-grid article:nth-child(3),
+.dysfunction-member-grid article:nth-child(5) {
+  border-top-color: var(--final-gold);
+}
+
+.dysfunction-member-grid span {
+  display: block;
+  margin-bottom: 9px;
+  color: #f2c7c9;
+  font: 800 .57rem/1.25 "Cascadia Code", Consolas, monospace;
+  letter-spacing: .06em;
+}
+
+.dysfunction-member-grid article:nth-child(1) span,
+.dysfunction-member-grid article:nth-child(4) span { color: #8de0d7; }
+.dysfunction-member-grid article:nth-child(3) span,
+.dysfunction-member-grid article:nth-child(5) span { color: #f5d88e; }
+
+.dysfunction-member-grid h3 {
+  margin: 0 0 8px;
+  color: #fff;
+  font: 700 .86rem/1.1 Arial, sans-serif;
+}
+
+.dysfunction-member-grid p {
+  margin: 0;
+  color: #c7c3c5;
+  font-size: .68rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 900px) {
+  .dysfunction-member-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 650px) {
+  .final-page .article-copy { grid-template-columns: 1fr; gap: 0; }
+  .final-page .article-copy p { font-size: .82rem; }
+  .dysfunction-member-grid { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 800px) {
   .final-page .book-stage > .book-page.book-page-cover {
     grid-template-columns: 1fr;
