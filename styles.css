@@ -629,6 +629,268 @@ details[open] summary::after { content: "−"; }
   }
 }
 
+/* Gráficos verificables del caso Netflix. */
+.final-data-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, .72fr);
+  gap: 28px;
+  align-items: end;
+  margin: 34px 0 16px;
+  padding-top: 20px;
+  border-top: 1px solid #cac4ba;
+}
+.final-data-heading h3 {
+  max-width: 620px;
+  margin: 7px 0 0;
+  color: var(--final-black);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
+  font-weight: 500;
+  line-height: 1.05;
+}
+.final-data-heading > p {
+  margin: 0;
+  color: #67636a;
+  font-size: .78rem;
+  line-height: 1.5;
+}
+.final-chart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.final-chart-card {
+  min-width: 0;
+  margin: 0;
+  padding: 18px;
+  background: #fbfaf6;
+  border: 1px solid #d3cdc3;
+  border-top: 3px solid var(--final-red);
+}
+.final-chart-card figcaption {
+  min-height: 78px;
+}
+.chart-index {
+  color: var(--final-red);
+  font: 800 .62rem "Cascadia Code", Consolas, monospace;
+  letter-spacing: .08em;
+}
+.final-chart-card h3 {
+  margin: 8px 0 1px;
+  color: var(--final-black);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.38rem;
+  font-weight: 500;
+  line-height: 1.05;
+}
+.final-chart-card figcaption p {
+  margin: 0;
+  color: #77747a;
+  font-size: .7rem;
+}
+.bar-chart {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: end;
+  gap: 16px;
+  height: 180px;
+  margin: 17px 0 14px;
+  padding: 0 10px 8px;
+  border-bottom: 1px solid #bdb6ad;
+  background: repeating-linear-gradient(to top, transparent 0, transparent 44px, rgba(35,33,36,.08) 45px);
+}
+.bar-column {
+  display: grid;
+  grid-template-rows: 18px 1fr 18px;
+  align-items: end;
+  justify-items: center;
+  height: 100%;
+}
+.bar-column span {
+  color: #77747a;
+  font: 800 .66rem "Cascadia Code", Consolas, monospace;
+}
+.bar-column i {
+  display: block;
+  align-self: end;
+  width: min(62px, 72%);
+  height: var(--bar-height);
+  background: #b5aaa0;
+  border-radius: 2px 2px 0 0;
+}
+.bar-column.bar-highlight i { background: var(--final-red); }
+.bar-column b {
+  color: #5f5b61;
+  font: 800 .64rem "Cascadia Code", Consolas, monospace;
+}
+.chart-reading {
+  min-height: 58px;
+  margin: 0;
+  color: #555159;
+  font-size: .76rem;
+  line-height: 1.48;
+}
+.chart-source {
+  display: block;
+  margin-top: 13px;
+  padding-top: 10px;
+  color: #77747a;
+  border-top: 1px solid #e0dbd3;
+  font-size: .63rem;
+  line-height: 1.4;
+}
+.final-metric-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+.final-metric-row article {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 11px;
+  align-items: center;
+  padding: 13px 14px;
+  background: var(--final-black);
+  color: #fff;
+}
+.final-metric-row strong {
+  grid-row: span 2;
+  color: var(--final-red-soft);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.65rem;
+  font-weight: 500;
+  line-height: 1;
+}
+.final-metric-row span {
+  color: #e7e3e4;
+  font-size: .72rem;
+  line-height: 1.35;
+}
+.final-metric-row small {
+  margin-top: 3px;
+  color: #a8a3a6;
+  font: 700 .58rem "Cascadia Code", Consolas, monospace;
+  text-transform: uppercase;
+}
+.final-data-note {
+  margin: 13px 0 0;
+  color: #77747a;
+  font-size: .68rem;
+  font-style: italic;
+  line-height: 1.45;
+}
+.chart-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 14px 0 8px;
+  overflow: visible;
+}
+.chart-grid-lines line {
+  stroke: #ddd7cf;
+  stroke-width: 1;
+}
+.chart-axis {
+  stroke: #77747a;
+  stroke-width: 1.4;
+}
+.chart-axis-labels text,
+.chart-year-labels text,
+.chart-values text {
+  fill: #77747a;
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: 13px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+.chart-axis-labels text { text-anchor: end; }
+.chart-bars rect { fill: #b5aaa0; }
+.chart-bars .chart-bar-accent { fill: var(--final-red); }
+.chart-values text { fill: var(--final-black); }
+.chart-year-labels text { fill: #5f5b61; }
+@media (max-width: 800px) {
+  .final-data-heading { grid-template-columns: 1fr; gap: 10px; }
+  .final-metric-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .final-chart-grid { grid-template-columns: 1fr; }
+  .final-chart-card { padding: 15px; }
+  .final-chart-card figcaption { min-height: 0; }
+  .bar-chart { height: 155px; gap: 10px; }
+  .chart-reading { min-height: 0; }
+}
+
+/* Ilustraciones vectoriales editoriales: no dependen de imágenes externas. */
+.final-illustration-band,
+.role-constellation,
+.change-path {
+  display: grid;
+  align-items: center;
+  gap: 28px;
+  margin: 26px 0 0;
+  padding: 22px;
+  background: #e9e3da;
+  border: 1px solid #d2c9be;
+}
+.final-illustration-band { grid-template-columns: minmax(0, .82fr) minmax(320px, 1.18fr); }
+.illustration-copy h3,
+.role-constellation h3,
+.change-path h3 {
+  margin: 8px 0 8px;
+  color: var(--final-black);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.35rem, 2.5vw, 2.05rem);
+  font-weight: 500;
+  line-height: 1.03;
+}
+.illustration-copy p,
+.role-constellation-copy p {
+  margin: 0;
+  color: #5f5b61;
+  font-size: .78rem;
+  line-height: 1.5;
+}
+.editorial-drawing,
+.roles-svg,
+.change-svg { display: block; width: 100%; height: auto; }
+.drawing-frame { fill: #151517; stroke: #e50914; stroke-width: 2; }
+.drawing-screen { fill: #25262a; stroke: #77747a; stroke-width: 2; }
+.drawing-screen-line { fill: none; stroke: #e50914; stroke-width: 4; stroke-linecap: round; }
+.drawing-red-node { fill: #e50914; }
+.drawing-connection { fill: none; stroke: #55c9bd; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.drawing-teal-node { fill: #55c9bd; }
+.drawing-base { fill: none; stroke: #77747a; stroke-width: 3; stroke-linecap: round; }
+.drawing-label { fill: #55c9bd; font: 700 10px "Cascadia Code", Consolas, monospace; letter-spacing: .12em; text-anchor: middle; }
+.drawing-label-main { fill: #fff; }
+.role-constellation { grid-template-columns: minmax(210px, .62fr) minmax(350px, 1.38fr); background: #151517; border-color: #343438; }
+.role-constellation h3 { color: #fff; }
+.role-constellation-copy p { color: #bcb8bb; }
+.role-constellation .final-mini-label { color: var(--final-red-soft); }
+.roles-links line { stroke: #4a484d; stroke-width: 1.2; stroke-dasharray: 4 5; }
+.roles-core { fill: #e50914; stroke: #ff4d5a; stroke-width: 3; }
+.roles-core-text,
+.roles-core-sub { fill: #fff; font: 800 12px "Cascadia Code", Consolas, monospace; text-anchor: middle; letter-spacing: .1em; }
+.roles-core-sub { fill: #f2c7c9; font-size: 8px; letter-spacing: .02em; }
+.role-node circle { stroke-width: 2; }
+.role-node text { fill: #151517; font: 800 7px "Cascadia Code", Consolas, monospace; text-anchor: middle; }
+.role-node-red circle { fill: #ffb8bd; stroke: #e50914; }
+.role-node-gold circle { fill: #f5e5c2; stroke: #c9943e; }
+.role-node-teal circle { fill: #c9ebe5; stroke: #159e91; }
+.change-path { grid-template-columns: minmax(180px, .55fr) minmax(350px, 1.45fr); background: #fbfaf6; }
+.change-line { fill: none; stroke: var(--final-red); stroke-width: 4; stroke-linecap: round; }
+.change-dot { fill: #fff; stroke: var(--final-red); stroke-width: 4; }
+.change-dot-final { fill: var(--final-red); }
+.change-svg text { fill: #5f5b61; font: 800 10px "Cascadia Code", Consolas, monospace; text-anchor: middle; letter-spacing: .08em; }
+@media (max-width: 760px) {
+  .final-illustration-band,
+  .role-constellation,
+  .change-path { grid-template-columns: 1fr; gap: 18px; }
+  .editorial-drawing { max-width: 520px; justify-self: center; }
+  .roles-svg { max-width: 620px; justify-self: center; }
+  .change-svg { max-width: 720px; justify-self: center; }
+}
+
 @media (max-width: 650px) {
   .platform-shell {
     gap: 10px;
