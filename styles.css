@@ -503,6 +503,55 @@ details[open] summary::after { content: "−"; }
   .book-map { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding: 2px 2px 7px; }
   .book-map button { flex: 0 0 auto; }
 }
+
+/* Exportación para Canva/PDF: conserva cada hoja como una página independiente. */
+@media print {
+  @page { size: landscape; margin: 0; }
+  html, body { background: #eee8df !important; }
+  .final-page.print-export .book-stage,
+  .final-page.print-export .book-page {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  .final-page.print-export .book-page[aria-hidden="true"] {
+    visibility: visible !important;
+  }
+  .final-page .site-header,
+  .final-page .book-utility,
+  .final-page .book-controls,
+  .final-page .book-map,
+  .final-page .final-footer,
+  .final-page .footer { display: none !important; }
+  .final-page .final-shell,
+  .final-page .book-reader,
+  .final-page .book-stage {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+  .final-page .book-page,
+  .final-page .book-page.is-active {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    height: 7.5in !important;
+    min-height: 7.5in !important;
+    max-height: 7.5in !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    break-after: page;
+    page-break-after: always;
+  }
+  .final-page .book-page-content {
+    transform-origin: top left !important;
+  }
+  .final-page .book-page:last-child { break-after: auto; page-break-after: auto; }
+}
 @media (prefers-reduced-motion: reduce) {
   .book-page.is-active, .book-control, .book-map button { animation: none; transition: none; }
 }

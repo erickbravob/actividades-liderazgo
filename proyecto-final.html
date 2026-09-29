@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Revista digital del proyecto final de Liderazgo y Dinámica de Grupo: Netflix, Belbin, Lencioni y liderazgo transformacional.">
   <title>Proyecto final | Equipos que transforman</title>
-  <link rel="stylesheet" href="styles.css?v=20260929-fit-pages-v9">
+  <link rel="stylesheet" href="styles.css?v=20260929-fit-pages-v13">
 </head>
 <body class="final-page">
   <header class="site-header project-header final-header">
@@ -386,6 +386,7 @@
     function buildBookReader() {
       const shell = document.querySelector(".final-shell");
       if (!shell || shell.dataset.bookReady === "true") return null;
+      const printMode = new URLSearchParams(window.location.search).has("print");
 
       const masthead = shell.querySelector(".final-masthead");
       const toolbar = shell.querySelector(".final-toolbar");
@@ -537,7 +538,13 @@
         if (event.key === "ArrowRight") step(1);
         if (event.key === "ArrowLeft") step(-1);
       });
+      if (printMode) {
+        document.body.classList.add("print-export");
+      }
       updatePage(0);
+      if (printMode) {
+        setTimeout(() => pages.forEach(page => fitPage(page)), 500);
+      }
       return book;
     }
 
