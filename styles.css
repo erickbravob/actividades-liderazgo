@@ -629,6 +629,87 @@ details[open] summary::after { content: "−"; }
   }
 }
 
+/* Escenas humanas para conectar la investigación con la experiencia real de uso. */
+.final-photo-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1.42fr) minmax(235px, .58fr);
+  align-items: stretch;
+  margin: 28px 0 34px;
+  background: var(--final-black);
+  overflow: hidden;
+}
+
+.final-photo-feature img {
+  display: block;
+  width: 100%;
+  height: 284px;
+  object-fit: cover;
+}
+
+.final-photo-feature figcaption {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 11px;
+  padding: 22px;
+  color: #fff;
+}
+
+.final-photo-feature figcaption span {
+  color: var(--final-red-soft);
+  font: 800 .62rem "Cascadia Code", Consolas, monospace;
+  letter-spacing: .08em;
+}
+
+.final-photo-feature figcaption strong {
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.38rem;
+  font-weight: 500;
+  line-height: 1.08;
+}
+
+.final-photo-feature figcaption small {
+  color: #bcb8bb;
+  font-size: .66rem;
+  line-height: 1.45;
+}
+
+.final-photo-team {
+  margin: 4px 0 28px;
+  background: #e9e3da;
+}
+
+.final-photo-team figcaption {
+  color: var(--final-black);
+}
+
+.final-photo-team figcaption span {
+  color: var(--final-red);
+}
+
+.final-photo-team figcaption strong {
+  color: var(--final-black);
+}
+
+.final-photo-team figcaption small {
+  color: #67636a;
+}
+
+@media (max-width: 760px) {
+  .final-photo-feature {
+    grid-template-columns: 1fr;
+  }
+
+  .final-photo-feature img {
+    height: 220px;
+  }
+
+  .final-photo-feature figcaption {
+    padding: 18px;
+  }
+}
+
 /* Gráficos verificables del caso Netflix. */
 .final-data-heading {
   display: grid;
