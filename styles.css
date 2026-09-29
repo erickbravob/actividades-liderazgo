@@ -375,6 +375,138 @@ details[open] summary::after { content: "−"; }
   .analysis-bar > div span { overflow-wrap: anywhere; }
 }
 
+/* Visor editorial tipo libro para el proyecto final. La lectura avanza hoja a hoja. */
+.book-utility { position: relative; z-index: 3; }
+.book-reader { position: relative; margin: 20px 0 48px; }
+.book-stage {
+  position: relative;
+  min-height: min(64vh, 720px);
+  max-height: min(64vh, 720px);
+  overflow: hidden;
+  padding: 0;
+  background: #d9d0c5;
+  border: 1px solid #b8aea3;
+  border-radius: 4px 12px 12px 4px;
+  box-shadow: 18px 18px 0 rgba(21,21,23,.08), 0 20px 60px rgba(21,21,23,.12);
+  perspective: 1500px;
+}
+.book-stage::before,
+.book-stage::after {
+  position: absolute;
+  z-index: 0;
+  top: 10px;
+  right: 10px;
+  bottom: 10px;
+  width: 13px;
+  content: "";
+  background: repeating-linear-gradient(to bottom, #e8e0d5 0 2px, #c8bdb1 2px 3px, #f2ece3 3px 6px);
+  border-radius: 0 9px 9px 0;
+  opacity: .78;
+}
+.book-stage::after { right: 5px; opacity: .4; }
+.book-page {
+  position: absolute;
+  z-index: 1;
+  inset: 0 22px 0 0;
+  display: none;
+  height: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: clamp(28px, 4vw, 54px) clamp(22px, 5vw, 72px) 56px;
+  background: var(--final-cream);
+  box-shadow: 9px 0 0 #efe8dd, 14px 0 0 #d2c7ba;
+  scrollbar-color: var(--final-red) #e8dfd4;
+  scrollbar-width: thin;
+  transform-origin: left center;
+  backface-visibility: hidden;
+}
+.book-page.is-active { display: block; }
+.book-page-cover { padding-top: 0; }
+.book-page > .final-section-label:first-child { margin-top: 0; }
+.book-page.final-dark-section { margin: 0; padding-left: clamp(22px, 5vw, 72px); padding-right: clamp(22px, 5vw, 72px); background: var(--final-black); }
+.book-page.field-section, .book-page.final-recommendations { margin: 0; padding-left: clamp(22px, 5vw, 72px); padding-right: clamp(22px, 5vw, 72px); }
+.book-page.sources-section { border-bottom: 0; }
+.book-turn-next .book-page.is-active { animation: book-turn-next .52s cubic-bezier(.22,.75,.25,1) both; }
+.book-turn-prev .book-page.is-active { animation: book-turn-prev .52s cubic-bezier(.22,.75,.25,1) both; }
+@keyframes book-turn-next {
+  0% { opacity: .35; transform: rotateY(-10deg) translateX(26px); box-shadow: -18px 0 30px rgba(21,21,23,.12), 9px 0 0 #efe8dd, 14px 0 0 #d2c7ba; }
+  100% { opacity: 1; transform: rotateY(0) translateX(0); box-shadow: 9px 0 0 #efe8dd, 14px 0 0 #d2c7ba; }
+}
+@keyframes book-turn-prev {
+  0% { opacity: .35; transform: rotateY(10deg) translateX(-26px); box-shadow: 18px 0 30px rgba(21,21,23,.12), 9px 0 0 #efe8dd, 14px 0 0 #d2c7ba; }
+  100% { opacity: 1; transform: rotateY(0) translateX(0); box-shadow: 9px 0 0 #efe8dd, 14px 0 0 #d2c7ba; }
+}
+.book-controls {
+  display: grid;
+  grid-template-columns: 150px minmax(180px, 1fr) 150px;
+  align-items: center;
+  gap: 16px;
+  margin: 20px auto 0;
+  max-width: 760px;
+}
+.book-control {
+  cursor: pointer;
+  min-height: 38px;
+  padding: 8px 14px;
+  color: #fff;
+  background: var(--final-black);
+  border: 1px solid var(--final-black);
+  border-radius: 999px;
+  font: 700 .72rem "Cascadia Code", Consolas, monospace;
+  transition: transform .2s ease, background .2s ease, opacity .2s ease;
+}
+.book-control-next { background: var(--final-red); border-color: var(--final-red); }
+.book-control:hover:not(:disabled), .book-control:focus-visible { transform: translateY(-2px); outline: 3px solid rgba(229,9,20,.18); outline-offset: 2px; }
+.book-control:disabled { cursor: not-allowed; opacity: .34; }
+.book-progress { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 9px 14px; }
+.book-progress-label { grid-column: 1 / -1; color: #77747a; font: 800 .62rem "Cascadia Code", Consolas, monospace; letter-spacing: .12em; }
+.book-progress strong { color: var(--final-black); font: 800 1rem "Cascadia Code", Consolas, monospace; }
+.book-progress strong i { padding: 0 4px; color: var(--final-red); font-style: normal; }
+.book-progress input { width: 100%; accent-color: var(--final-red); }
+.book-map { display: flex; flex-wrap: wrap; justify-content: center; gap: 7px; margin: 18px auto 0; max-width: 940px; }
+.book-map button { cursor: pointer; padding: 7px 10px; color: #77747a; background: transparent; border: 1px solid #c8beb1; border-radius: 999px; font: 700 .62rem "Cascadia Code", Consolas, monospace; transition: color .2s ease, background .2s ease, border-color .2s ease; }
+.book-map button span { margin-right: 5px; color: var(--final-red); }
+.book-map button:hover, .book-map button:focus-visible, .book-map button.is-active { color: #fff; background: var(--final-black); border-color: var(--final-black); outline: none; }
+.book-map button.is-active span { color: var(--final-red-soft); }
+.book-utility .final-contents { position: sticky; top: 0; z-index: 5; background: var(--final-cream); }
+.book-page .final-masthead { min-height: 0; padding: 22px 0 30px; border-bottom: 0; }
+.book-page .final-mast-copy { max-width: 780px; }
+.book-page .final-masthead h1 { max-width: 720px; font-size: clamp(2.5rem, 4vw, 3.7rem); line-height: .97; }
+.book-page .final-deck { max-width: 600px; font-size: .92rem; }
+.book-page .final-cover-mark { margin-right: 18px; }
+.book-page .final-toolbar { background: var(--final-cream); }
+.book-page .final-section { padding-top: 0; }
+.book-page .final-section:first-child { padding-top: 0; }
+.book-page .final-photo-feature img { max-height: 330px; object-fit: cover; }
+.book-page .final-illustration-band, .book-page .role-constellation, .book-page .change-path { margin-bottom: 0; }
+.book-page[aria-hidden="true"] { visibility: hidden; }
+@media (max-width: 800px) {
+  .book-stage { min-height: 62vh; max-height: 62vh; }
+  .book-page { padding: 30px 28px 48px; }
+  .book-page.final-dark-section, .book-page.field-section, .book-page.final-recommendations { padding-left: 28px; padding-right: 28px; }
+  .book-controls { grid-template-columns: 1fr 1.3fr 1fr; gap: 8px; }
+  .book-control { padding-left: 8px; padding-right: 8px; }
+}
+@media (max-width: 520px) {
+  .book-reader { margin-top: 12px; }
+  .book-stage { min-height: 60vh; max-height: 60vh; border-radius: 3px 9px 9px 3px; }
+  .book-page { right: 15px; padding: 26px 18px 42px; }
+  .book-page.final-dark-section, .book-page.field-section, .book-page.final-recommendations { padding-left: 18px; padding-right: 18px; }
+  .book-page .final-masthead { display: block; padding-top: 0; }
+  .book-page .final-cover-mark { width: 145px; min-height: 145px; margin: 26px 0 0 auto; }
+  .book-page .final-cover-mark span { font-size: 7.5rem; }
+  .book-controls { grid-template-columns: 1fr 1fr; margin-top: 15px; }
+  .book-progress { grid-column: 1 / -1; grid-row: 1; }
+  .book-control { grid-row: 2; }
+  .book-control-next { justify-self: end; }
+  .book-map { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding: 2px 2px 7px; }
+  .book-map button { flex: 0 0 auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .book-page.is-active, .book-control, .book-map button { animation: none; transition: none; }
+}
+
 /* Proyecto final: revista editorial Netflix / roles / relaciones */
 .home-card-final { color: #fff; background: #1b1b1d; border-color: #3c3c40; }
 .home-card-final h2, .home-card-final p { color: #fff; }

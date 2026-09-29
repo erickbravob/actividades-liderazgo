@@ -258,6 +258,121 @@
 
   <script>
     const EDIT_KEY = "proyecto_final_revista_edicion";
+
+    function buildBookReader() {
+      const shell = document.querySelector(".final-shell");
+      if (!shell || shell.dataset.bookReady === "true") return null;
+
+      const masthead = shell.querySelector(".final-masthead");
+      const toolbar = shell.querySelector(".final-toolbar");
+      const contents = shell.querySelector(".final-contents");
+      const sections = [...shell.querySelectorAll(":scope > .final-section")];
+      if (!masthead || !toolbar || !contents || !sections.length) return null;
+
+      shell.dataset.bookReady = "true";
+      const pages = [masthead, ...sections];
+      const book = document.createElement("section");
+      book.className = "book-reader";
+      book.setAttribute("aria-label", "Revista digital interactiva");
+
+      const utility = document.createElement("div");
+      utility.className = "book-utility";
+      utility.append(toolbar, contents);
+
+      const stage = document.createElement("div");
+      stage.className = "book-stage";
+      stage.setAttribute("aria-live", "polite");
+
+      pages.forEach((page, index) => {
+        page.classList.add("book-page");
+        page.dataset.bookIndex = String(index);
+        page.setAttribute("aria-label", `Hoja ${index + 1} de ${pages.length}`);
+        if (index === 0) page.classList.add("book-page-cover");
+        stage.append(page);
+      });
+
+      const controls = document.createElement("div");
+      controls.className = "book-controls";
+      controls.innerHTML = `
+        <button class="book-control" type="button" data-book-prev aria-label="Ir a la hoja anterior">← Anterior</button>
+        <div class="book-progress">
+          <span class="book-progress-label">LECTURA EDITORIAL</span>
+          <strong><span data-book-current>01</span><i>/</i><span>${String(pages.length).padStart(2, "0")}</span></strong>
+          <input data-book-range type="range" min="0" max="${pages.length - 1}" value="0" aria-label="Elegir hoja de la revista">
+        </div>
+        <button class="book-control book-control-next" type="button" data-book-next aria-label="Ir a la hoja siguiente">Siguiente →</button>
+      `;
+
+      const map = document.createElement("div");
+      map.className = "book-map";
+      map.setAttribute("aria-label", "Hojas de la revista");
+      pages.forEach((page, index) => {
+        const label = page.querySelector(".final-section-label, .final-kicker")?.textContent?.replace(/^\d+\s*[·.]\s*/, "").trim() || (index === 0 ? "Portada" : `Hoja ${index + 1}`);
+        const button = document.createElement("button");
+        button.type = "button";
+        button.dataset.bookTarget = String(index);
+        button.innerHTML = `<span>${String(index + 1).padStart(2, "0")}</span>${label}`;
+        map.append(button);
+      });
+
+      book.append(stage, controls, map);
+      shell.replaceChildren(utility, book);
+
+      const current = controls.querySelector("[data-book-current]");
+      const range = controls.querySelector("[data-book-range]");
+      const prev = controls.querySelector("[data-book-prev]");
+      const next = controls.querySelector("[data-book-next]");
+      const mapButtons = [...map.querySelectorAll("[data-book-target]")];
+      let active = 0;
+
+      function updatePage(index, direction = "next") {
+        active = Math.max(0, Math.min(pages.length - 1, index));
+        stage.classList.remove("book-turn-next", "book-turn-prev");
+        void stage.offsetWidth;
+        stage.classList.add(direction === "prev" ? "book-turn-prev" : "book-turn-next");
+        pages.forEach((page, pageIndex) => {
+          const isActive = pageIndex === active;
+          page.classList.toggle("is-active", isActive);
+          page.setAttribute("aria-hidden", String(!isActive));
+        });
+        current.textContent = String(active + 1).padStart(2, "0");
+        range.value = String(active);
+        prev.disabled = active === 0;
+        next.disabled = active === pages.length - 1;
+        mapButtons.forEach((button, buttonIndex) => button.classList.toggle("is-active", buttonIndex === active));
+        stage.scrollTop = 0;
+      }
+
+      function step(delta) { updatePage(active + delta, delta < 0 ? "prev" : "next"); }
+      prev.addEventListener("click", () => step(-1));
+      next.addEventListener("click", () => step(1));
+      range.addEventListener("input", () => updatePage(Number(range.value), Number(range.value) < active ? "prev" : "next"));
+      mapButtons.forEach(button => button.addEventListener("click", () => updatePage(Number(button.dataset.bookTarget), Number(button.dataset.bookTarget) < active ? "prev" : "next")));
+      contents.querySelectorAll("a").forEach(link => {
+        const targetId = link.getAttribute("href")?.slice(1);
+        const targetPage = pages.findIndex(page => page.id === targetId);
+        if (targetPage >= 0) link.addEventListener("click", event => { event.preventDefault(); updatePage(targetPage, targetPage < active ? "prev" : "next"); });
+      });
+      const sourceLink = toolbar.querySelector("a[href='#fuentes']");
+      if (sourceLink) sourceLink.addEventListener("click", event => { event.preventDefault(); const targetPage = pages.findIndex(page => page.id === "fuentes"); if (targetPage >= 0) updatePage(targetPage, targetPage < active ? "prev" : "next"); });
+      stage.addEventListener("click", event => {
+        if (event.target.closest("a[href^='#']")) {
+          const targetId = event.target.closest("a[href^='#']").getAttribute("href").slice(1);
+          const targetPage = pages.findIndex(page => page.id === targetId);
+          if (targetPage >= 0) { event.preventDefault(); updatePage(targetPage, targetPage < active ? "prev" : "next"); }
+        }
+      });
+      document.addEventListener("keydown", event => {
+        if (event.target.matches?.("input, textarea, [contenteditable='true']")) return;
+        if (event.key === "ArrowRight") step(1);
+        if (event.key === "ArrowLeft") step(-1);
+      });
+      updatePage(0);
+      return book;
+    }
+
+    buildBookReader();
+
     const editable = [...document.querySelectorAll("[data-editable]")];
     const toggle = document.getElementById("edit-toggle");
     const save = document.getElementById("edit-save");
