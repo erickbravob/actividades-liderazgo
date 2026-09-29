@@ -1479,23 +1479,354 @@ details[open] summary::after { content: "−"; }
 .final-page .book-page .lencioni-reading p { font-size: .68rem; line-height: 1.4; }
 .final-page .book-page .lencioni-reading p:not(:first-of-type) { grid-column: 2; }
 
+/* Hojas divididas: más superficie de lectura y menos desplazamiento vertical. */
+.final-page .book-page.final-data-section,
+.final-page .book-page#lencioni-piramide,
+.final-page .book-page#lencioni-equipo,
+.final-page .book-page#campo-instrumento,
+.final-page .book-page#voz-aplicacion {
+  overflow-y: auto;
+}
+.final-page .book-page .final-data-heading { margin-top: 4px; }
+.final-page .book-page .field-instrument-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 760px;
+  margin: 16px auto 0;
+}
+.final-page .book-page .field-instrument-layout .field-card { padding: 18px 20px; }
+.final-page .book-page .field-instrument-layout .field-card ol { columns: 2; column-gap: 28px; margin: 12px 0; }
+.final-page .book-page .field-instrument-layout .field-card li { break-inside: avoid; margin: 6px 0; }
+.final-page .book-page.final-recommendations .article-copy {
+  border-color: #555459;
+}
+.final-page .book-page.final-recommendations .article-copy p {
+  color: #f0edef;
+}
+.final-page .book-page.final-recommendations .article-copy p::before {
+  background: var(--final-red-soft);
+}
+.final-page .book-page.final-recommendations .final-section-heading h2 {
+  color: #fff;
+}
+
+/* Compactación final: una página editorial más visible y con numeración limpia. */
+.final-page .book-page {
+  padding: 16px clamp(18px, 3vw, 38px) 20px;
+}
+.final-page .book-page .final-section-heading {
+  margin-bottom: 8px;
+}
+.final-page .book-page .final-section h2 {
+  font-size: clamp(1.45rem, 2.45vw, 2.05rem);
+  line-height: 1;
+}
+.final-page .book-page .final-two-col {
+  gap: 18px;
+  margin: 7px 0 12px;
+}
+.final-page .book-page .final-two-col p {
+  margin-bottom: 5px;
+  font-size: .7rem;
+  line-height: 1.28;
+}
+.final-page .book-page .final-question {
+  padding: 12px;
+}
+.final-page .book-page .final-question p {
+  margin: 6px 0 10px;
+  font-size: .92rem;
+  line-height: 1.08;
+}
+.final-page .book-page .article-copy {
+  gap: 0 14px;
+  margin: 6px 0 10px;
+  padding: 3px 0 1px;
+}
+.final-page .book-page .article-copy p {
+  padding: 4px 0 5px 11px;
+  font-size: .62rem;
+  line-height: 1.28;
+}
+.final-page .book-page .article-copy p::before {
+  top: 9px;
+  width: 4px;
+  height: 4px;
+}
+.final-page .book-page .final-section-label {
+  margin-bottom: 5px;
+  font-size: .56rem;
+}
+.final-page .book-page .final-photo-feature img {
+  max-height: 180px;
+}
+.final-page .book-page .final-timeline > div {
+  min-height: 86px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+.final-page .book-page .final-timeline p,
+.final-page .book-page .role-tile p,
+.final-page .book-page .recommendation-grid p {
+  font-size: .61rem;
+  line-height: 1.25;
+}
+.final-page .book-page .role-tile {
+  min-height: 112px;
+  padding: 9px 10px;
+}
+.final-page .book-page .role-tile h3 {
+  margin: 12px 0 4px;
+  font-size: .95rem;
+}
+.final-page .book-page .dysfunction-pyramid {
+  margin: 9px 0;
+}
+.final-page .book-page .dysfunction-member-grid {
+  gap: 6px;
+  margin: 9px 0 12px;
+}
+.final-page .book-page .dysfunction-member-grid article {
+  padding: 8px 8px 9px;
+}
+.final-page .book-page .dysfunction-member-grid p {
+  font-size: .57rem;
+  line-height: 1.25;
+}
+.final-page .book-page .team-grid {
+  gap: 8px;
+}
+.final-page .book-page .team-grid article {
+  padding: 10px;
+}
+.final-page .book-page .team-grid p {
+  font-size: .62rem;
+  line-height: 1.28;
+}
+.final-page .book-page .field-card li {
+  font-size: .64rem;
+  line-height: 1.25;
+}
+.final-page .book-page .lencioni-reading p {
+  font-size: .62rem;
+  line-height: 1.28;
+}
+
+@media (max-width: 800px) {
+  .final-page .book-page {
+    padding: 14px 18px 18px;
+  }
+  .final-page .book-page .final-section h2 {
+    font-size: clamp(1.3rem, 5.8vw, 1.8rem);
+  }
+  .final-page .book-page .article-copy p {
+    font-size: .58rem;
+    line-height: 1.23;
+  }
+  .final-page .book-page .final-two-col p {
+    font-size: .64rem;
+  }
+  .final-page .book-page .team-grid p,
+  .final-page .book-page .recommendation-grid p {
+    font-size: .58rem;
+  }
+}
+
+/* Cada hoja ajusta su escala para mostrar todo el contenido dentro del marco. */
+.final-page .book-page {
+  overflow: hidden;
+  overflow-x: hidden;
+}
+.final-page .book-page-content {
+  width: 100%;
+  box-sizing: border-box;
+  padding-bottom: 10px;
+  transform-origin: top left;
+  will-change: transform;
+}
+.final-page .book-stage > .book-page {
+  overflow: hidden !important;
+}
+.final-page .book-page.book-page-cover .final-masthead h1 {
+  font-size: clamp(1.65rem, 2.45vw, 2rem);
+  line-height: .98;
+}
+.final-page .book-page.book-page-cover .final-deck {
+  max-width: 500px;
+  margin-top: 8px;
+  font-size: .7rem;
+  line-height: 1.24;
+}
+
+/* Compactación final: conserva la jerarquía editorial sin títulos sobredimensionados. */
+.final-page .book-page.final-masthead > .book-page-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 236px);
+  gap: 28px;
+  align-items: center;
+}
+.final-page .book-page h1 {
+  font-size: clamp(1.65rem, 2.45vw, 2rem);
+  line-height: .98;
+}
+.final-page .book-page h2 {
+  font-size: clamp(1.2rem, 1.8vw, 1.55rem);
+  line-height: 1.04;
+}
+.final-page .book-page .final-masthead h1 {
+  font-size: clamp(1.65rem, 2.45vw, 2rem);
+  line-height: .98;
+}
+.final-page .book-page .final-section h2 {
+  font-size: clamp(1.2rem, 1.8vw, 1.55rem);
+  line-height: 1.04;
+}
+.final-page .book-page .final-question p {
+  font-size: .82rem;
+  line-height: 1.12;
+}
+.final-page .book-page .final-deck {
+  font-size: .7rem;
+  line-height: 1.24;
+}
+
 @media (max-width: 800px) {
   .final-page .book-stage { min-height: 68vh; max-height: 68vh; }
   .final-page .book-page { padding: 24px 24px 28px; }
-  .final-page .book-page .final-masthead h1 { font-size: clamp(2.15rem, 7.8vw, 3.6rem); }
-  .final-page .book-page .article-copy p { font-size: .7rem; }
+  .final-page .book-page h1,
+  .final-page .book-page.final-masthead h1 { font-size: clamp(1.6rem, 4.8vw, 1.95rem); }
+  .final-page .book-page .article-copy p { font-size: .62rem; }
+  .final-page .book-page .field-instrument-layout .field-card ol { columns: 1; }
 }
 
 @media (max-width: 520px) {
   .final-page .book-stage { min-height: 64vh; max-height: 64vh; }
   .final-page .book-page { padding: 22px 18px 24px; }
-  .final-page .book-page .final-section h2 { font-size: clamp(1.55rem, 8vw, 2.1rem); }
-  .final-page .book-page .final-masthead h1 { font-size: clamp(2rem, 11vw, 3.1rem); }
+  .final-page .book-page h2 { font-size: clamp(1.25rem, 6vw, 1.65rem); }
+  .final-page .book-page h1,
+  .final-page .book-page.final-masthead h1 { font-size: clamp(1.55rem, 6.5vw, 1.85rem); }
+  .final-page .book-page.final-masthead > .book-page-content {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
   .final-page .book-page .article-copy { grid-template-columns: 1fr 1fr; gap: 0 12px; }
   .final-page .book-page .article-copy p { font-size: .64rem; line-height: 1.34; }
   .final-page .book-page .final-timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .final-page .book-page .dysfunction-member-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .final-page .book-page .lencioni-reading p:not(:first-of-type) { grid-column: 1; }
+}
+
+/* Proporción final de lectura: márgenes contenidos y contenido legible. */
+.final-page .book-stage > .book-page {
+  padding: 24px clamp(26px, 4vw, 52px) 26px;
+}
+.final-page .book-stage > .book-page.book-page-cover {
+  padding-top: 24px;
+}
+
+@media (max-width: 800px) {
+  .final-page .book-stage > .book-page,
+  .final-page .book-stage > .book-page.final-dark-section,
+  .final-page .book-stage > .book-page.field-section,
+  .final-page .book-stage > .book-page.final-recommendations {
+    padding: 22px 26px 24px;
+  }
+}
+
+@media (max-width: 520px) {
+  .final-page .book-stage > .book-page,
+  .final-page .book-stage > .book-page.final-dark-section,
+  .final-page .book-stage > .book-page.field-section,
+  .final-page .book-stage > .book-page.final-recommendations {
+    padding: 18px 18px 20px;
+  }
+}
+
+/* Portada: ocupa el espacio disponible con una marca visible y bien equilibrada. */
+.final-page .book-page.final-masthead > .book-page-content {
+  min-height: 100%;
+  grid-template-columns: minmax(0, 1fr) minmax(230px, 300px);
+  align-content: center;
+  gap: 30px;
+}
+.final-page .book-page.final-masthead h1 {
+  font-size: clamp(2rem, 3.6vw, 2.7rem);
+  line-height: .96;
+}
+.final-page .book-page.final-masthead .final-deck {
+  max-width: 620px;
+  font-size: .78rem;
+  line-height: 1.3;
+}
+.final-page .book-stage > .book-page .final-cover-mark {
+  width: min(100%, 300px);
+  min-height: 202px;
+  padding: 24px 24px 20px;
+  grid-template-columns: 82px minmax(0, 1fr);
+  gap: 9px 15px;
+}
+.final-page .book-stage > .book-page .final-netflix-n {
+  width: 82px;
+  height: 96px;
+}
+.final-page .book-stage > .book-page .final-netflix-wordmark {
+  max-width: 190px;
+}
+.final-page .book-stage > .book-page .final-brand-lockup {
+  gap: 10px;
+}
+.final-page .book-stage > .book-page .final-cover-mark strong {
+  font-size: 1.45rem;
+}
+.final-page .book-stage > .book-page .final-cover-mark i {
+  font-size: .62rem;
+}
+
+/* Investigación de campo: texto legible y columnas aprovechadas de forma regular. */
+.final-page .book-page.field-section .field-layout {
+  width: 100%;
+  max-width: none;
+}
+.final-page .book-page.field-section .field-layout > div:first-child {
+  min-width: 0;
+}
+.final-page .book-page.field-section .field-layout h2 {
+  font-size: clamp(1.45rem, 2.4vw, 2.15rem);
+  line-height: 1.05;
+}
+.final-page .book-page.field-section .field-layout > div > p {
+  max-width: none;
+}
+.final-page .book-page.field-section .article-copy p {
+  font-size: .72rem;
+  line-height: 1.3;
+}
+.final-page .book-page.field-section .field-method {
+  font-size: .72rem;
+  line-height: 1.3;
+}
+
+@media (max-width: 520px) {
+  .final-page .book-page.final-masthead > .book-page-content {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .final-page .book-page.final-masthead h1 {
+    font-size: clamp(1.8rem, 8vw, 2.25rem);
+  }
+  .final-page .book-stage > .book-page .final-cover-mark {
+    width: min(100%, 270px);
+    min-height: 176px;
+    justify-self: end;
+    grid-template-columns: 68px minmax(0, 1fr);
+  }
+  .final-page .book-stage > .book-page .final-netflix-n {
+    width: 68px;
+    height: 82px;
+  }
+  .final-page .book-page.field-section .article-copy p {
+    font-size: .68rem;
+  }
 }
 
 /* Logotipos oficiales proporcionados para la portada. */
