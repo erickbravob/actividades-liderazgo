@@ -1285,3 +1285,50 @@ details[open] summary::after { content: "−"; }
     font-size: 1.08rem;
   }
 }
+
+/* Logotipos oficiales proporcionados para la portada. */
+.final-page .book-stage > .book-page .final-cover-mark {
+  grid-template-columns: 66px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  gap: 7px 12px;
+}
+
+.final-page .book-stage > .book-page .final-netflix-n {
+  grid-row: 1 / 3;
+  width: 66px;
+  height: 78px;
+  display: block;
+  object-fit: cover;
+  border-radius: 3px;
+}
+
+.final-page .book-stage > .book-page .final-brand-lockup {
+  display: grid;
+  align-content: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.final-page .book-stage > .book-page .final-netflix-wordmark {
+  display: block;
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  object-fit: contain;
+}
+
+.final-page .book-stage > .book-page .final-brand-lockup i {
+  display: block;
+  margin: 0;
+}
+
+@media (max-width: 520px) {
+  .final-page .book-stage > .book-page .final-cover-mark {
+    grid-template-columns: 54px minmax(0, 1fr);
+  }
+
+  .final-page .book-stage > .book-page .final-netflix-n {
+    width: 54px;
+    height: 66px;
+  }
+}
