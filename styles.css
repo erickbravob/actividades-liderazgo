@@ -1180,3 +1180,107 @@ details[open] summary::after { content: "−"; }
     margin-top: 4px;
   }
 }
+
+/* Portada: sello Netflix compacto, separado del texto editorial. */
+.final-page .book-stage > .book-page .final-cover-mark {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  grid-template-rows: auto auto;
+  align-content: center;
+  justify-items: start;
+  gap: 7px 14px;
+  width: min(100%, 236px);
+  min-height: 158px;
+  padding: 22px 20px 18px;
+  margin: 0;
+  align-self: end;
+  color: #fff;
+  background: #151517;
+  border: 1px solid #343438;
+  border-radius: 14px 14px 4px 14px;
+  transform: none;
+  box-shadow: 9px 9px 0 rgba(229, 9, 20, .13);
+  overflow: hidden;
+}
+
+.final-page .book-stage > .book-page.book-page-cover {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 236px);
+  gap: 28px;
+  align-items: center;
+}
+
+.final-page .book-stage > .book-page .final-cover-mark::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  content: "";
+  background: var(--final-red);
+}
+
+.final-page .book-stage > .book-page .final-cover-mark span {
+  grid-row: 1 / 3;
+  align-self: center;
+  color: var(--final-red);
+  font: 900 6.7rem/.68 Arial, sans-serif;
+  letter-spacing: -.24em;
+  transform: translateX(-5px);
+}
+
+.final-page .book-stage > .book-page .final-cover-mark strong {
+  align-self: end;
+  color: #fff;
+  font: 900 1.16rem/.95 Arial, sans-serif;
+  letter-spacing: .08em;
+}
+
+.final-page .book-stage > .book-page .final-cover-mark i {
+  align-self: start;
+  margin: 0;
+  color: #c9c6c8;
+  font: 700 .58rem/1.2 "Cascadia Code", Consolas, monospace;
+  letter-spacing: .1em;
+  text-align: left;
+  text-transform: uppercase;
+  transform: none;
+}
+
+.final-page .book-page p {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}
+
+@media (max-width: 800px) {
+  .final-page .book-stage > .book-page.book-page-cover {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .final-page .book-stage > .book-page .final-cover-mark {
+    width: 214px;
+    min-height: 146px;
+    justify-self: end;
+  }
+}
+
+@media (max-width: 520px) {
+  .final-page .book-stage > .book-page .final-cover-mark {
+    grid-template-columns: 48px 1fr;
+    width: min(100%, 198px);
+    min-height: 132px;
+    padding: 18px 16px 15px;
+    gap: 6px 11px;
+  }
+
+  .final-page .book-stage > .book-page .final-cover-mark span {
+    font-size: 5.6rem;
+  }
+
+  .final-page .book-stage > .book-page .final-cover-mark strong {
+    font-size: 1rem;
+  }
+}
